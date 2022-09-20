@@ -1,0 +1,37 @@
+@media screen and (max-width: 420px)
+{
+  .content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+  }
+  .content div{
+    padding: 8px;
+    left:0;
+    width: 20%;
+    height: 20%;
+   
+  }
+}  
+
+.content div{
+  width: 40%;
+  height: 40%;
+}
+
+.content button:hover{
+  transition: all 0.3s ease-out;
+  background: #242424;
+}
+
+.content img{
+  object-fit:contain;
+  width: 80%;
+  height: 30%;
+}
+
+
+

@@ -1,0 +1,151 @@
+.login-ui{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    
+}
+img {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 250px;
+    height: 150x;
+    position: relative;
+    object-position: center;
+}
+.main-page{
+    /* background-image: url("/src/img/background.jpg");
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+    height: 100vh;
+
+    
+    /* filter: grayscale(30%);
+    -webkit-filter: grayscale(30%); */
+}
+
+.login-contain{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.button{
+    display: flex;
+    padding-top: 8px;
+}
+
+.button a{
+    width: 100%;
+}
+h2{
+    padding-top: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+}
+h2 i {
+    color:#bd0c0c;
+}
+
+.container{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    object-fit: contain;
+    height: 100%;
+}
+
+input[type=text] {
+    width: 100%;
+    border: 2px solid rgb(175, 175, 175);
+    border-radius: 4px;
+    outline:none;
+    padding: 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+input[type=text]:focus {
+    border-color: rgb(159, 201, 243);
+    box-shadow: 0 0 8px 0 rgb(159, 201, 243);
+}
+input[type=text]::placeholder{
+    color:rgb(175, 175, 175);
+}
+
+.field input[type=text]{
+    padding-left:40px;
+}
+.field input[type=password]{
+    padding-left:40px;
+}
+.field input[type=file]{
+    padding-left:40px;
+}
+.field{
+    position: relative;
+
+}
+.field i{
+    position: absolute;
+    left: 0;
+    top: 12px;
+    padding: 13px 8px;
+    margin-left: 5px;
+    color: #bd0c0c;
+    /* rgb(22, 120, 218) */
+}
+
+input[type=password] {
+    width: 100%;
+    border: 2px solid rgb(175, 175, 175);
+    border-radius: 4px;
+    outline:none;
+    padding: 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+input[type=password]:focus {
+    border-color: rgb(159, 201, 243);
+    box-shadow: 0 0 8px 0 rgb(159, 201, 243);
+}
+input[type=password]::placeholder{
+    color:rgb(175, 175, 175);
+}
+input[type=file] {
+    width: 100%;
+    border: 2px solid rgb(175, 175, 175);
+    border-radius: 4px;
+    outline:none;
+    padding: 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    transition: 0.3s;
+    
+}
+input [type=file] ::after {
+    box-sizing: border-box;
+    
+}
+
+input[type=file]:focus {
+    border-color: rgb(159, 201, 243);
+    box-shadow: 0 0 8px 0 rgb(159, 201, 243);
+}
+input[type=file]::placeholder{
+    color:rgb(175, 175, 175);
+}
+
+.login-component {
+    margin: 10px 0;
+}
+
+.login-component a:hover{
+    color:#bd0c0c;
+}
