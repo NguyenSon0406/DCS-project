@@ -37,13 +37,13 @@ const Login = () =>
                 <Form className="login-ui" onSubmit={handleSubmit}>
                 <div className="field">
                     <input type="text" name="gmail" placeholder="Email"
-                        onChange={e => setEmail(e.target.value)}/>
+                        onChange={e => setEmail(e.target.value)} required/>
                         <i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"/>
                 </div>
                 <div className="field">
                     <input type="password" name="password" placeholder="Password" 
                     onChange={e => setPassword(e.target.value)}/>
-                    <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"/>
+                    <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true" required/>
                 </div>
                     <div className="login-component">
                         <Button className="fluid ui button red" type="Submit">
