@@ -17,7 +17,7 @@ export default function PopupSignUp(props) {
                 <div className="content">
                     <div className="fa fa-md fa-pull-left" >
                         <Link to="/sign-up-role-student">
-                            <Button className="fluid ui button ">
+                            <Button className="fluid ui button">
                                 <img src="image/student.png" alt="Student icon" />
                                 <p>Student</p>
                             </Button>
