@@ -1,34 +1,54 @@
 import React, { useState,useEffect } from "react";
 import "../auth/Login.css"
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { Form} from "react-bootstrap";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import axios from "axios";
 import {AccountCircle, Lock, Business, Email, ContactPhone, InsertDriveFile} from '@mui/icons-material';
-import { Button } from "react-bootstrap";
-import { useUserAuth } from "../context/UserAuthContext";
 
 const SignUpRoleBusiness = () => {
-  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [password, setPassword] = useState("");
-  const { signUp } = useUserAuth();
-  let navigate = useNavigate();
-  const initialValues = {email:"", password:"", company_name:"",file:"",phone_number:"", firstName:"", lastName:""};
+  const initialValues = {
+    email:"", 
+    password:"", 
+    company_name:"",
+    file:"",
+    phone_number:"", 
+    firstName:"", 
+    lastName:"",
+    err:"",
+    isSuccess:""
+  };
+  const [user,setUser] = useState(initialValues);
   const [formValues,setFormValues] = useState(initialValues);
+  const {email,
+    password,
+    re_password,
+    company_name,
+    file,
+    phone_number, 
+    firstName, 
+    lastName,
+    err, 
+    isSuccess} = user;
   const [isSubmit,setIsSubmit] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
       e.preventDefault();
       setError(validate(formValues));
       setIsSubmit(true);
-    // try {
-    //   await signUp(email, password);
-    //   navigate("/");
-    // } catch (err) {
-    //   setError(err.message);
-    // }
+      try {
+        const res = await axios.post('user/register',{
+          email,password
+        });
+        setUser({...user, err: "", isSuccess: res.data.msg})
+      } catch (err) {
+        err.response.data.msg && 
+        setUser({...user, err: err.response.data.msg, isSuccess:""})
+      }
   };
   const uploadFile = () =>
   {
@@ -58,40 +78,21 @@ const fileChange = (e) => {
   setFormValues({...formValues,[name]:files});
   
 };
-const validatePass = (values) => {
-  const uppercaseRegExp   = /(?=.*?[A-Z])/;
-  const lowercaseRegExp   = /(?=.*?[a-z])/;
-  const digitsRegExp      = /(?=.*?[0-9])/;
-  const specialCharRegExp = /(?=.*?[#?!@$%^&_*-])/;
-  const minLengthRegExp   = /.{8,}/;
-  let errMsg = "";
-  const passwordLength =   values.password.length;
-  const uppercasePassword = uppercaseRegExp.test(values.password);
-  const lowercasePassword =   lowercaseRegExp.test(values.password);
-  const digitsPassword =      digitsRegExp.test(values.password);
-  const specialCharPassword = specialCharRegExp.test(values.password);
-  const minLengthPassword =   minLengthRegExp.test(values.password);
-  if(passwordLength === 0){
-    errMsg = "Password is required!";
-  }else if(!uppercasePassword || !lowercasePassword || !digitsPassword ||
-    !specialCharPassword || !minLengthPassword){
-      errMsg="Password must be at least one Uppercase, one Lowercase, one digit, one Special Characters and minumum 8 characters";
-  // }else if(!lowercasePassword){
-  //     errMsg="Password must be at least one Lowercase";
-  // }else if(!digitsPassword){
-  //     errMsg="At least one digit";
-  // }else if(!specialCharPassword){
-  //     errMsg="At least one Special Characters";
-  // }else if(!minLengthPassword){
-  //     errMsg="At least minumum 8 characters";
-  }else{
-    errMsg= "" ;
-  }
-  return errMsg;
-}
 const validate = (values) => {
     const errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+    const uppercaseRegExp   = /(?=.*?[A-Z])/;
+    const lowercaseRegExp   = /(?=.*?[a-z])/;
+    const digitsRegExp      = /(?=.*?[0-9])/;
+    const specialCharRegExp = /(?=.*?[#?!@$%^&_*-])/;
+    const minLengthRegExp   = /.{8,}/;
+
+    const uppercasePassword = uppercaseRegExp.test(values.password);
+    const lowercasePassword =   lowercaseRegExp.test(values.password);
+    const digitsPassword =      digitsRegExp.test(values.password);
+    const specialCharPassword = specialCharRegExp.test(values.password);
+    const minLengthPassword =   minLengthRegExp.test(values.password);
     if(!values.firstName)
     {
       errors.firstName = "First Name is required!";
@@ -111,7 +112,13 @@ const validate = (values) => {
       errors.email = "This is not a valid email format!";
     }
     
-    errors.password = validatePass(values);
+    if(!values.password)
+    {
+      errors.password = "Password is required!";
+    } else if(!uppercasePassword || !lowercasePassword || !digitsPassword || !specialCharPassword || !minLengthPassword )
+    {
+      errors.password = "Password must be at least one Uppercase, one Lowercase, one Digit, one Special Characters and minumum 8 characters";
+    }
     
     if(!values.phone_number)
     {
@@ -153,7 +160,8 @@ useEffect(() => {
                         name="firstName"
                         error={error.firstName ? true : false}
                         helperText={error.firstName ? error.firstName : ""}
-                        onChange={handleChange} 
+                        onChange={handleChange}
+                        required  
                         size="small"/>
                      </div>
                     </Box>
@@ -169,6 +177,7 @@ useEffect(() => {
                         error={error.lastName ? true : false}
                         helperText={error.lastName ? error.lastName : ""}
                         onChange={handleChange} 
+                        required 
                         size="small"/>
                      </div>
                   </Box>
@@ -184,6 +193,7 @@ useEffect(() => {
                         error={error.company_name ? true : false}
                         helperText={error.company_name ? error.company_name : ""}
                         onChange={handleChange} 
+                        required 
                         size="small"/>
                      </div>
                   </Box>
@@ -200,7 +210,7 @@ useEffect(() => {
                         error={error.email ? true : false}
                         helperText={error.email ? error.email : ""}
                         onChange={handleChange} 
-                          
+                        required 
                         size="small"/>
                      </div>
                     </Box>
@@ -217,6 +227,7 @@ useEffect(() => {
                         helperText={error.password ? error.password : ""}
                         onChange={handleChange} 
                         fullWidth={true} 
+                        required 
                         size="small"/>
                       </div>
                     </Box>
@@ -232,7 +243,8 @@ useEffect(() => {
                         name="phone_number"
                         error={error.phone_number ? true : false}
                         helperText={error.phone_number ? error.phone_number : ""}
-                        onChange={handleChange} 
+                        onChange={handleChange}
+                        required  
                         size="small"/>
                      </div>
                     </Box>
@@ -281,9 +293,13 @@ useEffect(() => {
                 </div>
                 <p>{error.file}</p> */}
                     <div className="login-component">
-                        <Button className="fluid ui button red" type="Submit">
-                            Sign up
-                        </Button>
+                    <Button 
+                        type="Submit"
+                        variant="contained" 
+                        fullWidth={true} 
+                        color="error" 
+                        sx={{fontWeight:"bold"}}
+                        >Sign up</Button>
                     </div>
                     <div className="login-component">
                     OR

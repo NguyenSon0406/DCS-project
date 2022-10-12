@@ -21,9 +21,13 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
         default: "https://res.cloudinary.com/dyqqjlozc/image/upload/v1664770107/user_tymt3d.png"
+    },
+    isVerify:{
+        type: Boolean,
+        default: false,
     }
 },{
     timestamps: true
 })
 
-module.exports = mongoose.model("Users", userSchema )
+module.exports = mongoose.model("Users", userSchema );

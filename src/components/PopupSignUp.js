@@ -8,7 +8,7 @@ export default function PopupSignUp(props) {
 
     const { openPopup, setOpenPopup} = props;
     return (
-        <Dialog open={openPopup} fullWidth="lg" scroll="body" onBackdropClick={() => setOpenPopup(false)} >
+        <Dialog open={openPopup} fullWidth={true} scroll="body" onBackdropClick={() => setOpenPopup(false)} >
             <DialogTitle sx={{margin:0, padding:2, fontWeight: 'bold', color:"#bd0c0c"}}>
                 <div>Select your role! <i class="fa fa-close fa-xl fa-pull-right" onClick={() => setOpenPopup(false)}></i></div>
                 <div className="ui divider"></div>
