@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,22 +14,70 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import axios from "axios";
+import { useSelector } from 'react-redux';
+import { makeStyles } from '@mui/styles';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const useStyles = makeStyles({
+  popOverRoot: {
+    pointerEvents: "none"
+  }
+});
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function Navbar() {
+  
+    let currentlyHovering = false;
+    const styles = useStyles();
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
-
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
       };
       const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
       };
-    
+
+      function handleHover() {
+        currentlyHovering = true;
+      }
+      const [anchorPostEl, setAnchorPostEl] = useState(null);
+      const [anchorReEl, setAnchorReEl] = useState(null);
+      function handleClick(event) {
+        if (anchorPostEl !== event.currentTarget) {
+          setAnchorPostEl(event.currentTarget);
+        }
+      }
+      function handleClick1(event) {
+        if (anchorReEl !== event.currentTarget) {
+          setAnchorReEl(event.currentTarget);
+        }
+      }
+      function handleClose() {
+        setAnchorPostEl(null);
+      }
+      function handleClose1() {
+        setAnchorReEl(null);
+      }
+      function handleCloseHover() {
+        currentlyHovering = false;
+        setTimeout(() => {
+          if (!currentlyHovering) {
+            handleClose();
+          }
+        }, 50);
+      }
+      function handleCloseHover1() {
+        currentlyHovering = false;
+        setTimeout(() => {
+          if (!currentlyHovering) {
+            handleClose1();
+          }
+        }, 50);
+      }
+    const auth = useSelector(state => state.auth);
+    const {user, isLogged} = auth;
 
   const handleCloseNavMenu = () => {
+   
     setAnchorElNav(null);
   };
 
@@ -47,7 +96,7 @@ function Navbar() {
     }
 }
   return (
-    <AppBar position="static" color='default' style={{color:"black"}}>
+    <AppBar position="static" color='error' style={{color:"white"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -62,11 +111,24 @@ function Navbar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'white',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            DTU <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}>CONNECTIONS</Typography>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -97,14 +159,16 @@ function Navbar() {
               sx={{
                 display: { xs: 'block', md: 'none' },
               }}
-              
-              
             >
-              {pages.map((page) => (
-                <MenuItem key={page}  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" >{page}</Typography>
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Link to="post" style={{color:"black"}}>Post</Link>
                 </MenuItem>
-              ))}
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Link to="recruitment" style={{color:"black"}}>Recruitment</Link>
+                </MenuItem>
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Link to="post" style={{color:"black"}}>Blog</Link>
+                </MenuItem>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -124,24 +188,82 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            DTU CONNECTIONS
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block', fontWeight:"bold" }}
+                aria-owns={anchorPostEl ? "simple-menu" : undefined}
+                aria-haspopup="true"
+                onClick={handleClick}
+                onMouseOver={handleClick}
+                onMouseLeave={handleCloseHover}
+                sx={{ my: 2, color: 'white', display: 'block', fontWeight:"bold",zIndex: 1301 }}
               >
-                {page}
+                <Link to="post" style={{color:"white"}}>Post</Link>
+                <Menu
+               id="simple-menu"
+              anchorEl={anchorPostEl}
+              open={Boolean(anchorPostEl)}
+              onClose={handleClose}
+              MenuListProps={{
+                  onMouseEnter: handleHover,
+                  onMouseLeave: handleCloseHover,
+                  style: { pointerEvents: "auto" }
+                }}
+             
+              anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+              PopoverClasses={{
+                root: styles.popOverRoot
+              }}
+                  >
+                  <MenuItem onClick={handleClose}>Newest</MenuItem>
+                  <MenuItem onClick={handleClose}>My post</MenuItem>
+                  <MenuItem onClick={handleClose}>Create post</MenuItem>
+                </Menu>
               </Button>
-            ))}
+              
+              <Button
+                aria-owns={anchorReEl ? "simple-menu2" : undefined}
+                aria-haspopup="true"
+                onClick={handleClick1}
+                onMouseOver={handleClick1}
+                onMouseLeave={handleCloseHover1}
+                sx={{ my: 2, color: 'white', display: 'block', fontWeight:"bold",zIndex: 1301 }}
+              >
+                Recruitment
+              </Button>
+              <Menu
+               id="simple-menu2"
+               anchorEl={anchorReEl}
+              open={Boolean(anchorReEl)}
+              onClose={handleClose1}
+              MenuListProps={{
+                  onMouseEnter: handleHover,
+                  onMouseLeave: handleCloseHover1,
+                  style: { pointerEvents: "auto" }
+                }}
+             
+              anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+              PopoverClasses={{
+                root: styles.popOverRoot
+              }}
+                  >
+                  <MenuItem onClick={handleClose1}><Link to="recruitment/newest" style={{color:"black"}}>Newest</Link></MenuItem>
+                  <MenuItem onClick={handleClose1}><Link to="recruitment/myjobpost" style={{color:"black"}}>My Recruitment Post</Link></MenuItem>
+                  <MenuItem onClick={handleClose1}>Post Job</MenuItem>
+                </Menu>
+              <Button
+                
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', fontWeight:"bold" }}
+              >
+                <Link to="post" style={{color:"white"}}>Blog</Link>
+              </Button>
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Logo-Rikkei.png" sx={{justifyContent:"space-evenly"}} />
               </IconButton>
             </Tooltip>
             <Menu

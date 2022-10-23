@@ -21,7 +21,7 @@ const Post = (props) => {
                     </div>
                 </div>
                 <div>
-                <div className="ui celled list">{renderContactList}</div>
+                <div className="ui celled list">{renderContactList()}</div>
                 </div>
             </div>
         </div>
