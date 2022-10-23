@@ -31,7 +31,6 @@ const userCtrl = {
 
             const url = `${CLIENT_URL}/user/activate/${activation_token}`
             sendMail(email, url,"Verify your email address",1);
-            // console.log(sendMail);
             res.json({msg:"Register Success! Please activate your email to start."});
         }catch(err){
             return res.status(500).json({msg: err.message});
@@ -49,7 +48,7 @@ const userCtrl = {
             // await Users.updateOne({_id, isVerify:true});
             // if(check.isVerify) return res.status(400).json({msg:"This email already exists."})
             const newUser = new Users({
-                 email, password
+                 email, password,isVerify:"true"
             })
 
             await newUser.save()
@@ -64,8 +63,10 @@ const userCtrl = {
         try {
             const {email, password} = req.body
             const user = await Users.findOne({email})
-            if(!user) return res.status(400).json({msg: "This email does not exist."})
-
+            if(!user) return res.status(400).json({msg: "This email does not exist"})
+            
+            if(user.isVerify === false)
+            return res.status(400).json({msg: "This account hasn't been activated yet. If you are student, please use your DTU email to sign up."})
             const isMatch = await bcrypt.compare(password, user.password)
             if(!isMatch) return res.status(400).json({msg: "Password is incorrect."})
 
@@ -75,7 +76,7 @@ const userCtrl = {
                 path: '/user/refresh_token',
                 maxAge: 7*24*60*60*1000 // 7 days
             })
-
+            
             res.json({msg: "Login success!"})
         } catch (err) {
             return res.status(500).json({msg: err.message})

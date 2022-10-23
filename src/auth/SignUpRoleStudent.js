@@ -4,7 +4,7 @@ import "../auth/Login.css"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {AccountCircle, Lock} from '@mui/icons-material';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 import { showErrMsg, showSuccessMsg } from "../utils/notification";
 import axios from "axios";
@@ -16,7 +16,6 @@ const SignUpRoleStudent = () => {
   const [formValues,setFormValues] = useState(initialValues);
   const [isSubmit,setIsSubmit] = useState(false);
   const {email,password,re_password,err, isSuccess} = user;
-  const navigate = useNavigate();
   
   const handleSubmit = async (e) => {
     e.preventDefault();

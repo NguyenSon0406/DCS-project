@@ -18,7 +18,6 @@ import { useDispatch } from "react-redux";
 
 const Login = () =>
 {
-    
     const [error, setError] = useState({});
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -35,7 +34,6 @@ const Login = () =>
     const handleSubmit = async (e) => {
       e.preventDefault();
       setError(validate(formValues));
-      console.log(isSubmit);
       setIsSubmit(true);
 
       try {
@@ -125,9 +123,7 @@ const Login = () =>
             <img src="image/duytan-banner.jpg" alt="Duy Tân Banner" />
             <div className="login-page">
                 <h2 className="mb-3"><i>DTU</i> CONNECTIONS</h2>
-               
                 <Form className="login-ui" onSubmit={handleSubmit}>
-                
                 <Box display="flex"
                 flexDirection={"column"}
                 maxWidth={900}
@@ -140,7 +136,6 @@ const Login = () =>
                 boxShadow={"5px 5px 10px #ccc"}
                 sx={{":hover": {
                   boxShadow:'10px 10px 20px #ccc',
-
                 }}}>
                  <h3>Sign in with</h3>
                 {Object.keys(error).length === 0 && isSubmit ? (
