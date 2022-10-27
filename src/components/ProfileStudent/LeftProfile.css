@@ -1,0 +1,23 @@
+.leftp-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 10px;
+}
+.leftp-content-left {
+  height: 100%;
+  width: 40%;
+  border: 1px solid red;
+}
+.leftp-content-right {
+  height: 100%;
+  width: 60%;
+  font-size: 18px;
+  text-align: center;
+}
+
+.leftp-content-right .name {
+  font-weight: 600;
+  font-size: 30px;
+  padding-top: 50px;
+}

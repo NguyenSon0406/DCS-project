@@ -1,0 +1,20 @@
+.rightp-containter {
+  padding-top: 5px;
+  padding-left: 100px;
+}
+.label-content {
+  display: flex;
+}
+.label-content .label-left {
+  font-size: 20px;
+}
+.label-content .label-left div {
+  margin: 3px;
+}
+.label-content .label-right {
+  padding-left: 25px;
+  font-size: 15px;
+}
+.label-content .label-right div {
+  margin: 10px;
+}

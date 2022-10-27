@@ -1,0 +1,43 @@
+.infor-title {
+  font-size: 25px;
+}
+.avatar {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.title-avatar {
+  font-size: 18px;
+}
+.input-img {
+  border: 1px solid rgb(185, 180, 180);
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.infor-group {
+  display: flex;
+  margin: 10px;
+}
+
+.infor-item {
+  margin-right: 15px;
+  width: 35%;
+}
+.btn-save {
+  width: 150px;
+  display: inline-block;
+  border-radius: 30px;
+}
+.infor-btnsave {
+  text-align: center;
+}
+.infor-account {
+  margin-top: 20px;
+}
+.btn-on-change-password {
+  border-radius: 2px;
+}
+.text-account {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
