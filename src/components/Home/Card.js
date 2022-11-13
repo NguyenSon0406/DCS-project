@@ -7,7 +7,6 @@ import './Card.css';
 import { dataDigitalBestSeller } from './data';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-// import imgGirl from '.../defaultImage.jpg';
 import Divider from '@mui/material/Divider';
 function Card() {
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
@@ -16,6 +15,7 @@ function Card() {
 
   const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
     <ArrowCircleRightIcon {...props} sx = {{color: 'black', "&:hover":{color: "gray"}}} />
+
   );
   const [defaultImage, setDefaultImage] = useState({});
   const settings = {

@@ -1,0 +1,13 @@
+.view-score-content {
+  display: flex;
+  padding: 15px;
+}
+.title-score {
+  width: 230px;
+  font-size: 16px;
+}
+.grade-score {
+  margin-left: 30px;
+  font-weight: 600;
+  font-size: 17px;
+}

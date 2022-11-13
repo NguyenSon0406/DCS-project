@@ -1,17 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import Notifications from "@mui/icons-material/Notifications";
+import Badge from '@mui/material/Badge';
 import { Link } from 'react-router-dom';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from "@mui/icons-material/Menu"
+import {AppBar,Box,Toolbar,Typography,IconButton,Menu,Container,Button,Tooltip,MenuItem} from "@mui/material"
 import AdbIcon from '@mui/icons-material/Adb';
 import axios from "axios";
 import { useSelector } from 'react-redux';
@@ -22,7 +14,7 @@ const useStyles = makeStyles({
     pointerEvents: "none"
   }
 });
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 function Navbar() {
   
     let currentlyHovering = false;
@@ -73,9 +65,12 @@ function Navbar() {
           }
         }, 50);
       }
-    const auth = useSelector(state => state.auth);
-    const {user, isLogged} = auth;
-
+    
+  //fetch user information
+  const auth = useSelector(state => state.auth);
+  const {user, isLogged} = auth;
+  
+  
   const handleCloseNavMenu = () => {
    
     setAnchorElNav(null);
@@ -261,10 +256,17 @@ function Navbar() {
 
               </Button>
           </Box>
+          <Box sx={{flexGrow:0.05}}>
+            <IconButton sx={{color:"#fff"}}>
+              <Badge color="primary" badgeContent={3} >
+                <Notifications />
+              </Badge>
+            </IconButton>
+          </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Logo-Rikkei.png" sx={{justifyContent:"space-evenly"}} />
+              <IconButton onClick={handleOpenUserMenu} size="small" sx={{ p: 0 }}>
+              <img src={user.avatar} alt="avatar" style={{verticalAlign:"middle",margin:0, width:"40px", height:"40px",borderRadius:"50%"}}/>
               </IconButton>
             </Tooltip>
             <Menu
@@ -283,11 +285,14 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={setting==="Logout" ? handleLogout : handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
+              <MenuItem>
+                <Link to="profile" style={{color:"black"}}>
+                  <Typography textAlign="center">Profile</Typography>
+                </Link>
+              </MenuItem>
+                <MenuItem onClick={ handleLogout}>
+                <Typography textAlign="center">Sign out</Typography>
                 </MenuItem>
-              ))}
             </Menu>
           </Box>
         </Toolbar>

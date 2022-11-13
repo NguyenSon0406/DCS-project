@@ -4,9 +4,11 @@ const mongoose = require('mongoose');
 const userInfoSchema = new mongoose.Schema({
     user_id: {
         type: String
-        
     },
-    name:{
+    firstName:{
+        type: String
+    },
+    lastName:{
         type: String
     },
     email:{
@@ -15,12 +17,20 @@ const userInfoSchema = new mongoose.Schema({
     contact: {
         type: String
     },
-    class:{
-        type: String
-        
+    className:{
+        type: String    
     },
     falculty: {
         type: String
+    },
+    gender:{
+        type: String
+    },
+    address:{
+        type: String
+    },
+    dayofbirth:{
+        type: Date
     },
     avatar: {
         type: String,

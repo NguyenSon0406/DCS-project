@@ -1,6 +1,7 @@
 import React from "react";
-import {Dialog, DialogTitle, DialogContent} from "@mui/material";
-import {Button} from "react-bootstrap";
+import {Dialog, DialogTitle, DialogContent,Box,IconButton, Typography, Button} from "@mui/material";
+import {Close as CloseIcon} from "@mui/icons-material";
+
 import {Link} from "react-router-dom";
 import "./PopupSignUp.css";
 
@@ -8,31 +9,52 @@ export default function PopupSignUp(props) {
 
     const { openPopup, setOpenPopup} = props;
     return (
-        <Dialog open={openPopup} fullWidth={true} scroll="body" onBackdropClick={() => setOpenPopup(false)} >
+        <Dialog open={openPopup} fullWidth={true} maxWidth="sm"  onBackdropClick={() => setOpenPopup(false)} >
             <DialogTitle sx={{margin:0, padding:2, fontWeight: 'bold', color:"#bd0c0c"}}>
-                <div>Select your role! <i class="fa fa-close fa-xl fa-pull-right" onClick={() => setOpenPopup(false)}></i></div>
-                <div className="ui divider"></div>
+                <Box display="flex" justifyContent="space-between" alignItem="center">
+                <Typography variant="body1" fontWeight="550" fontSize="20px" fontFamily="sans-serif">Select Role</Typography>
+                    <IconButton>
+                        <CloseIcon onClick={() => setOpenPopup(false)}/>
+                    </IconButton>
+                </Box>
             </DialogTitle>
             <DialogContent >
-                <div className="content">
-                    <div className="fa fa-md fa-pull-left" >
-                        <Link to="/sign-up-role-student">
-                            <Button className="fluid ui button">
-                                <img src="image/student.png" alt="Student icon" />
-                                <p>Student</p>
-                            </Button>
-                        </Link>            
-                    </div>         
-                    <div className="fa fa-md fa-pull-right" >
-                        <Link to="/sign-up-role-business">
-                            <Button className="fluid ui button "  >
-                            <img src="image/business.png" alt="Business icon" />
-                                <p>Business</p>
-                            </Button>
+              <Box sx={{ display: 'flex', marginTop:"15px"}} justifyContent="space-between" alignItems="center" >         
+                        <Box display="flex" flexDirection="column" justifyContent="center"
+                        boxShadow={12}
+                        sx={{
+                            
+                            textAlign:"center",
+                            width: 200,
+                            height: 200,      
+                            borderRadius:"20px",
+                            '&:hover': {
+                            opacity: [0.9, 0.8, 0.7],
+                            },
+                        }} >
+                        <Link to="/sign-up-role-student">             
+                            <img src="image/student.png" alt="Student icon" style={{width:"50%", height:"50%",padding:0}}/>
+                            <Typography variant="body1" fontFamily="sans-serif" color="#000000" fontWeight="550">Student</Typography>
+                        </Link>         
+                        </Box>    
+                       <Box display="flex" flexDirection="column" justifyContent="center"
+                        boxShadow={12}
+                        sx={{
+                            textAlign:"center",
+                            width: 200,
+                            height: 200,
+                            borderRadius:"20px",
+                            '&:hover': {
+                            opacity: [0.9, 0.8, 0.7],
+                            },
+                        }}>
+                       <Link to="/sign-up-role-business">
+                            
+                            <img src="image/business.png" alt="Business icon" style={{width:"50%", height:"50%",padding:0}}/>
+                            <Typography variant="body1" fontFamily="sans-serif" color="#000000" fontWeight="550">Business</Typography>
                         </Link>
-                        
-                    </div>
-                </div>
+                       </Box>
+              </Box>
             </DialogContent>
         </Dialog>
     );
