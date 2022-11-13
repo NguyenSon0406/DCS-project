@@ -5,9 +5,18 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Box } from '@mui/material';
 import './Card.css';
 import { dataDigitalBestSeller } from './data';
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 // import imgGirl from '.../defaultImage.jpg';
 import Divider from '@mui/material/Divider';
 function Card() {
+  const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+    < ArrowCircleLeftIcon {...props} sx = {{color: 'black', "&:hover":{color: "gray"}}} />
+  );
+
+  const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+    <ArrowCircleRightIcon {...props} sx = {{color: 'black', "&:hover":{color: "gray"}}} />
+  );
   const [defaultImage, setDefaultImage] = useState({});
   const settings = {
     dots: true,
@@ -16,6 +25,8 @@ function Card() {
     slidesToShow: 3,
     slidesToScroll: 3,
     initialSlide: 0,
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />,
     responsive: [
       {
         breakpoint: 1024,

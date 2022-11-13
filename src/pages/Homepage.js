@@ -8,7 +8,8 @@ import Recruitment from "./Recruitment";
 import NotFound from '../utils/notFound';
 import { Home } from "./Home";
 import MyJobPost from "./MyJobPost";
-
+import Footer from '../components/Home/Footer'
+import ListStudent from "./ListStudent";
 export default function Homepage(){
     const auth = useSelector(state => state.auth)
     const {isLogged} = auth;
@@ -22,8 +23,11 @@ export default function Homepage(){
                 <Route path = "/recruitment/myjobpost" element={<MyJobPost/>}/>
                 <Route path= "/recruitment/newest" element={<Recruitment/> }/>
                 <Route path= "*"  element={<NotFound/> }/>
+                <Route path= "/liststudent"  element={<ListStudent/> }/>
             </Routes>
+            <Footer/>
              </> 
         )  
-    );
+    )
+    ;
 }

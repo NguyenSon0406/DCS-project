@@ -257,7 +257,8 @@ function Navbar() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', fontWeight:"bold" }}
               >
-                <Link to="post" style={{color:"white"}}>Blog</Link>
+                <Link to="liststudent" style={{color:"white"}}>Student</Link>
+
               </Button>
           </Box>
           <Box sx={{ flexGrow: 0 }}>

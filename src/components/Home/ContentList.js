@@ -16,7 +16,7 @@ export default function ContentList() {
     <Box style={{marginTop: '40px',display: 'flex', width: '70%'}}>
     <h2 style={{fontFamily: 'Helvetica, Arial, Tahoma, sans-serif',color: '#253b80'}}>ARTICLE</h2>
     </Box>
-        <Card sx={{ display: 'flex', marginTop: "40px",width: '70%',
+        <Card sx={{ display: 'flex', marginTop: "40px",width: '70%',backgroundColor: '#ebebeb',
         height: 200,
         '&:hover': {
           opacity: [0.9, 0.8, 0.7] }}}>
@@ -26,7 +26,7 @@ export default function ContentList() {
         image="https://fasttrack.edu.vn/wp-content/uploads/2020/10/nganh-nao-trong-IT-ma-khong-can-code-1.jpg"
         alt="Live from space album cover"
       />
-      <Box sx={{ display: 'flex', flexDirection: 'column', marginLeft: '30px', width: '90%' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', marginLeft: '30px', width: '90%', }}>
         
         <CardContent sx={{ flex: '1 0 auto' }}>
           <Typography component="div" variant="h5" textAlign = 'left'>
@@ -41,7 +41,7 @@ export default function ContentList() {
         </Box>
       </Box>
     </Card>
-    <Card sx={{ display: 'flex', marginTop: "5px",width: '70%',
+    <Card sx={{ display: 'flex', marginTop: "5px",width: '70%',backgroundColor: '#ebebeb',
         height: 200,
         '&:hover': {
           opacity: [0.9, 0.8, 0.7] }}}>
@@ -68,7 +68,7 @@ export default function ContentList() {
         </Box>
       </Box>
     </Card>
-    <Card sx={{ display: 'flex', marginTop: "5px",width: '70%',
+    <Card sx={{ display: 'flex', marginTop: "5px",width: '70%',backgroundColor: '#ebebeb',
         height: 200,
         '&:hover': {
           opacity: [0.9, 0.8, 0.7] }}}>
