@@ -5,16 +5,17 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Box } from '@mui/material';
 import './Card.css';
 import { dataDigitalBestSeller } from './data';
-import LeftArrow from "./left-arrow.svg";
-import RightArrow from "./right-arrow.svg";
-
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import Divider from '@mui/material/Divider';
 function Card() {
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
-    <img src={LeftArrow} alt="prevArrow" {...props} />
+    < ArrowCircleLeftIcon {...props} sx = {{color: 'black', "&:hover":{color: "gray"}}} />
   );
 
   const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
-    <img src={RightArrow} alt="nextArrow" {...props} />
+    <ArrowCircleRightIcon {...props} sx = {{color: 'black', "&:hover":{color: "gray"}}} />
+
   );
   const [defaultImage, setDefaultImage] = useState({});
   const settings = {

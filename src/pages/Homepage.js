@@ -12,7 +12,7 @@ import MyJobPost from "./MyJobPost";
 import UpdateJob from "../components/Job/UpdateJob"
 import RecruitmentDetail from "../components/Job/JobDetail";
 import HomeProfile from "../components/ProfileStudent/HomeProfile"
-
+import ListStudent from "./ListStudent";
 export default function Homepage(){
     const auth = useSelector(state => state.auth)
     const {isLogged} = auth;
@@ -29,9 +29,11 @@ export default function Homepage(){
                 <Route path = "/recruitment/edit/:id" element={<UpdateJob/>}/>
                 <Route path= "/profile" exact element={<HomeProfile/>}/>
                 <Route path= "*"  element={<NotFound/> }/>
+                <Route path= "/liststudent"  element={<ListStudent/> }/>
             </Routes>
             <Footer/>
              </> 
         )  
-    );
+    )
+    ;
 }
