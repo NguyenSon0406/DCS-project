@@ -3,7 +3,6 @@ import './App.css';
 import React, {useEffect} from 'react';
 import {Route, Routes, Navigate} from "react-router-dom";
 import Login from './auth/Login.js';
-import {Container} from "react-bootstrap";
 import SignUpRoleStudent from "./auth/SignUpRoleStudent";
 import SignUpRoleBusiness from "./auth/SignUpRoleBusiness";
 import Homepage from './pages/Homepage';
@@ -46,7 +45,8 @@ function App() {
     }
   },[token, dispatch])
   return (   
-      <Container>  
+    <>
+      <div>  
             <Routes>
               <Route path= "/" exact  element={isLogged ? 
               (
@@ -60,8 +60,8 @@ function App() {
               <Route path= "/user/activate/:activation_token" exact element={<ActivationEmail/>}/>
               <Route path= "*" exact element={<NotFound/>}/>
             </Routes>
-      </Container>
-      
+      </div>
+      </>
   );
 }
 

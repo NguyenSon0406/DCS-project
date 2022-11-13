@@ -83,7 +83,7 @@ const validate = (values) => {
     <>
     <div className="main-page">
             <img src="image/duytan-banner.jpg" alt="Duy Tân Banner" />
-            <div className="login-page">
+            <div className="login-page" style={{width:"30%"}}>
                 <h2 className="mb-3"><i>DTU</i> CONNECTIONS</h2>
                 <h3>Sign up with</h3>
                 {Object.keys(error).length === 0 && isSubmit ? (

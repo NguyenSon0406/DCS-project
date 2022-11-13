@@ -62,6 +62,9 @@ const NewJob = (props) => {
                 </Grid>
                 <TagInput  />
                 <Grid item xs={12}>
+                    <Typography variant='h5'>Job Descriptions</Typography>   
+                </Grid>
+                <Grid item xs={12}>
                     <Box >
                         <TextEdittor/>
                     </Box>
