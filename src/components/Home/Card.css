@@ -1,6 +1,6 @@
-body {
+/* body {
   background: rgb(180, 224, 219);
-}
+} */
 .Card {
   width: 70%;
   margin: 0 auto;
@@ -21,7 +21,7 @@ body {
   overflow: hidden;
 
   height: 400px;
-  color: rgb(0, 0, 0);
+  
   cursor: pointer;
 }
 

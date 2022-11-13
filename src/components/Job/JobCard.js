@@ -1,7 +1,7 @@
 import React from 'react'
-import {  Box, Grid, Typography, Button, Avatar} from "@mui/material"
+import {  Box, Grid, Typography, Button} from "@mui/material"
 import { makeStyles } from '@mui/styles';
-
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) =>({
   wrapper:{
@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme) =>({
 
 export default function JobCard(props) {
   const classes = useStyles();
+  const {id} = props.job;
+  
   const calculateTimePass = ( datePast) => {
     const dateNow = Date.now();
     const datePa = Date.parse(datePast);
@@ -93,7 +95,7 @@ export default function JobCard(props) {
       <Grid container alignItems="center">
       <Grid item>
             <img alt='avatar company'
-              src="https://itviec.com/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBK1lxREE9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--6163801645eb4792d6534169042826e45cbf6b51/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJY0c1bkJqb0dSVlE2RkhKbGMybDZaVjkwYjE5c2FXMXBkRnNIYVFJc0FXa0NMQUU9IiwiZXhwIjpudWxsLCJwdXIiOiJ2YXJpYXRpb24ifX0=--ee4e4854f68df0a745312d63f6c2782b5da346cd/mgm-technology-partners-vietnam-logo.png"
+              src={props.image}
               style={{
                 margin:"10px",
                 width: "70px",
@@ -109,10 +111,6 @@ export default function JobCard(props) {
           <Typography className={classes.companyName} variant='subtitle1'>{props.companyName}</Typography>
           </Grid>
         </Grid>
-            {/* <Grid item xs direction="column"  alignItems="flex-start">
-              <Typography variant='subtitle1' sx={{fontWeight:"bold"}}>{props.title}</Typography>
-              <Typography className={classes.companyName} variant='subtitle1'>{props.companyName}</Typography>
-            </Grid> */}
         <Grid item container xs>
                 {
                   props.skills.map((skill) =>(
@@ -130,11 +128,13 @@ export default function JobCard(props) {
           </Grid>
           <Grid item>
             <Box mt={2}>
-                <Button variant='outlined' 
-                className={classes.button} 
-                >
-                  Check
-                </Button>
+                <Link to={`/home/recruitment/detail/${id}`} state = {{ job: props.job}}>
+                  <Button variant='outlined' 
+                  className={classes.button} 
+                  >
+                    Check
+                  </Button>
+                </Link>  
             </Box>
           </Grid>
         </Grid>

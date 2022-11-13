@@ -30,7 +30,7 @@ mongoose.connect(URL, err => {
 })
 // routes
 app.use('/user', require('./routes/userRouter'));
-// app.use("/api/auth", authRoutes);
+app.use("/api", require('./routes/upload'));
 
 const port = process.env.PORT || 8080;
 app.listen(port, console.log(`Listening on port ${port}...`));

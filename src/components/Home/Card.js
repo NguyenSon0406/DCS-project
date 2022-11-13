@@ -5,9 +5,17 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Box } from '@mui/material';
 import './Card.css';
 import { dataDigitalBestSeller } from './data';
-// import imgGirl from '.../defaultImage.jpg';
-import Divider from '@mui/material/Divider';
+import LeftArrow from "./left-arrow.svg";
+import RightArrow from "./right-arrow.svg";
+
 function Card() {
+  const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
+    <img src={LeftArrow} alt="prevArrow" {...props} />
+  );
+
+  const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
+    <img src={RightArrow} alt="nextArrow" {...props} />
+  );
   const [defaultImage, setDefaultImage] = useState({});
   const settings = {
     dots: true,
@@ -16,6 +24,8 @@ function Card() {
     slidesToShow: 3,
     slidesToScroll: 3,
     initialSlide: 0,
+    prevArrow: <SlickArrowLeft />,
+    nextArrow: <SlickArrowRight />,
     responsive: [
       {
         breakpoint: 1024,

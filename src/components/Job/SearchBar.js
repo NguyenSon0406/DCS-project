@@ -1,5 +1,5 @@
 import React,{useState,useRef} from 'react'
-import {Box, Button, Select, MenuItem,Menu, FilledInput} from "@mui/material";
+import {Box, Button, Select, MenuItem,Menu, FilledInput,InputAdornment} from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -25,11 +25,11 @@ const StyledMenu = styled((props) => (
     elevation={0}
     anchorOrigin={{
       vertical: 'bottom',
-      horizontal: 'right',
+      horizontal: 'center',
     }}
     transformOrigin={{
       vertical: 'top',
-      horizontal: 'right',
+      horizontal: 'center',
     }}
     {...props}
   />
@@ -104,12 +104,13 @@ const SearchBar = (props) => {
         inputRef={inputElement}
         disableUnderline
         value={props.term}
-        sx={{width:"65%"}}
+        sx={{width:"75%"}}
         onChange= {getSearchTerm}
-        > <i className="search icon"/></FilledInput>
-        <Button variant='contained'
-        startIcon={<SearchIcon/>} 
-        sx={{fontWeight:"bold",width:"15%"}} >Search</Button>
+        
+        endAdornment= {<InputAdornment position="start">
+          <SearchIcon/>
+        </InputAdornment>}
+        />
         <Button
         id="demo-customized-button"
         aria-controls={open ? 'demo-customized-menu' : undefined}
@@ -118,7 +119,7 @@ const SearchBar = (props) => {
         variant="outlined"
         disableElevation
         onClick={handleClick}
-        sx={{fontWeight:"bold", width:"20%"}}
+        sx={{fontWeight:"bold", width:"25%"}}
         endIcon={<KeyboardArrowDownIcon />}
       >
         Request University

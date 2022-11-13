@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from "axios";
+import { showErrMsg, showSuccessMsg } from "../utils/notification";
 import {AccountCircle, Lock, Business, Email, ContactPhone, InsertDriveFile} from '@mui/icons-material';
 
 const SignUpRoleBusiness = () => {
@@ -42,7 +43,7 @@ const SignUpRoleBusiness = () => {
       setIsSubmit(true);
       try {
         const res = await axios.post('user/register',{
-          email,password
+          email,password,role:1
         });
         setUser({...user, err: "", isSuccess: res.data.msg})
       } catch (err) {
@@ -70,7 +71,7 @@ const SignUpRoleBusiness = () => {
   const handleChange = (e) => { 
     const {name, value} = e.target;
     setFormValues({...formValues,[name]:value});
-    
+    setUser({...user,[name]:value, err:'', isSuccess:""});
 };
 const fileChange = (e) => { 
   uploadOnChange();
@@ -144,10 +145,23 @@ useEffect(() => {
     <>
     <div className="main-page">
             <img src="image/duytan-banner.jpg" alt="Duy Tân Banner" />
-            <div className="login-page">
+            <div className="login-page" style={{width:"30%"}}>
                 <h2 className="mb-3"><i>DTU</i> CONNECTIONS</h2>
                 <h3>Sign up with</h3>
-               
+                {Object.keys(error).length === 0 && isSubmit ? (
+                  <>
+                    {err && showErrMsg(err)}
+                    {isSuccess && showSuccessMsg(isSuccess)}
+                  </>
+                  ) : Object.keys(error).length !==0 && isSubmit  ? (
+                    <>
+                    {/* <div className="ui message error">Sign up failed</div> */}
+                      {err && showErrMsg(err)}
+                    </>
+                    
+                  ): (
+                    <div></div>
+                  )}
                 <Form className="login-ui" onSubmit={handleSubmit}>
                 <Box sx={{ display: 'flex'}}>
                   <AccountCircle sx={{ color: 'action.active', mr: 1, my: 1 }} />

@@ -15,6 +15,7 @@ export default function ResetPassword() {
         success:''
     }
     const [error, setError] = useState({});
+    const [isSubmit,setIsSubmit] = useState(false);
     const [data,setData] = useState(initialValues);
     const {token} = useParams();
 
@@ -59,6 +60,7 @@ export default function ResetPassword() {
     }
 
     const handleResetPass = async (e) => {
+        setIsSubmit(true);
         setError(validate(data));
         try {
             const res = await axios.post('/user/reset', {password}, {
@@ -77,8 +79,14 @@ export default function ResetPassword() {
             <div className='login-page'>
             <h2 className="mb-3"><i>DTU</i> CONNECTIONS</h2>
             <h3>Reset Your Password ?</h3>
-            {err && showErrMsg(err)}
-            {success && showSuccessMsg(success)}
+            {Object.keys(error).length === 0 && isSubmit ? (
+                  <>
+                    {err && showErrMsg(err)}
+                    {success && showSuccessMsg(success)}
+                  </>
+                  )  : (
+                    <div></div>
+                  )}
             <Box className="login-ui" spacing={2} sx={{marginTop:"20px"}} >
             <div className='textfield-border-radius'>
                 <TextField 

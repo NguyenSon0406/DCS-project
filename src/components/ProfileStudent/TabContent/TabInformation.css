@@ -1,0 +1,77 @@
+.infor-title {
+  font-size: 25px;
+}
+.avatar {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 11px;
+}
+.title-avatar {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.input-img {
+  font-size: 18px;
+  border-radius: 5px;
+  width: 420px;
+}
+
+.infor-group {
+  display: flex;
+  margin: 10px;
+}
+
+.infor-item {
+  margin-right: 15px;
+  width: 35%;
+}
+.infor-btnsave {
+  text-align: center;
+}
+.btn-save {
+  width: 150px;
+  display: inline-block;
+  border-radius: 30px;
+  cursor: pointer;
+  background-color: rgb(36, 143, 215);
+  height: 40px;
+  color: white;
+  border: 1px solid gray;
+}
+.btn-save:hover {
+  opacity: 0.8;
+}
+.infor-account {
+  margin-top: 20px;
+}
+.btn-on-change-password {
+  border-radius: 2px;
+  width: 150px;
+  height: 40px;
+  background-color: rgb(36, 143, 215);
+  color: white;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+.btn-on-change-password:hover {
+  opacity: 0.8;
+}
+.text-account {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.input-item {
+  font-size: 18px;
+  width: 420px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgb(201, 201, 201);
+  border-radius: 5px;
+  padding: 5px;
+}
+.input-item:focus {
+  border: 2px solid #3399ff;
+}
+.input-item:disabled {
+  background-color: rgb(207, 193, 193);
+}

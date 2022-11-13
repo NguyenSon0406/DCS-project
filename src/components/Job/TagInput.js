@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 8px 8px 0",
   }
 }));
-const TagInput = () => {
+const TagInput = (props) => {
   const classes = useStyles();
-  const [tags, setTags] = useState(["MongoDb","NodeJS"]);
+  const [tags, setTags] = useState(props.skills ?? ["MongoDb","NodeJS"]);
 
 	const removeTags = (indexToRemove) => {
 		setTags(tags.filter((tag,index) => index !== indexToRemove));

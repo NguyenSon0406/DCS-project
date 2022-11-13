@@ -8,7 +8,7 @@ const {CLIENT_URL} = process.env
 const userCtrl = {
     register : async (req, res) => {
         try {
-            const { email, password } = req.body;
+            const { email, password,role } = req.body;
 
             if(!email || !password)
             { 
@@ -23,8 +23,18 @@ const userCtrl = {
             //     return res.status(400).json({msg:"Use your DTU email to register!"})
             // }
             const passwordHash = await bcrypt.hash(password,12);
-            const newUser = {
-                email, password: passwordHash
+            let newUser = '';
+            if(!role)
+            {
+                newUser = {
+                    email, password: passwordHash
+                }
+            }
+            else
+            {
+                 newUser = {
+                    email, password: passwordHash,role
+                }
             }
 
             const activation_token = createActivationToken(newUser);
@@ -41,15 +51,26 @@ const userCtrl = {
             const {activation_token} = req.body;
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET);
             
-            const { email, password} = user;
+            const { email, password,role} = user;
             
             const check = await Users.findOne({email});
             if(check) return res.status(400).json({msg:"This account already activated!"});
             // await Users.updateOne({_id, isVerify:true});
             // if(check.isVerify) return res.status(400).json({msg:"This email already exists."})
-            const newUser = new Users({
-                 email, password,isVerify:"true"
-            })
+            
+            let newUser="";
+            if(!role)
+            {
+                newUser = new Users({
+                    email, password,isVerify:"true"
+               })
+            }
+            else
+            {
+                newUser = new Users({
+                    email, password,role,isVerify:"true"
+               })
+            }
 
             await newUser.save()
 
@@ -115,7 +136,6 @@ const userCtrl = {
     resetPassword: async (req, res) => {
         try {
             const {password} = req.body
-            console.log(password)
             const passwordHash = await bcrypt.hash(password, 12)
             
             await Users.findOneAndUpdate({_id: req.user.id}, {
@@ -130,9 +150,6 @@ const userCtrl = {
     getUserInfor: async (req, res) => {
         try {
             const user = await Users.findById(req.user.id).select('-password')
-
-            console.log(req.user.id);
-        
             const userId = await userInfo.findOne({user_id : req.user.id});
             res.json(userId);
         } catch (err) {
@@ -147,6 +164,17 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+    updateUser: async (req, res) => {
+        try {
+            const {avatar,address,phone} = req.body;
+            const userId = await userInfo.findOneAndUpdate({user_id : req.user.id},{
+                avatar,address,phone
+            });
+            res.json({msg:"Update Success!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    }
 }
 
 const createActivationToken = (payload) => {
