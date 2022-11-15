@@ -1,8 +1,7 @@
 import React,{useState} from 'react'
 import {Box, Grid, ThemeProvider, Typography, Button, Pagination} from "@mui/material"
-import theme from "../theme";
+import theme from "../components/Job/theme";
 import SearchBar from '../components/ListStudent/SearchBar2';
-
 import JobData from "../components/ListStudent/dummyData2"
 import JobList from '../components/ListStudent/StudentList';
 
@@ -34,7 +33,7 @@ const ListStudent=() => {
                 <Grid container justifyContent="center">  
                   <Grid item xs={10}>
                     <Box display="flex" justifyContent="space-between">
-                    <Typography variant='h3'>Student</Typography>
+                    <Typography variant='h3'>List Potential Student</Typography>
                     {/*  */}
                     </Box>
                   </Grid>               

@@ -1,84 +1,119 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import './TabInformation.css';
 import ModalChangePassword from "./modal/ModalChangePassword";
+import axios from "axios"
+import { useSelector } from "react-redux";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
-class TabInformation extends Component {
+const initialState = {
+    contact:'',
+    address:'',
+    description:'',
+    err:'',
+    success:''
+}
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+function TabInformation(props) {
+    const auth = useSelector(state => state.auth)
+    const token = useSelector(state => state.token)
+    const {user} = auth;
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstName: this.props.auth.firstName,
-            lastName: this.props.auth.lastName,
-            avatar:"",
-            birthday: new Date(this.props.auth.dayofbirth).toISOString().slice(0,10),
-            gender: this.props.auth.gender,
-            phone: this.props.auth.contact,
-            email: this.props.auth.email,
-            address: this.props.auth.address,
-            falculty: this.props.auth.falculty,
-            className: this.props.auth.className,
-            isOpenModalChangePassword: false,
+    const [data, setData] = useState(initialState)
+    const {contact, address, description, err, success} = data
+    const [avatar, setAvatar] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [openModalChangePassword, setOpenModalChangePassword] = useState(false);
+
+    const handleChange = e => {
+        const {name, value} = e.target
+        setData({...data, [name]:value, err:'', success: ''})
+    }
+    
+    //change avatar
+    const changeAvatar = async(e) => {
+        e.preventDefault()
+        try {
+            const file = e.target.files[0]
+
+            if(!file) return setData({...data, err: "No files were uploaded." , success: ''})
+
+            if(file.size > 1024 * 1024)
+                return setData({...data, err: "Size too large." , success: ''})
+
+            if(file.type !== 'image/jpeg' && file.type !== 'image/png')
+                return setData({...data, err: "File format is incorrect." , success: ''})
+
+            let formData =  new FormData()
+            formData.append('file', file)
+
+            setLoading(true)
+            const res = await axios.post('/api/upload_avatar', formData, {
+                headers: {'content-type': 'multipart/form-data', Authorization: token}
+            })
+
+            setLoading(false)
+            setAvatar(res.data.url)
+            
+        } catch (err) {
+            setData({...data, err: err.response.data.msg , success: ''})
         }
-        
-       console.log(this.state);
     }
-    convertDatetoString = (date) => {
-        let timestamp = new Date(date).getTime();
-        let day = new Date(timestamp).getDate();
-        let month = new Date(timestamp).getMonth()+1;
-        let year = new Date(timestamp).getFullYear(); 
-        let newDateFormat = year+"-"+month+"-"+day;
-        return newDateFormat;  
+    //update user infor
+    const updateInfor = () => {
+        try {
+            axios.patch('/user/update', {
+                avatar: avatar ? avatar : user.avatar,
+                contact: contact ? contact : user.contact,
+                address: address ? address : user.address,
+                description: description ? description : user.description
+            },{
+                headers: {Authorization: token}
+            })
+
+            setData({...data, err: '' , success: "Updated Success!"})
+        } catch (err) {
+            setData({...data, err: err.response.data.msg , success: ''})
+        }
     }
-    handleOnChangeInput = (e, id) => {
-        let valueInput = e.target.value;
-        let copyState = { ...this.state }
-        copyState[id] = valueInput;
-        this.setState({
-            ...copyState
-        })
+    const handleUpdate = () => {
+        if(contact || address || description || avatar )
+            {
+                updateInfor();
+                handleClick();
+            }
+
     }
-    
-    handleSaveInfor = () => {
-        console.log("check state: ", this.state);
-        // this.setState({
-        //     firstName: '',
-        //     lastName: '',
-        //     birthday: '',
-        //     gender: 'male',
-        //     phone: '',
-        //     email: 'son102938@gmail.com',
-        //     address: '',
-        //     falculty: '',
-        //     className: '',
-        //     avatar:'',
-        // })
+    const convertBirthday = (userbirthday) => {
+        const birthday = new Date(userbirthday).toISOString().slice(0,10)
+        return birthday;
     }
-    closeModalChangePassword = () => {
-        this.setState({
-            isOpenModalChangePassword: false
-        })
-    }
-    handleOnChangePassword = () => {
-        this.setState({
-            isOpenModalChangePassword: true
-        })
-    }
-    render() {
-    
-        let { firstName, lastName, birthday, gender, phone, email,
-            address, falculty, className } = this.state;
+    const [open, setOpen] = useState(false);
+
+    const handleClick = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen(false);
+    };
         return (
             <>
                 <ModalChangePassword
-                    isOpen={this.state.isOpenModalChangePassword}
-                    closeModal={this.closeModalChangePassword}
+                    isOpen={openModalChangePassword}
+                    setIsOpen={setOpenModalChangePassword}
                 />
                 <div className="infor-container">
                     <div className="infor-title">Personal Information</div>
                     <div className="avatar">
                         <div className="title-avatar">Avatar</div>
-                        <input className="input-img" type="file" />
+                        <input className="input-img" type="file" onChange={changeAvatar} />
                     </div>
                     <div className="infor-input">
                         <div className="infor-group">
@@ -87,8 +122,7 @@ class TabInformation extends Component {
                                 <input
                                     className="input-item"
                                     type="text"
-                                    value={firstName}
-                                    onChange={(e) => this.handleOnChangeInput(e, "firstName")}
+                                    value={user.firstName}
                                     disabled={true}
                                 />
                             </div>
@@ -97,8 +131,7 @@ class TabInformation extends Component {
                                 <input
                                     className="input-item"
                                     type="text"
-                                    value={lastName}
-                                    onChange={(e) => this.handleOnChangeInput(e, "lastName")}
+                                    value={user.lastName}
                                     disabled={true}
                                 />
                             </div>
@@ -107,10 +140,8 @@ class TabInformation extends Component {
                                 <input
                                     className="input-item"
                                     type='date'
-                                    value={birthday}
-                                    placeholder="dd/mm/yyyy"
-                                    onChange={(e) => this.handleOnChangeInput(e, "birthday")}
-                                    disabled={true}
+                                    value={convertBirthday(user.dayofbirth)}
+                                    placeholder="dd/mm/yyyy"                                    disabled={true}
                                 />
                             </div>
                         </div>
@@ -119,8 +150,7 @@ class TabInformation extends Component {
                                 <label>Gender</label>
                                 <select
                                     className="input-item"
-                                    value={gender}
-                                    onChange={(e) => this.handleOnChangeInput(e, "gender")}
+                                    value={user.gender}
                                     disabled={true}
                                 >
                                     <option value="male">Male</option>
@@ -133,8 +163,9 @@ class TabInformation extends Component {
                                 <input
                                     className="input-item"
                                     type="text"
-                                    value={phone}
-                                    onChange={(e) => this.handleOnChangeInput(e, "phone")}
+                                    name="contact"
+                                    defaultValue={user.contact}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="infor-item">
@@ -142,8 +173,7 @@ class TabInformation extends Component {
                                 <input
                                     className="input-item"
                                     type="text"
-                                    value={email}
-                                    onChange={(e) => this.handleOnChangeInput(e, "email")}
+                                    value={user.email}
                                     disabled={true}
                                 />
                             </div>
@@ -154,18 +184,17 @@ class TabInformation extends Component {
                                 <input
                                     className="input-item"
                                     type="text"
-                                    value={address}
-                                    onChange={(e) => this.handleOnChangeInput(e, "address")}
-                                />
+                                    name="address"
+                                    defaultValue={user.address}
+                                    onChange={handleChange}                                />
                             </div>
                             <div className="infor-item">
                                 <label>Falculty</label>
                                 <input
                                     className="input-item"
                                     type="text"
-                                    value={falculty}
+                                    value={user.falculty}
                                     disabled={true}
-                                    onChange={(e) => this.handleOnChangeInput(e, "falculty")}
                                 />
                             </div>
                             <div className="infor-item">
@@ -173,30 +202,49 @@ class TabInformation extends Component {
                                 <input
                                     className="input-item"
                                     type="text"
-                                    value={className}
+                                    value={user.className}
                                     disabled={true}
-                                    onChange={(e) => this.handleOnChangeInput(e, "class")}
                                 />
                             </div>
+                        </div>
+                        <div className="infor-group"> 
+                            <div className="infor-item">
+                                    <label>Description</label>
+                                    <textarea
+                                        className="input-item"
+                                        type="text"
+                                        name="description"
+                                        defaultValue={user.description}
+                                        onChange={handleChange}
+                                        style={{
+                                            height:"100%"
+                                        }}
+                                    />
+                                </div>
                         </div>
                     </div>
                     <div className="infor-btnsave">
                         <button
                             className="btn-save"
-                            onClick={() => this.handleSaveInfor()}
-                        >SAVE</button>
+                            onClick={handleUpdate}
+                        >{loading ? <h5>Loading.....</h5> : <h5>SAVE</h5>}</button>
                     </div>
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        {success && <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                           {success}
+                        </Alert>}
+                    </Snackbar>
+                   
                     <div className="infor-account">
                         <div className="text-account">Account</div>
                         <button
                             className="btn-on-change-password"
-                            onClick={() => this.handleOnChangePassword()}
+                            onClick={()=> setOpenModalChangePassword(true)}
                         >Change Password</button>
                     </div>
                 </div>
             </>
         );
-    }
 }
 
 export default TabInformation;

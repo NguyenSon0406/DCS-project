@@ -1,7 +1,7 @@
 import React from "react";
 import './LeftProfile.css';
 function LeftProfile(props) {
-    const {avatar,firstName,lastName} = props.auth;
+    const {avatar,firstName,lastName,description} = props.auth;
         return (
             <>
                 <div className="leftp-container">
@@ -16,6 +16,7 @@ function LeftProfile(props) {
                     </div>
                     <div className="leftp-content-right">
                         <div className="name">{lastName} {firstName}</div>
+                        <div className="description">Description: {description}</div>
                     </div>
                 </div>
             </>

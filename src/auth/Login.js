@@ -231,6 +231,5 @@ const Login = () =>
       </>
     );
 }
-//error && <Alert variant="danger">{error}</Alert>
 export default Login;
 
