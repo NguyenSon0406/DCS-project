@@ -166,15 +166,33 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const {avatar,address,phone} = req.body;
+            const {avatar,address,contact,description} = req.body;
             const userId = await userInfo.findOneAndUpdate({user_id : req.user.id},{
-                avatar,address,phone
+                avatar,address,contact,description
             });
             res.json({msg:"Update Success!"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
-    }
+    },
+    changePassword: async (req,res) => {
+        try{
+            const {oldPassword,newPassword} = req.body;
+            const user = await Users.findById(req.user.id)
+            const isMatch = await bcrypt.compare(oldPassword, user.password)
+            if(!isMatch) return res.status(400).json({msg: "Old Password is incorrect."})
+            else {
+                const passwordHash = await bcrypt.hash(newPassword, 12)
+                await Users.findOneAndUpdate({_id: req.user.id}, {
+                    password: passwordHash
+                })
+            }
+                
+            res.json({msg: "Password successfully changed!"})
+        }catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
 }
 
 const createActivationToken = (payload) => {
