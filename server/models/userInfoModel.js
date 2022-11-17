@@ -38,7 +38,10 @@ const userInfoSchema = new mongoose.Schema({
     },
     description:{
         type: String
-    }
+    },
+    role:{
+        type: Number
+    },
 },{
     timestamps: true
 })

@@ -1,0 +1,23 @@
+.rightp-containter-company {
+  padding-top: 5px;
+  padding-left: 100px;
+}
+.label-content-company {
+  display: flex;
+}
+.label-content-company .label-left-company {
+  font-size: 20px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+.label-content-company .label-left-company div {
+  margin: 3px;
+}
+.label-content-company .label-right-company {
+  padding-left: 25px;
+  font-size: 15px;
+  margin-top: 20px;
+}
+.label-content-company .label-right-company div {
+  margin: 3.5px;
+}

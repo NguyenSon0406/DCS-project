@@ -1,36 +1,46 @@
 
 const mongoose = require('mongoose');
+const {Schema} = mongoose;
 
 const userSchema = new mongoose.Schema({
     id: {
         type: String
         
     },
+    user_id: {
+        type: Schema.Types.ObjectId, ref: 'Users' 
+    },
+    firstName:{
+        type: String
+    },
+    lastName:{
+        type: String
+    },
+    companyName: {
+        type: String
+    },
     email:{
-        type: String,
-        require: [true," Please enter your email!"]
+        type: String
     },
-    password: {
-        type: String,
-        require: [true," Please enter your password!"]
+    contact: {
+        type: String
     },
-    name:{
-        type:String,
-    },
-    role:{
-        type: Number,
-        default: 1 // 0 = student, 1 = IT Company, 2 = admin, 3 = Lecturer
+    address:{
+        type: String
     },
     avatar: {
         type: String,
         default: "https://res.cloudinary.com/dyqqjlozc/image/upload/v1664770107/user_tymt3d.png"
     },
-    isVerify:{
-        type: Boolean,
-        default: false,
-    }
+    description:{
+        type: String
+    },
+    role:{
+        type: Number,
+        default:1
+    },
 },{
     timestamps: true
 })
 
-module.exports = mongoose.model("Users", userSchema );
+module.exports = mongoose.model("CompanyInfor", userSchema );

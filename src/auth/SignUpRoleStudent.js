@@ -23,7 +23,7 @@ const SignUpRoleStudent = () => {
       setIsSubmit(true);
     try {
       const res = await axios.post('user/register',{
-        email,password
+        email,password,role:0
       });
       setUser({...user, err: "", isSuccess: res.data.msg})
     } catch (err) {
