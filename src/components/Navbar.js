@@ -211,7 +211,7 @@ function Navbar() {
                 root: styles.popOverRoot
               }}
                   >
-                  <MenuItem onClick={handleClose}>Newest</MenuItem>
+                  <MenuItem onClick={handleClose}><Link to="post/newest" style={{color:"black"}}>Newest</Link></MenuItem>
                   <MenuItem onClick={handleClose}>My post</MenuItem>
                   <MenuItem onClick={handleClose}>Create post</MenuItem>
                 </Menu>
