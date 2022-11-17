@@ -13,9 +13,10 @@ import UpdateJob from "../components/Job/UpdateJob"
 import RecruitmentDetail from "../components/Job/JobDetail";
 import HomeProfile from "../components/ProfileStudent/HomeProfile"
 import ListStudent from "./ListStudent";
+import HomeProfileCompany from "../components/ProfileCompany/HomeProfileCompany";
 export default function Homepage(){
     const auth = useSelector(state => state.auth)
-    const {isLogged} = auth;
+    const {isLogged,role} = auth;
     return(
         (!isLogged) ? (<Navigate to="/"/>) : (
             <>
@@ -27,7 +28,7 @@ export default function Homepage(){
                 <Route path= "/recruitment/newest" element={<Recruitment/> }/>
                 <Route path = "/recruitment/detail/:id" element={<RecruitmentDetail/>}/>
                 <Route path = "/recruitment/edit/:id" element={<UpdateJob/>}/>
-                <Route path= "/profile" exact element={<HomeProfile/>}/>
+                <Route path= "/profile" exact element={(role === 0) ? (<HomeProfile/>): (<HomeProfileCompany/>)}/>
                 <Route path= "*"  element={<NotFound/> }/>
                 <Route path= "/liststudent"  element={<ListStudent/> }/>
             </Routes>
