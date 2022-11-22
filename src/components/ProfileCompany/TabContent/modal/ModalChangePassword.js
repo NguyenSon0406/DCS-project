@@ -7,6 +7,7 @@ import MuiAlert from '@mui/material/Alert';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axios from "axios";
 import { useSelector } from "react-redux";
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -136,6 +137,7 @@ function ModalChangePassword (props) {
                 handleClick(2);
         }
     }
+
         return (
             <>
                 <Modal
@@ -153,7 +155,7 @@ function ModalChangePassword (props) {
                                 </span>
                             </div>
                             <div className="old-password">
-                                    <TextField
+                            <TextField
                                     id="input-oldpassword"
                                     label="Old Password"
                                     name="oldPassword"
@@ -181,7 +183,7 @@ function ModalChangePassword (props) {
                                 />
                             </div>
                             <div className="new-password">
-                            <TextField
+                                <TextField
                                     id="input-newpassword"
                                     label="New Password"
                                     name="newPassword"
@@ -238,13 +240,13 @@ function ModalChangePassword (props) {
                             </div>
                             <div className="btn-change-password">
                                 <button
-                                    className="btn-return"
-                                    onClick={() => setIsOpen(false)}
-                                >Return</button>
-                                <button
-                                    className="btn-change"
-                                    onClick={handleChangePass}
-                                >Change</button>
+                                        className="btn-return"
+                                        onClick={() => setIsOpen(false)}
+                                    >Return</button>
+                                    <button
+                                        className="btn-change"
+                                        onClick={handleChangePass}
+                                    >Change</button>
                             </div>
                             <Snackbar open={errOpen} autoHideDuration={6000} onClose={handleClose}>  
                                 {err && <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>

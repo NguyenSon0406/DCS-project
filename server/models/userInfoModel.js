@@ -35,7 +35,13 @@ const userInfoSchema = new mongoose.Schema({
     avatar: {
         type: String,
         default: "https://res.cloudinary.com/dyqqjlozc/image/upload/v1664770107/user_tymt3d.png"
-    }
+    },
+    description:{
+        type: String
+    },
+    role:{
+        type: Number
+    },
 },{
     timestamps: true
 })

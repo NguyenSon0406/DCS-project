@@ -1,10 +1,10 @@
-.leftp-container {
+.left-pf-company-container {
   height: 100%;
   width: 100%;
   display: flex;
   padding: 10px;
 }
-.leftp-content-left {
+.left-pf-company-content-left {
   height: 100%;
   width: 40%;
   display: flex;
@@ -12,7 +12,7 @@
   justify-content: center;
   align-items: center;
 }
-.leftp-content-right {
+.left-pf-company-content-right {
   height: 100%;
   width: 60%;
   font-size: 18px;
@@ -20,13 +20,12 @@
   justify-content: center;
 }
 
-.leftp-content-right .name {
-  font-weight: 600;
+.left-pf-company-content-right .name {
+  font-weight: bold;
   font-size: 30px;
   padding-top: 20px;
 }
-.leftp-content-right .description {
-  font-size: 15px;
+.left-pf-company-content-right .address {
+  font-size: 18px;
   padding-top: 20px;
-  word-wrap: break-word;
 }

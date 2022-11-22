@@ -4,11 +4,12 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const sendMail = require("./sendMail");
 const {CLIENT_URL} = process.env
+const companyInfo = require('../models/companyModel')
 
 const userCtrl = {
     register : async (req, res) => {
         try {
-            const { email, password,role } = req.body;
+            const { email, password,role, firstName, lastName, phone_number, company_name } = req.body;
 
             if(!email || !password)
             { 
@@ -24,16 +25,15 @@ const userCtrl = {
             // }
             const passwordHash = await bcrypt.hash(password,12);
             let newUser = '';
-            if(!role)
+            if(role === 0)
             {
                 newUser = {
                     email, password: passwordHash
                 }
-            }
-            else
+            } else if(role === 1)
             {
                  newUser = {
-                    email, password: passwordHash,role
+                    email, password: passwordHash,role, firstName, lastName, phone_number, company_name
                 }
             }
 
@@ -51,7 +51,7 @@ const userCtrl = {
             const {activation_token} = req.body;
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET);
             
-            const { email, password,role} = user;
+            const { email, password,role,firstName, lastName, phone_number, company_name} = user;
             
             const check = await Users.findOne({email});
             if(check) return res.status(400).json({msg:"This account already activated!"});
@@ -59,21 +59,25 @@ const userCtrl = {
             // if(check.isVerify) return res.status(400).json({msg:"This email already exists."})
             
             let newUser="";
-            if(!role)
+            if(role === 0)
             {
                 newUser = new Users({
                     email, password,isVerify:"true"
                })
+               await newUser.save();
             }
-            else
+            else if( role === 1)
             {
                 newUser = new Users({
                     email, password,role,isVerify:"true"
                })
+               await newUser.save(function(){
+                    const newInfo = new companyInfo({
+                        user_id:newUser._id, email, firstName, lastName, contact:phone_number, companyName: company_name, address:''
+                    });
+                    newInfo.save();
+                })
             }
-
-            await newUser.save()
-
             res.json({msg: "Account has been activated!"})
 
         } catch (err) {
@@ -150,7 +154,15 @@ const userCtrl = {
     getUserInfor: async (req, res) => {
         try {
             const user = await Users.findById(req.user.id).select('-password')
-            const userId = await userInfo.findOne({user_id : req.user.id});
+            let userId ='';
+            if(user.role === 0)
+                {
+                    userId = await userInfo.findOne({user_id : req.user.id});
+                }
+            else if(user.role === 1)
+                {
+                    userId = await companyInfo.findOne({user_id : req.user.id});
+                }
             res.json(userId);
         } catch (err) {
             return res.status(500).json({msg: err.message})
@@ -166,15 +178,45 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const {avatar,address,phone} = req.body;
-            const userId = await userInfo.findOneAndUpdate({user_id : req.user.id},{
-                avatar,address,phone
-            });
+            const {firstName,lastName,avatar,address,contact,description} = req.body;
+            const user = await Users.findById(req.user.id).select('-password');
+            let userId ='';
+            if(user.role === 0)
+                {
+                    userId = await userInfo.findOneAndUpdate({user_id : req.user.id},{
+                        avatar,address,contact,description
+                    });
+                }
+            else if(user.role === 1)
+                {
+                    userId = await companyInfo.findOneAndUpdate({user_id : req.user.id},{
+                        firstName, lastName,avatar,address,contact,description
+                    });
+                }
+            
             res.json({msg:"Update Success!"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
-    }
+    },
+    changePassword: async (req,res) => {
+        try{
+            const {oldPassword,newPassword} = req.body;
+            const user = await Users.findById(req.user.id)
+            const isMatch = await bcrypt.compare(oldPassword, user.password)
+            if(!isMatch) return res.status(400).json({msg: "Old Password is incorrect."})
+            else {
+                const passwordHash = await bcrypt.hash(newPassword, 12)
+                await Users.findOneAndUpdate({_id: req.user.id}, {
+                    password: passwordHash
+                })
+            }
+                
+            res.json({msg: "Password successfully changed!"})
+        }catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
 }
 
 const createActivationToken = (payload) => {

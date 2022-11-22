@@ -80,25 +80,6 @@ const SearchBar = (props) => {
 }
   return (
     <Box p={2} className={classes.wrapper}>
-        {/* <Select disableUnderline variant='filled' sx={{fontWeight:"bold",width:"30%"}} defaultValue="Full time">
-            <MenuItem value="Full time">
-                Full time
-            </MenuItem>
-            <MenuItem value="Part time">
-                Part time
-            </MenuItem>
-            <MenuItem value="Contract">
-                Contract
-            </MenuItem>
-        </Select>
-        <Select disableUnderline variant='filled' sx={{fontWeight:"bold", width:"30%"}} defaultValue="Remote">
-            <MenuItem value="Remote">
-                Remote
-            </MenuItem>
-            <MenuItem value="In-Office">
-                In-Office
-            </MenuItem>
-        </Select> */}
         <FilledInput 
         placeholder='Input keyword to search' 
         inputRef={inputElement}

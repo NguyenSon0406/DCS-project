@@ -1,17 +1,9 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Grid,
-  ThemeProvider,
-  Typography,
-  Button,
-  Pagination,
-} from "@mui/material";
+import React,{useState} from 'react'
+import {Box, Grid, ThemeProvider, Typography, Button, Pagination} from "@mui/material"
 import theme from "../components/Job/theme";
-import SearchBar from "../components/ListStudent/SearchBar2";
-
-import JobData from "../components/ListStudent/dummyData2";
-import JobList from "../components/ListStudent/StudentList";
+import SearchBar from '../components/ListStudent/SearchBar2';
+import JobData from "../components/ListStudent/dummyData2"
+import JobList from '../components/ListStudent/StudentList';
 
 const ListStudent = () => {
   const [openPopup, setOpenPopup] = useState(false);
@@ -33,32 +25,29 @@ const ListStudent = () => {
   };
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <Box bgcolor="white" py={2} sx={{ marginTop: 0, width: "100%" }}>
-          <Grid container justifyContent="center">
-            <Grid item xs={10}>
-              <Box display="flex" justifyContent="space-between">
-                <Typography variant="h3">Student</Typography>
-                {/*  */}
+      <ThemeProvider theme={theme} >
+          
+              <Box bgcolor="white" py={2} sx={{marginTop:0,width:"100%"}}>
+                <Grid container justifyContent="center">  
+                  <Grid item xs={10}>
+                    <Box display="flex" justifyContent="space-between">
+                    <Typography variant='h3'>List Potential Student</Typography>
+                    {/*  */}
+                    </Box>
+                  </Grid>               
+                </Grid>
               </Box>
-            </Grid>
-          </Grid>
-        </Box>
-        <Grid container justifyContent="center">
-          <Grid item xs={10}>
-            <SearchBar term={searchTerm} searchKeyWord={searchHandle} />
-            <JobList jobs={searchTerm.length < 1 ? JobData : searchResults} />
-          </Grid>
-        </Grid>
-        <Pagination
-          style={{ marginTop: "40px" }}
-          count={10}
-          variant="outlined"
-          shape="rounded"
-          showFirstButton
-          showLastButton
-        />
-      </ThemeProvider>
+              <Grid container justifyContent="center">
+                <Grid item xs={10}>
+                  <SearchBar term = {searchTerm}
+                    searchKeyWord = {searchHandle}
+                  />
+                  <JobList jobs={searchTerm.length < 1 ? JobData : searchResults}/>
+                </Grid>
+              </Grid>
+              <Pagination style={{marginTop:"40px"}} count={10} variant="outlined" shape="rounded" showFirstButton showLastButton  />
+              
+          </ThemeProvider> 
     </>
   );
 };

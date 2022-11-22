@@ -43,7 +43,7 @@ const SignUpRoleBusiness = () => {
       setIsSubmit(true);
       try {
         const res = await axios.post('user/register',{
-          email,password,role:1
+          email,password,role:1,firstName, lastName, phone_number,company_name
         });
         setUser({...user, err: "", isSuccess: res.data.msg})
       } catch (err) {
@@ -291,21 +291,6 @@ useEffect(() => {
                               />
                      </div>
                     </Box>
-               
-                {/* <div className="field">
-                    <input type="text" id="textfile" name="file"  placeholder="Business License (*pdf, *png, *jpg)"
-                    readOnly onClick={uploadFile} 
-                    />
-                    <input type="file"
-                            id="fileinput" name="file"
-                            accept="image/png, image/jpeg, .pdf" 
-                            
-                            style={{visibility:"hidden", display:"none"}}
-                            onChange={fileChange}
-                            />
-                    <i class="fa fa-file fa-lg fa-fw" aria-hidden="true"/>
-                </div>
-                <p>{error.file}</p> */}
                     <div className="login-component">
                     <Button 
                         type="Submit"
