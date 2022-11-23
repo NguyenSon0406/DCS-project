@@ -9,10 +9,11 @@ const TextEdittor = (props) => {
         <> <CKEditor
         id="editor"
         editor={ClassicEditor}
-        data={props.jobDescription ?? "<p>Input Job Descriptions</p>"}
+        data={props.jobDescription}
         onChange={(event, editor) =>{
            const data = editor.getData()
            setText(data);
+           props.setDescription(text);
         }}
         onReady={(editor) => {
        editor.editing.view.change((writer) => {

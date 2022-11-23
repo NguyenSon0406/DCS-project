@@ -181,7 +181,6 @@ function TabInformation(props) {
                                         onChange={(event, editor) =>{
                                             const data = editor.getData()
                                             setDesciptionHTML({...descriptionHTML,description: data});
-                                            console.log(description)
                                         }}
                                         onReady={(editor) => {
                                         editor.editing.view.change((writer) => {
