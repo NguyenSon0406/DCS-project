@@ -103,8 +103,11 @@ export default function JobCard(props) {
             </Grid>
           <Grid item container direction="column" xs>
           <Grid item>
-          <Typography variant='subtitle1' sx={{fontWeight:"bold"}}>{props.title}</Typography>
-
+          <Typography variant='subtitle1' sx={{fontWeight:"bold"}}>
+            <Link to={`/home/recruitment/detail/${id}`} state = {{ job: props.job}}>
+              {props.title}
+            </Link>
+          </Typography>
           </Grid>
           <Grid item>
           <Typography className={classes.companyName} variant='subtitle1'>{props.companyName}</Typography>

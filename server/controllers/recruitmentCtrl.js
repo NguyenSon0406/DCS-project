@@ -32,6 +32,25 @@ const recruitmentCtrl = {
         catch(err) {
             return res.status(500).json({msg: err.message});
         }
+    },
+    getPostByID: async(req,res) => {
+        try {
+            const posts = await recruitmentPost.find({user_id: req.user.id});
+            res.json(posts)
+        }catch(err){
+            return res.status(500).json({msg: err.message});
+        }
+    },
+    updateRecruitment: async (req,res) => {
+        try {
+            const {title,type,link,location,skills,description} = req.body;
+            await recruitmentPost.findByIdAndUpdate(req.params.id,{
+                title,type,link,location,skills,description
+            })
+            res.json({msg:"Update Successfully"})
+        }catch (err){
+            return res.status(500).json({msg: err.message});
+        }
     }
 }
 

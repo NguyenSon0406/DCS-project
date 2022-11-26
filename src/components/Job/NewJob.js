@@ -89,6 +89,7 @@ const NewJob = (props) => {
         setData({...data, err:err.response.data.msg, success: ''})
         
     }
+    props.passUpdateList();
   }
   return (
     <Dialog open={openPopup} fullWidth={true} maxWidth="lg" onBackdropClick={() => setOpenPopup(false)}>

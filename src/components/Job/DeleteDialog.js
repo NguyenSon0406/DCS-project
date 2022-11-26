@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close"
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import MuiAlert from '@mui/material/Alert';
+import { useNavigate } from 'react-router-dom';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -13,8 +14,8 @@ export const DeleteDialog = (props) => {
     const { openPopup, setOpenPopup} = props;
     const token = useSelector(state => state.token);
     const [notify, setNotify] = useState('');
-
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleClick = () => {
       setOpen(true);
@@ -35,6 +36,7 @@ export const DeleteDialog = (props) => {
             setNotify(res.data.msg);
             setOpenPopup(false);
             handleClick();
+            navigate("/home/recruitment/myjobpost");
         }catch (err){
             setNotify(err.response.data.msg)
         }
@@ -62,7 +64,7 @@ export const DeleteDialog = (props) => {
                         {notify && <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                            {notify}
                         </Alert>}
-                    </Snackbar>
+        </Snackbar>
         </>
     )
 };

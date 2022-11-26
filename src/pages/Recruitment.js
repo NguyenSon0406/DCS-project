@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect, useReducer} from 'react'
 import {Box, Grid, ThemeProvider, Typography, Button, Pagination} from "@mui/material"
 import theme from "../components/Job/theme";
 import SearchBar from '../components/Job/SearchBar';
@@ -7,6 +7,7 @@ import JobList from '../components/Job/JobList';
 import CompanyList from '../components/Job/CompanyList';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 
 const Recruitment=() => {
   const [openPopup, setOpenPopup] = useState(false);
@@ -14,6 +15,7 @@ const Recruitment=() => {
   const [searchResults, setSearchResults] = useState("");
   const [jobs, setJobs] = useState([]);
   const token = useSelector(state => state.token);
+  const [reducerValue,forceUpdate] = useReducer(x => x + 1, 0);
 
   useEffect(() =>{  
     const getAllJobs= async() => {
@@ -24,7 +26,7 @@ const Recruitment=() => {
     }
     getAllJobs();
     
-  },[])
+  },[reducerValue])
   const searchHandle = (searchTerm) => {
     setSearchTerm(searchTerm);
     if(searchTerm !== "")
@@ -40,6 +42,9 @@ const Recruitment=() => {
     else{
       setSearchResults(jobs);
     }
+  }
+  const passUpdateList = () => {
+    forceUpdate();
   }
   return (
     <>
@@ -57,7 +62,8 @@ const Recruitment=() => {
                     variant='contained'
                     color='error'                   
                     sx={{fontWeight:"bold"}}
-                    onClick={() => setOpenPopup(true)}                    
+                    onClick={() => setOpenPopup(true)}
+                    startIcon={<PostAddIcon/>}                    
                     >Post a job</Button>
                     </Box>
                     <SearchBar term = {searchTerm}
@@ -97,8 +103,7 @@ const Recruitment=() => {
                 </Grid>
               </Box>
 
-              
-              <NewJob openPopup = {openPopup}
+              <NewJob openPopup = {openPopup} passUpdateList = {passUpdateList}
         setOpenPopup={setOpenPopup} />
           </ThemeProvider> 
     </>

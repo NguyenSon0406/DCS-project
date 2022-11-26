@@ -32,20 +32,30 @@ const TagInput = (props) => {
   const [tags, setTags] = useState(props.skills ?? ["MongoDb","NodeJS"]);
   const removeTags = (indexToRemove) => {
 		setTags(tags.filter((tag,index) => index !== indexToRemove));
-    props.setSkills(tags);
+    setSkills(tags)
+    handleSkills(tags)
 	};
-
+  const handleSkills = tags => {
+    if(props.handleSkills)
+    props.handleSkills(tags);
+  }
+  const setSkills = tags => {
+    if(props.setSkills)
+      props.setSkills(tags)
+  }
 	const addTags = event => {
 		if (event.target.value !== "") {
 			setTags([...tags, event.target.value]);
 			event.target.value = "";
-      props.setSkills(tags);
+      setSkills(tags)
+      handleSkills(tags)
 		}
 	};
   useEffect(() => {
     if(props.setSkills)
       props.setSkills(tags);
-    
+    if(props.handleSkills)
+      props.handleSkills(tags);
   },[props,tags])
   return (
     <Grid item xs={12}>
