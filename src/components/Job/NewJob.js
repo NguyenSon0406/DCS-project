@@ -31,7 +31,7 @@ const NewJob = (props) => {
   const [location, setLocation] = useState('Remote');
 
   const auth = useSelector(state => state.auth)
-  const token = useSelector(state => state.token)
+  const token = localStorage.getItem('accessToken');
   const {user} = auth;
 
   const [open, setOpen] = useState(false);

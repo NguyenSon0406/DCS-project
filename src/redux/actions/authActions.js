@@ -12,7 +12,7 @@ export const fetchUser = (info) => {
         type: ACTIONS.FETCH_USER,
         payload: {
             isLogged: true,
-            user: info._id,
+            user: info,
             role: info.role,
             isAdmin: false
         },

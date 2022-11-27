@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 export default function MyJobPost() { 
   const classes = useStyles();
   const [jobs,setJobs] = useState([])
-  const token = useSelector(state => state.token);
+  const token = localStorage.getItem('accessToken');
   
 
   useEffect(() =>{  

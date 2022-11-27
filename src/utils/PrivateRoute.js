@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const PrivateRoute = ({ children }) => {
     const auth = useSelector(state => state.auth)
@@ -8,9 +10,9 @@ const PrivateRoute = ({ children }) => {
     console.log(isLogged, authLoading)
 
     if (authLoading) return (
-        <div>
-            Loading....
-        </div>
+        <Box sx={{ display: 'flex' }}>
+        <CircularProgress /> Loading...
+    </Box>
     )
 
     if (!isLogged) {

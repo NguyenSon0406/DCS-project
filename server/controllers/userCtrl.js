@@ -150,16 +150,14 @@ const userCtrl = {
         try {
             const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
             const id = decoded.id
-            let info;
+            let info = '';
             const user = await Users.findById(id).select('-password')
-            info = user;
-            // if (user.role === 0) {
-            //     info = await userInfo.findOne({ user_id: id });
-            // }
-            // else if (user.role === 1) {
-            //     info = await companyInfo.findOne({ user_id: id });
-            //     console.log(info, 'company info')
-            // }
+            if (user.role === 0) {
+                info = await userInfo.findOne({ user_id: id });
+            }
+            else if (user.role === 1) {
+                info = await companyInfo.findOne({ user_id: id });
+            }
             res.status(200).json({ success: true, info });
         } catch (error) {
             console.log(error)
