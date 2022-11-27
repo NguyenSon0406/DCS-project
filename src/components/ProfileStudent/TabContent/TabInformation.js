@@ -18,7 +18,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   });
 function TabInformation(props) {
     const auth = useSelector(state => state.auth)
-    const token = useSelector(state => state.token)
+    const token = localStorage.getItem('accessToken');
     const {user} = auth;
 
     const [data, setData] = useState(initialState)

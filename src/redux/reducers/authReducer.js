@@ -4,15 +4,25 @@ const initialState = {
     user: [],
     role: 0,
     isLogged: false,
-    isAdmin: false
+    isAdmin: false,
+    authLoading: true,
 }
 
 const authReducer = (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case ACTIONS.LOGIN:
             return {
                 ...state,
-                isLogged: true
+                authLoading: true,
+            }
+        case ACTIONS.FETCH_USER:
+            return {
+                ...state,
+                authLoading: false,
+                isLogged: action.payload.isLogged,
+                user: action.payload.user,
+                role: action.payload.role,
+                isAdmin: action.payload.isAdmin
             }
         case ACTIONS.GET_USER:
             return {

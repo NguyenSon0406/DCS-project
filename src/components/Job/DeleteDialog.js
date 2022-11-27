@@ -12,7 +12,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export const DeleteDialog = (props) => {
     const { openPopup, setOpenPopup} = props;
-    const token = useSelector(state => state.token);
+    const token = localStorage.getItem('accessToken');
     const [notify, setNotify] = useState('');
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();

@@ -1,21 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import Notifications from "@mui/icons-material/Notifications";
-import Badge from "@mui/material/Badge";
-import { Link } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  Typography,
-  IconButton,
-  Menu,
-  Container,
-  Button,
-  Tooltip,
-  MenuItem,
-} from "@mui/material";
-import AdbIcon from "@mui/icons-material/Adb";
+import Badge from '@mui/material/Badge';
+import { Link } from 'react-router-dom';
+import MenuIcon from "@mui/icons-material/Menu"
+import { AppBar, Box, Toolbar, Typography, IconButton, Menu, Container, Button, Tooltip, MenuItem } from "@mui/material"
+import AdbIcon from '@mui/icons-material/Adb';
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@mui/styles";
@@ -27,6 +16,7 @@ const useStyles = makeStyles({
 });
 
 function Navbar() {
+
   let currentlyHovering = false;
   const styles = useStyles();
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -77,7 +67,7 @@ function Navbar() {
   }
 
   //fetch user information
-  const auth = useSelector((state) => state.auth);
+  const auth = useSelector(state => state.auth);
   const { user, isLogged } = auth;
 
   const handleCloseNavMenu = () => {
@@ -90,15 +80,16 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await axios.get("/user/logout");
-      localStorage.removeItem("firstLogin");
+      localStorage.removeItem('accessToken')
+      await axios.get('/user/logout')
+      localStorage.removeItem('firstLogin')
       window.location.href = "/";
     } catch (err) {
       window.location.href = "/";
     }
-  };
+  }
   return (
-    <AppBar position="static" color="error" style={{ color: "white" }}>
+    <AppBar position="static" color='error' style={{ color: "white" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -117,24 +108,20 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            DTU{" "}
-            <Typography
+            DTU <Typography
               variant="h6"
               noWrap
               component="a"
               href="/"
               sx={{
                 mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
                 fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              CONNECTIONS
-            </Typography>
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}>CONNECTIONS</Typography>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -167,19 +154,13 @@ function Navbar() {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="post" style={{ color: "black" }}>
-                  Post
-                </Link>
+                <Link to="post" style={{ color: "black" }}>Post</Link>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="recruitment" style={{ color: "black" }}>
-                  Recruitment
-                </Link>
+                <Link to="recruitment" style={{ color: "black" }}>Recruitment</Link>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="post" style={{ color: "black" }}>
-                  Blog
-                </Link>
+                <Link to="post" style={{ color: "black" }}>Blog</Link>
               </MenuItem>
             </Menu>
           </Box>
@@ -202,24 +183,16 @@ function Navbar() {
           >
             DTU CONNECTIONS
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button
               aria-owns={anchorPostEl ? "simple-menu" : undefined}
               aria-haspopup="true"
               onClick={handleClick}
               onMouseOver={handleClick}
               onMouseLeave={handleCloseHover}
-              sx={{
-                my: 2,
-                color: "white",
-                display: "block",
-                fontWeight: "bold",
-                zIndex: 1301,
-              }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold", zIndex: 1301 }}
             >
-              <Link to="post" style={{ color: "white" }}>
-                Post
-              </Link>
+              <Link to="post" style={{ color: "white" }}>Post</Link>
               <Menu
                 id="simple-menu"
                 anchorEl={anchorPostEl}
@@ -249,13 +222,7 @@ function Navbar() {
               onClick={handleClick1}
               onMouseOver={handleClick1}
               onMouseLeave={handleCloseHover1}
-              sx={{
-                my: 2,
-                color: "white",
-                display: "block",
-                fontWeight: "bold",
-                zIndex: 1301,
-              }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold", zIndex: 1301 }}
             >
               Recruitment
             </Button>
@@ -267,64 +234,36 @@ function Navbar() {
               MenuListProps={{
                 onMouseEnter: handleHover,
                 onMouseLeave: handleCloseHover1,
-                style: { pointerEvents: "auto" },
+                style: { pointerEvents: "auto" }
               }}
               anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
               PopoverClasses={{
                 root: styles.popOverRoot,
               }}
             >
-              <MenuItem onClick={handleClose1}>
-                <Link to="recruitment/newest" style={{ color: "black" }}>
-                  Newest
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose1}>
-                <Link to="recruitment/myjobpost" style={{ color: "black" }}>
-                  My Recruitment Post
-                </Link>
-              </MenuItem>
+              <MenuItem onClick={handleClose1}><Link to="recruitment/newest" style={{ color: "black" }}>Newest</Link></MenuItem>
+              <MenuItem onClick={handleClose1}><Link to="recruitment/myjobpost" style={{ color: "black" }}>My Recruitment Post</Link></MenuItem>
               <MenuItem onClick={handleClose1}>Post Job</MenuItem>
             </Menu>
             <Button
+
               onClick={handleCloseNavMenu}
-              sx={{
-                my: 2,
-                color: "white",
-                display: "block",
-                fontWeight: "bold",
-              }}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold" }}
             >
-              <Link to="liststudent" style={{ color: "white" }}>
-                Student
-              </Link>
+              <Link to="liststudent" style={{ color: "white" }}>Student</Link>
             </Button>
           </Box>
           <Box sx={{ flexGrow: 0.05 }}>
             <IconButton sx={{ color: "#fff" }}>
-              <Badge color="primary" badgeContent={3}>
+              <Badge color="primary" badgeContent={3} >
                 <Notifications />
               </Badge>
             </IconButton>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton
-                onClick={handleOpenUserMenu}
-                size="small"
-                sx={{ p: 0 }}
-              >
-                <img
-                  src={user.avatar}
-                  alt="avatar"
-                  style={{
-                    verticalAlign: "middle",
-                    margin: 0,
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                  }}
-                />
+              <IconButton onClick={handleOpenUserMenu} size="small" sx={{ p: 0 }}>
+                <img src={user.avatar} alt="avatar" style={{ verticalAlign: "middle", margin: 0, width: "40px", height: "40px", borderRadius: "50%" }} />
               </IconButton>
             </Tooltip>
             <Menu

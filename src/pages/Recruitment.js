@@ -14,18 +14,20 @@ const Recruitment=() => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState("");
   const [jobs, setJobs] = useState([]);
-  const token = useSelector(state => state.token);
+  const token = localStorage.getItem('accessToken');
   const [reducerValue,forceUpdate] = useReducer(x => x + 1, 0);
 
   useEffect(() =>{  
-    const getAllJobs= async() => {
+    if(token)
+    {
+      const getAllJobs= async() => {
         const response = await axios.get("/recruitment/list-post",{
           headers: {Authorization: token}
         });
         setJobs(response.data);
     }
     getAllJobs();
-    
+    }
   },[reducerValue])
   const searchHandle = (searchTerm) => {
     setSearchTerm(searchTerm);

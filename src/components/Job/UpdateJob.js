@@ -18,7 +18,7 @@ const initialState = {
 const UpdateJob = (props) => {
     const getLocation = useLocation();
     const navigate = useNavigate();
-    const token = useSelector(state => state.token);
+    const token = localStorage.getItem('accessToken');
     const {_id,title,type,location,skills,description,link} = getLocation.state.edit;
     const [data, setData] = useState(initialState);
     const {tempTitle,tempType,tempLocation,tempLink,success,err} = data;
