@@ -1,14 +1,62 @@
 import { Box,Grid,Select,MenuItem,FilledInput,Typography,Button } from "@mui/material";
-import React from "react";
-import {Link,useLocation,useNavigate} from "react-router-dom"
+import React,{ useState } from "react";
+import {useLocation,useNavigate} from "react-router-dom"
 import TagInput from "./TagInput";
 import TextEdittor from "./TextEdittor";
 import CompanyList from "./CompanyList";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
+const initialState = {
+    tempTitle:'',
+    tempType:'',
+    tempLocation:'',
+    tempLink:'',
+    err:'',
+    success:''
+}
 const UpdateJob = (props) => {
     const getLocation = useLocation();
     const navigate = useNavigate();
-    const {id,title,type,location,skills,jobDescription,companyUrl} = getLocation.state.edit;
+    const token = useSelector(state => state.token);
+    const {_id,title,type,location,skills,description,link} = getLocation.state.edit;
+    const [data, setData] = useState(initialState);
+    const {tempTitle,tempType,tempLocation,tempLink,success,err} = data;
+    
+    const [tempSkills,setTempSkills] = useState([]);
+    const [tempDescription, setTempDescription] = useState('');
+
+    const handleSkills = (tags) => {
+        setTempSkills(tags);
+    }
+    const handleDescription = (text) => {
+        setTempDescription(text);
+    }
+    const handleChange = (e) => {
+        const {name,value} = e.target;
+        setData({...data,[name]:value})
+    }
+
+    const handleUpdate = async(e) => {
+        try{
+           const res = await axios.patch(`/recruitment/update/${_id}`,{
+                title: tempTitle ? tempTitle : title,
+                link: tempLink ? tempLink : link,
+                type: tempType ? tempType : type,
+                location: tempLocation ? tempLocation : location,
+                skills: tempSkills ? tempSkills : skills,
+                description: tempDescription ? tempDescription : description
+            },{
+                headers: {Authorization: token}
+            })
+            setData({...data,err:'',success:res.data.msg})
+            navigate("/home/recruitment/myjobpost")
+        }catch(err)
+        {
+            err.response.data.msg && 
+            setData({...data, err:err.response.data.msg, success: ''})
+        }
+    }
     const handleClick = (e) =>{
         e.preventDefault();
         navigate("/home/recruitment/myjobpost");
@@ -28,14 +76,22 @@ const UpdateJob = (props) => {
                     <Grid container spacing={2}>
                     <Grid item xs={6} >
                         <FilledInput 
-                        value={title}
+                        name="tempTitle"
+                        defaultValue={title}
                         placeholder='Job title *' 
                         disableUnderline
                         fullWidth={true}
+                        onChange={handleChange}
                         />
                     </Grid>
                     <Grid item xs={6}>
-                    <Select disableUnderline variant='filled' sx={{fontWeight:"bold"}} defaultValue={type} fullWidth={true}>
+                    <Select name="tempType" 
+                    disableUnderline 
+                    variant='filled' 
+                    sx={{fontWeight:"bold"}} 
+                    defaultValue={type} 
+                    fullWidth={true}
+                    onChange={handleChange}>
                         <MenuItem value="Full time">
                             Full time
                         </MenuItem>
@@ -49,15 +105,23 @@ const UpdateJob = (props) => {
                     </Grid>
                     <Grid item xs={6} >
                         <FilledInput 
+                        name="tempLink"
                         placeholder='Job Link *' 
                         disableUnderline
                         fullWidth={true}
-                        value={companyUrl}
+                        defaultValue={link}
                         />
                         
                     </Grid>
                     <Grid item xs={6}>
-                    <Select fullWidth={true} disableUnderline variant='filled' sx={{fontWeight:"bold"}} defaultValue={location} >
+                    <Select 
+                    name="tempLocation" 
+                    fullWidth={true} 
+                    disableUnderline 
+                    variant='filled' 
+                    sx={{fontWeight:"bold"}} 
+                    defaultValue={location} 
+                    onChange={handleChange}>
                         <MenuItem value="Remote">
                             Remote
                         </MenuItem>
@@ -70,17 +134,17 @@ const UpdateJob = (props) => {
                     <Grid item xs={12} display="flex">
                         <Typography variant='h5'>Skills</Typography>   
                     </Grid>
-                    <TagInput skills={skills} />
+                    <TagInput skills={skills} handleSkills={handleSkills}/>
                     <Grid item xs={12} display="flex">
                         <Typography variant='h5'>Job Descriptions</Typography>   
                     </Grid>
                     <Grid item xs={12}>
                         <Box >
-                            <TextEdittor jobDescription ={jobDescription}/>
+                            <TextEdittor jobDescription ={description} handleDescription={handleDescription}/>
                         </Box>
                     </Grid>
                     <Grid item xs={12} spacing={2}>
-                        <Button variant="contained" color="primary" sx={{fontWeight:"bold",fontSize:"15px",padding:1,marginRight:"30px"}}>EDIT</Button>
+                        <Button variant="contained" color="primary" sx={{fontWeight:"bold",fontSize:"15px",padding:1,marginRight:"30px"}} onClick={handleUpdate}>EDIT</Button>
                         <Button variant="contained" color="error" sx={{fontWeight:"bold",fontSize:"15px", padding:1}} onClick={handleClick}>CANCEL</Button>
                     </Grid>
                     </Grid>           

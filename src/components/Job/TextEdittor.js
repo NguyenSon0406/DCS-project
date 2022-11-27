@@ -4,16 +4,25 @@ import React from 'react';
 import { useState } from 'react';
 
 const TextEdittor = (props) => {
-    const [text,setText] = useState("");
+    const setDescription = (text) => {
+        if(props.setDescription)
+            props.setDescription(text)
+    }
+    const handleDescription = (text) => {
+        if(props.handleDescription)
+            props.handleDescription(text)
+    }
         return (
         <> <CKEditor
         id="editor"
         editor={ClassicEditor}
-        data={props.jobDescription ?? "<p>Input Job Descriptions</p>"}
+        data={props.jobDescription}
         onChange={(event, editor) =>{
            const data = editor.getData()
-           setText(data);
+           setDescription(data) 
+           handleDescription(data);
         }}
+        
         onReady={(editor) => {
        editor.editing.view.change((writer) => {
        writer.setStyle(

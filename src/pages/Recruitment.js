@@ -1,21 +1,37 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect, useReducer} from 'react'
 import {Box, Grid, ThemeProvider, Typography, Button, Pagination} from "@mui/material"
 import theme from "../components/Job/theme";
 import SearchBar from '../components/Job/SearchBar';
 import NewJob from '../components/Job/NewJob';
-import JobData from "../components/Job/dummyData"
 import JobList from '../components/Job/JobList';
 import CompanyList from '../components/Job/CompanyList';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import PostAddIcon from '@mui/icons-material/PostAdd';
 
 const Recruitment=() => {
   const [openPopup, setOpenPopup] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState("");
+  const [jobs, setJobs] = useState([]);
+  const token = useSelector(state => state.token);
+  const [reducerValue,forceUpdate] = useReducer(x => x + 1, 0);
+
+  useEffect(() =>{  
+    const getAllJobs= async() => {
+        const response = await axios.get("/recruitment/list-post",{
+          headers: {Authorization: token}
+        });
+        setJobs(response.data);
+    }
+    getAllJobs();
+    
+  },[reducerValue])
   const searchHandle = (searchTerm) => {
     setSearchTerm(searchTerm);
     if(searchTerm !== "")
     {
-      const newJobList = JobData.filter((job) => {
+      const newJobList = jobs.filter((job) => {
         return Object.values(job)
         .join("")
         .toLowerCase()
@@ -24,8 +40,11 @@ const Recruitment=() => {
       setSearchResults(newJobList);
     }
     else{
-      setSearchResults(JobData);
+      setSearchResults(jobs);
     }
+  }
+  const passUpdateList = () => {
+    forceUpdate();
   }
   return (
     <>
@@ -43,13 +62,14 @@ const Recruitment=() => {
                     variant='contained'
                     color='error'                   
                     sx={{fontWeight:"bold"}}
-                    onClick={() => setOpenPopup(true)}                    
+                    onClick={() => setOpenPopup(true)}
+                    startIcon={<PostAddIcon/>}                    
                     >Post a job</Button>
                     </Box>
                     <SearchBar term = {searchTerm}
                     searchKeyWord = {searchHandle}
                   />
-                  <JobList jobs={searchTerm.length < 1 ? JobData : searchResults}/>
+                  <JobList jobs={searchTerm.length < 1 ? jobs : searchResults}/>
                  
                   </Grid>
                   <Pagination 
@@ -83,8 +103,7 @@ const Recruitment=() => {
                 </Grid>
               </Box>
 
-              
-              <NewJob openPopup = {openPopup}
+              <NewJob openPopup = {openPopup} passUpdateList = {passUpdateList}
         setOpenPopup={setOpenPopup} />
           </ThemeProvider> 
     </>

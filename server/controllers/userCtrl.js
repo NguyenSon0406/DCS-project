@@ -28,7 +28,7 @@ const userCtrl = {
             if(role === 0)
             {
                 newUser = {
-                    email, password: passwordHash
+                    email, password: passwordHash,role
                 }
             } else if(role === 1)
             {

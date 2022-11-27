@@ -10,6 +10,7 @@ import ConvertToHTML from "react-html-parser";
 import CompanyList from './CompanyList';
 import { useLocation,Link } from 'react-router-dom';
 import { DeleteDialog } from './DeleteDialog';
+import { useSelector } from 'react-redux';
 const useStyles = makeStyles({
   wrapper:{
       backgroundColor:"#fff",
@@ -33,6 +34,8 @@ const useStyles = makeStyles({
   },
 });
 export default function JobDetail(props) { 
+  const auth = useSelector(state => state.auth)
+  const {user} = auth;
   const [openPopup, setOpenPopup] = useState(false);
   const classes = useStyles(); 
   const getLocation = useLocation(); 
@@ -43,7 +46,7 @@ export default function JobDetail(props) {
   const handleCloseSetting = () => {
     setAnchorElSetting(null);
   };
-  const {id,title,type,address,location,image,companyName,postedOn,skills,jobDescription,companyUrl} = getLocation.state.job;
+  const {_id,user_id,title,type,address,location,avatar,companyName,createdAt,skills,description,link} = getLocation.state.job;
   const calculateTimePass = ( datePast) => {
     const dateNow = Date.now();
     const datePa = Date.parse(datePast);
@@ -98,10 +101,10 @@ export default function JobDetail(props) {
                     <Paper display="flex" flex-dicorection="column" sx={{textAlign: "left",maxHeight: 1000, overflow: 'auto'}}>
                         <Box display="flex" justifyContent="space-between">
                           <Box display="flex" alignItems="center">
-                            <img src={image} alt="avatar" style={{verticalAlign:"middle",margin:0, width:"60px", height:"60px",borderRadius:"50%"}}/>
+                            <img src={avatar} alt="avatar" style={{verticalAlign:"middle",margin:0, width:"60px", height:"60px",borderRadius:"50%"}}/>
                             <Typography className={classes.companyName} variant="h5">{companyName}</Typography>
                           </Box>
-                          <Box>
+                          { (user_id === user.user_id) ? <Box>
                            <Tooltip title="Setting" arrow>
                            <IconButton onClick={handleOpenSetting} size="small">
                               <MoreHorizIcon/>
@@ -124,12 +127,12 @@ export default function JobDetail(props) {
                                 onClose={handleCloseSetting}
                               >
                                 <MenuItem onClick={()=>setOpenPopup(true)}><DeleteIcon  sx={{ fontSize: 18,marginRight:"5px" }}/>Delete</MenuItem>
-                                <MenuItem><Link to={`/home/recruitment/edit/${id}`} state={{edit:{id,title,type,companyUrl,location,skills,jobDescription}}}>
+                                <MenuItem><Link to={`/home/recruitment/edit/${_id}`} state={{edit:{_id,title,type,link,location,skills,description}}}>
                                   <EditIcon sx={{ fontSize: 18,marginRight:"5px" }}/>Edit
                                   </Link>
                                 </MenuItem>
                               </Menu>
-                          </Box>
+                          </Box>: ''}
                         </Box>
                         <Box display="flex" >
                             <Box  display="flex" flexDirection="column" sx={{padding:1}} color="#9e9e9e">
@@ -138,27 +141,37 @@ export default function JobDetail(props) {
                             <Computer />
                             <CalendarMonth />
                             </Box>
-                            <Box display="flex" flexDirection="column" sx={{padding:1}} color="#9e9e9e">
+                            <Box display="flex" flexDirection="column" sx={{padding:1,right:"200px"}} color="#9e9e9e">
                             <Typography >{address}</Typography>
                             <Typography >{type}</Typography>
                             <Typography>{location}</Typography>
-                            <Typography variant='subtitle1' >{calculateTimePass(postedOn)}</Typography>
+                            <Typography variant='subtitle1' >{calculateTimePass(createdAt)}</Typography>
                             </Box>
                             <Box>
                             <Divider orientation="vertical" variant="middle" flexItem sx={{height:"90%"}} />
                             </Box>
+                           <Box display="flex" flexDirection="column">
                             <Box display="flex"  color="#9e9e9e" >
-                              <Typography sx={{padding:1}} >
-                                Position 
-                              </Typography>
-                              <Box sx={{padding:1}}>
-                              {
-                                skills.map((skill) => (
-                                  <Chip label={skill} color="primary" size='small'
-                                    sx={{fontWeight:"bold",fontSize:"10px",marginRight:"5px"}}
-                                  />
-                                ))
-                              }
+                                <Typography sx={{padding:1}} >
+                                  Position 
+                                </Typography>
+                                <Box sx={{padding:1}}>
+                                {
+                                  skills.map((skill) => (
+                                    <Chip label={skill} color="primary" size='small'
+                                      sx={{fontWeight:"bold",fontSize:"10px",marginRight:"5px"}}
+                                    />
+                                  ))
+                                }
+                                </Box>
+                              </Box>
+                              <Box display="flex"  color="#9e9e9e" >
+                                <Typography sx={{padding:1}} >
+                                  Job Link 
+                                </Typography>
+                                <Box sx={{padding:1}}>
+                                <a href={link}>{link}</a>
+                                </Box>
                               </Box>
                             </Box>
                         </Box>
@@ -170,7 +183,7 @@ export default function JobDetail(props) {
                           <Typography sx={{fontWeight:"bold", fontSize:"30px"}}>Job Descriptions</Typography>
                         </Box>
                         <Box>
-                            {ConvertToHTML(jobDescription)}
+                            {ConvertToHTML(description)}
                         </Box>
                         <Button variant='contained' sx={{marginTop:"30px",marginBottom:"30px",fontWeight:"bold", justifyContent:"center", textAlign:"center"}}  color='error'>Apply Now</Button>
                     </Paper>
@@ -199,7 +212,7 @@ export default function JobDetail(props) {
                 </Grid>
               </Box>
     </ThemeProvider> 
-    <DeleteDialog openPopup = {openPopup}
+    <DeleteDialog id={_id} openPopup = {openPopup}
         setOpenPopup={setOpenPopup}/>
 </>
   )
