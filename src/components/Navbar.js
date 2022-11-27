@@ -6,13 +6,13 @@ import MenuIcon from "@mui/icons-material/Menu"
 import { AppBar, Box, Toolbar, Typography, IconButton, Menu, Container, Button, Tooltip, MenuItem } from "@mui/material"
 import AdbIcon from '@mui/icons-material/Adb';
 import axios from "axios";
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@mui/styles';
+import { useSelector } from "react-redux";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   popOverRoot: {
-    pointerEvents: "none"
-  }
+    pointerEvents: "none",
+  },
 });
 
 function Navbar() {
@@ -70,15 +70,12 @@ function Navbar() {
   const auth = useSelector(state => state.auth);
   const { user, isLogged } = auth;
 
-
   const handleCloseNavMenu = () => {
-
     setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-
   };
 
   const handleLogout = async () => {
@@ -95,7 +92,7 @@ function Navbar() {
     <AppBar position="static" color='error' style={{ color: "white" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -103,12 +100,12 @@ function Navbar() {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'white',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "white",
+              textDecoration: "none",
             }}
           >
             DTU <Typography
@@ -127,7 +124,7 @@ function Navbar() {
               }}>CONNECTIONS</Typography>
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -142,18 +139,18 @@ function Navbar() {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
@@ -167,7 +164,7 @@ function Navbar() {
               </MenuItem>
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -175,13 +172,13 @@ function Navbar() {
             href=""
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             DTU CONNECTIONS
@@ -204,17 +201,18 @@ function Navbar() {
                 MenuListProps={{
                   onMouseEnter: handleHover,
                   onMouseLeave: handleCloseHover,
-                  style: { pointerEvents: "auto" }
+                  style: { pointerEvents: "auto" },
                 }}
-
                 anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
                 PopoverClasses={{
-                  root: styles.popOverRoot
+                  root: styles.popOverRoot,
                 }}
               >
                 <MenuItem onClick={handleClose}>Newest</MenuItem>
                 <MenuItem onClick={handleClose}>My post</MenuItem>
-                <MenuItem onClick={handleClose}>Create post</MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to="create-post">Create post</Link>
+                </MenuItem>
               </Menu>
             </Button>
 
@@ -238,10 +236,9 @@ function Navbar() {
                 onMouseLeave: handleCloseHover1,
                 style: { pointerEvents: "auto" }
               }}
-
               anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
               PopoverClasses={{
-                root: styles.popOverRoot
+                root: styles.popOverRoot,
               }}
             >
               <MenuItem onClick={handleClose1}><Link to="recruitment/newest" style={{ color: "black" }}>Newest</Link></MenuItem>
@@ -254,7 +251,6 @@ function Navbar() {
               sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold" }}
             >
               <Link to="liststudent" style={{ color: "white" }}>Student</Link>
-
             </Button>
           </Box>
           <Box sx={{ flexGrow: 0.05 }}>
@@ -271,17 +267,17 @@ function Navbar() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}

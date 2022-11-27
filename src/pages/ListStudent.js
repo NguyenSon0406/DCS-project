@@ -5,29 +5,27 @@ import SearchBar from '../components/ListStudent/SearchBar2';
 import JobData from "../components/ListStudent/dummyData2"
 import JobList from '../components/ListStudent/StudentList';
 
-const ListStudent=() => {
+const ListStudent = () => {
   const [openPopup, setOpenPopup] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState("");
   const searchHandle = (searchTerm) => {
     setSearchTerm(searchTerm);
-    if(searchTerm !== "")
-    {
+    if (searchTerm !== "") {
       const newJobList = JobData.filter((job) => {
         return Object.values(job)
-        .join("")
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
+          .join("")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
       });
       setSearchResults(newJobList);
-    }
-    else{
+    } else {
       setSearchResults(JobData);
     }
-  }
+  };
   return (
     <>
-          <ThemeProvider theme={theme} >
+      <ThemeProvider theme={theme} >
           
               <Box bgcolor="white" py={2} sx={{marginTop:0,width:"100%"}}>
                 <Grid container justifyContent="center">  
@@ -51,9 +49,7 @@ const ListStudent=() => {
               
           </ThemeProvider> 
     </>
-  )
-}
+  );
+};
 
-
-export default ListStudent
-
+export default ListStudent;
