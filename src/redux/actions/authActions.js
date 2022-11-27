@@ -1,16 +1,31 @@
 import ACTIONS from "./index"
 import axios from "axios"
 
-export const dispatchLogin = () => {
+export const login = () => {
     return {
-        type: ACTIONS.LOGIN
+        type: ACTIONS.LOGIN,
     }
 }
-export const fetchUser = async (token) => {
-    const res = await axios.get('/user/infor', {
-        headers: {Authorization: token}
-    })
-    return res
+
+export const fetchUser = (info) => {
+    if (info) return {
+        type: ACTIONS.FETCH_USER,
+        payload: {
+            isLogged: true,
+            user: info._id,
+            role: info.role,
+            isAdmin: false
+        },
+    }
+    return {
+        type: ACTIONS.FETCH_USER,
+        payload: {
+            isLogged: false,
+            user: null,
+            role: null,
+            isAdmin: false
+        },
+    }
 }
 
 export const dispatchGetUser = (res) => {

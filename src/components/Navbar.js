@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Notifications from "@mui/icons-material/Notifications";
 import Badge from '@mui/material/Badge';
 import { Link } from 'react-router-dom';
 import MenuIcon from "@mui/icons-material/Menu"
-import {AppBar,Box,Toolbar,Typography,IconButton,Menu,Container,Button,Tooltip,MenuItem} from "@mui/material"
+import { AppBar, Box, Toolbar, Typography, IconButton, Menu, Container, Button, Tooltip, MenuItem } from "@mui/material"
 import AdbIcon from '@mui/icons-material/Adb';
 import axios from "axios";
 import { useSelector } from 'react-redux';
@@ -16,82 +16,83 @@ const useStyles = makeStyles({
 });
 
 function Navbar() {
-  
-    let currentlyHovering = false;
-    const styles = useStyles();
-    const [anchorElNav, setAnchorElNav] = useState(null);
-    const [anchorElUser, setAnchorElUser] = useState(null);
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-      };
-      const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-      };
 
-      function handleHover() {
-        currentlyHovering = true;
+  let currentlyHovering = false;
+  const styles = useStyles();
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  function handleHover() {
+    currentlyHovering = true;
+  }
+  const [anchorPostEl, setAnchorPostEl] = useState(null);
+  const [anchorReEl, setAnchorReEl] = useState(null);
+  function handleClick(event) {
+    if (anchorPostEl !== event.currentTarget) {
+      setAnchorPostEl(event.currentTarget);
+    }
+  }
+  function handleClick1(event) {
+    if (anchorReEl !== event.currentTarget) {
+      setAnchorReEl(event.currentTarget);
+    }
+  }
+  function handleClose() {
+    setAnchorPostEl(null);
+  }
+  function handleClose1() {
+    setAnchorReEl(null);
+  }
+  function handleCloseHover() {
+    currentlyHovering = false;
+    setTimeout(() => {
+      if (!currentlyHovering) {
+        handleClose();
       }
-      const [anchorPostEl, setAnchorPostEl] = useState(null);
-      const [anchorReEl, setAnchorReEl] = useState(null);
-      function handleClick(event) {
-        if (anchorPostEl !== event.currentTarget) {
-          setAnchorPostEl(event.currentTarget);
-        }
+    }, 50);
+  }
+  function handleCloseHover1() {
+    currentlyHovering = false;
+    setTimeout(() => {
+      if (!currentlyHovering) {
+        handleClose1();
       }
-      function handleClick1(event) {
-        if (anchorReEl !== event.currentTarget) {
-          setAnchorReEl(event.currentTarget);
-        }
-      }
-      function handleClose() {
-        setAnchorPostEl(null);
-      }
-      function handleClose1() {
-        setAnchorReEl(null);
-      }
-      function handleCloseHover() {
-        currentlyHovering = false;
-        setTimeout(() => {
-          if (!currentlyHovering) {
-            handleClose();
-          }
-        }, 50);
-      }
-      function handleCloseHover1() {
-        currentlyHovering = false;
-        setTimeout(() => {
-          if (!currentlyHovering) {
-            handleClose1();
-          }
-        }, 50);
-      }
-    
+    }, 50);
+  }
+
   //fetch user information
   const auth = useSelector(state => state.auth);
-  const {user, isLogged} = auth;
-  
-  
+  const { user, isLogged } = auth;
+
+
   const handleCloseNavMenu = () => {
-   
+
     setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-    
+
   };
 
   const handleLogout = async () => {
     try {
-        await axios.get('/user/logout')
-        localStorage.removeItem('firstLogin')
-        window.location.href = "/";
+      localStorage.removeItem('accessToken')
+      await axios.get('/user/logout')
+      localStorage.removeItem('firstLogin')
+      window.location.href = "/";
     } catch (err) {
-        window.location.href = "/";
+      window.location.href = "/";
     }
-}
+  }
   return (
-    <AppBar position="static" color='error' style={{color:"white"}}>
+    <AppBar position="static" color='error' style={{ color: "white" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -111,19 +112,19 @@ function Navbar() {
             }}
           >
             DTU <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}>CONNECTIONS</Typography>
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}>CONNECTIONS</Typography>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -155,15 +156,15 @@ function Navbar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Link to="post" style={{color:"black"}}>Post</Link>
-                </MenuItem>
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Link to="recruitment" style={{color:"black"}}>Recruitment</Link>
-                </MenuItem>
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Link to="post" style={{color:"black"}}>Blog</Link>
-                </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to="post" style={{ color: "black" }}>Post</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to="recruitment" style={{ color: "black" }}>Recruitment</Link>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Link to="post" style={{ color: "black" }}>Blog</Link>
+              </MenuItem>
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -186,78 +187,78 @@ function Navbar() {
             DTU CONNECTIONS
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Button
-                aria-owns={anchorPostEl ? "simple-menu" : undefined}
-                aria-haspopup="true"
-                onClick={handleClick}
-                onMouseOver={handleClick}
-                onMouseLeave={handleCloseHover}
-                sx={{ my: 2, color: 'white', display: 'block', fontWeight:"bold",zIndex: 1301 }}
-              >
-                <Link to="post" style={{color:"white"}}>Post</Link>
-                <Menu
-               id="simple-menu"
-              anchorEl={anchorPostEl}
-              open={Boolean(anchorPostEl)}
-              onClose={handleClose}
-              MenuListProps={{
+            <Button
+              aria-owns={anchorPostEl ? "simple-menu" : undefined}
+              aria-haspopup="true"
+              onClick={handleClick}
+              onMouseOver={handleClick}
+              onMouseLeave={handleCloseHover}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold", zIndex: 1301 }}
+            >
+              <Link to="post" style={{ color: "white" }}>Post</Link>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorPostEl}
+                open={Boolean(anchorPostEl)}
+                onClose={handleClose}
+                MenuListProps={{
                   onMouseEnter: handleHover,
                   onMouseLeave: handleCloseHover,
                   style: { pointerEvents: "auto" }
                 }}
-             
-              anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
-              PopoverClasses={{
-                root: styles.popOverRoot
-              }}
-                  >
-                  <MenuItem onClick={handleClose}>Newest</MenuItem>
-                  <MenuItem onClick={handleClose}>My post</MenuItem>
-                  <MenuItem onClick={handleClose}>Create post</MenuItem>
-                </Menu>
-              </Button>
-              
-              <Button
-                aria-owns={anchorReEl ? "simple-menu2" : undefined}
-                aria-haspopup="true"
-                onClick={handleClick1}
-                onMouseOver={handleClick1}
-                onMouseLeave={handleCloseHover1}
-                sx={{ my: 2, color: 'white', display: 'block', fontWeight:"bold",zIndex: 1301 }}
+
+                anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+                PopoverClasses={{
+                  root: styles.popOverRoot
+                }}
               >
-                Recruitment
-              </Button>
-              <Menu
-               id="simple-menu2"
-               anchorEl={anchorReEl}
+                <MenuItem onClick={handleClose}>Newest</MenuItem>
+                <MenuItem onClick={handleClose}>My post</MenuItem>
+                <MenuItem onClick={handleClose}>Create post</MenuItem>
+              </Menu>
+            </Button>
+
+            <Button
+              aria-owns={anchorReEl ? "simple-menu2" : undefined}
+              aria-haspopup="true"
+              onClick={handleClick1}
+              onMouseOver={handleClick1}
+              onMouseLeave={handleCloseHover1}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold", zIndex: 1301 }}
+            >
+              Recruitment
+            </Button>
+            <Menu
+              id="simple-menu2"
+              anchorEl={anchorReEl}
               open={Boolean(anchorReEl)}
               onClose={handleClose1}
               MenuListProps={{
-                  onMouseEnter: handleHover,
-                  onMouseLeave: handleCloseHover1,
-                  style: { pointerEvents: "auto" }
-                }}
-             
+                onMouseEnter: handleHover,
+                onMouseLeave: handleCloseHover1,
+                style: { pointerEvents: "auto" }
+              }}
+
               anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
               PopoverClasses={{
                 root: styles.popOverRoot
               }}
-                  >
-                  <MenuItem onClick={handleClose1}><Link to="recruitment/newest" style={{color:"black"}}>Newest</Link></MenuItem>
-                  <MenuItem onClick={handleClose1}><Link to="recruitment/myjobpost" style={{color:"black"}}>My Recruitment Post</Link></MenuItem>
-                  <MenuItem onClick={handleClose1}>Post Job</MenuItem>
-                </Menu>
-              <Button
-                
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block', fontWeight:"bold" }}
-              >
-                <Link to="liststudent" style={{color:"white"}}>Student</Link>
+            >
+              <MenuItem onClick={handleClose1}><Link to="recruitment/newest" style={{ color: "black" }}>Newest</Link></MenuItem>
+              <MenuItem onClick={handleClose1}><Link to="recruitment/myjobpost" style={{ color: "black" }}>My Recruitment Post</Link></MenuItem>
+              <MenuItem onClick={handleClose1}>Post Job</MenuItem>
+            </Menu>
+            <Button
 
-              </Button>
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold" }}
+            >
+              <Link to="liststudent" style={{ color: "white" }}>Student</Link>
+
+            </Button>
           </Box>
-          <Box sx={{flexGrow:0.05}}>
-            <IconButton sx={{color:"#fff"}}>
+          <Box sx={{ flexGrow: 0.05 }}>
+            <IconButton sx={{ color: "#fff" }}>
               <Badge color="primary" badgeContent={3} >
                 <Notifications />
               </Badge>
@@ -266,7 +267,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} size="small" sx={{ p: 0 }}>
-              <img src={user.avatar} alt="avatar" style={{verticalAlign:"middle",margin:0, width:"40px", height:"40px",borderRadius:"50%"}}/>
+                <img src={user.avatar} alt="avatar" style={{ verticalAlign: "middle", margin: 0, width: "40px", height: "40px", borderRadius: "50%" }} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -286,13 +287,13 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               <MenuItem>
-                <Link to="profile" style={{color:"black"}}>
+                <Link to="profile" style={{ color: "black" }}>
                   <Typography textAlign="center">Profile</Typography>
                 </Link>
               </MenuItem>
-                <MenuItem onClick={ handleLogout}>
+              <MenuItem onClick={handleLogout}>
                 <Typography textAlign="center">Sign out</Typography>
-                </MenuItem>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
