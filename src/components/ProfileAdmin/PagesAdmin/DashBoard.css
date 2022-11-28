@@ -1,0 +1,114 @@
+.dash-board-container {
+  display: flex;
+  height: 100vh;
+}
+.nav-page-admin {
+  width: 88%;
+  margin-bottom: 15px;
+  background-color: #eaeaea;
+}
+
+.dashboard-quantity {
+  display: flex;
+}
+.dashboard-quantity .dashboard-quantity-content {
+  width: 300px;
+  height: 100px;
+  margin-left: 50px;
+  margin-top: 20px;
+  display: flex;
+  background-color: white;
+  box-shadow: 0px 5px 3px gray;
+}
+.dashboard-pieChart-left {
+  margin-top: 50px;
+  margin-left: 30px;
+  width: 550px;
+  height: 450px;
+  padding-left: 75px;
+  padding-top: 20px;
+  background-color: white;
+  border-radius: 5px;
+}
+.dashboard-pieChart-left label {
+  font-size: 18px;
+}
+.dashboard-group {
+  display: flex;
+}
+.dashboard-pieChart-right {
+  margin-top: 50px;
+  margin-left: 30px;
+  width: 550px;
+  height: 450px;
+  padding-left: 75px;
+  padding-top: 20px;
+  background-color: white;
+  border-radius: 5px;
+  margin-left: 150px;
+}
+.dashboard-pieChart-right label {
+  font-size: 18px;
+}
+.dashboard-quanlity-left {
+  height: 100%;
+  width: 50%;
+}
+.quanlity-left-icon {
+  font-size: 40px;
+  height: 70px;
+  width: 70px;
+  margin: 15px 40px 15px 40px;
+  padding-top: 15px;
+  padding-left: 10px;
+  border-radius: 50%;
+}
+.dashboard-quanlity-right {
+  height: 100%;
+  width: 50%;
+}
+.quanlity-right-up {
+  width: 100%;
+  height: 50%;
+  padding-top: 15px;
+  padding-left: 10px;
+  font-weight: 600;
+  font-size: 15px;
+}
+.quanlity-right-down {
+  width: 70%;
+  height: 25%;
+  margin-top: 15px;
+  margin-left: 5px;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  padding-top: 2px;
+  color: white;
+}
+.color-student-left {
+  background-color: #8884d8;
+}
+.color-student-right {
+  background-color: #8884d8;
+}
+.color-companies-left {
+  background-color: rgb(109, 154, 42);
+}
+.color-companies-right {
+  background-color: rgb(109, 154, 42);
+}
+.color-admin-left {
+  background-color: rgb(26, 125, 167);
+  padding-left: 15px;
+}
+.color-admin-right {
+  background-color: rgb(26, 125, 167);
+}
+.color-lecturer-left {
+  background-color: #82ca9d;
+  padding-left: 15px;
+}
+.color-lecturer-right {
+  background-color: #82ca9d;
+}

@@ -1,0 +1,46 @@
+.request-container {
+  display: flex;
+  height: 100vh;
+}
+.nav-page-admin-request {
+  width: 88%;
+  margin-bottom: 15px;
+  background-color: #eaeaea;
+  padding-top: 100px;
+  padding-left: 10px;
+}
+.text-title-request {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.nav-page-admin-request .btn-accept-request {
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  margin-right: 10px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.btn-accept-request:hover {
+  background-color: green;
+}
+.nav-page-admin-request .btn-decline-request {
+  font-size: 20px;
+  width: 35px;
+  height: 30px;
+  text-align: center;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.btn-decline-request:hover {
+  background-color: orange;
+}
+.input-file-bussiness-liscense {
+  border: 1px solid gray;
+  cursor: pointer;
+  width: 200px;
+  font-size: 14px;
+}

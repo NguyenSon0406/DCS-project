@@ -1,0 +1,25 @@
+.slidebar-item {
+  font-size: 15px;
+  display: flex;
+  margin-bottom: 8px;
+}
+.slidebar-icon {
+  margin: 0 10px;
+}
+.nav-link {
+  width: 100%;
+  padding: 7px;
+  color: black;
+}
+.nav-link.active {
+  color: red;
+  background-color: rgb(182, 182, 202);
+  border-right: 2px solid red;
+  opacity: 0.8;
+}
+.nav-link:hover {
+  color: red;
+  background-color: rgb(182, 182, 202);
+  border-right: 2px solid red;
+  opacity: 0.8;
+}

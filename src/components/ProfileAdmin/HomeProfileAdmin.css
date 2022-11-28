@@ -1,0 +1,35 @@
+.slidebar-section {
+  height: 100vh;
+}
+.slidebar-left {
+  width: 170px;
+  border: 1px solid #fff8ea;
+  padding-top: 100px;
+}
+.slidebar-btn {
+  text-align: center;
+}
+.slidebar-btn .slidebar-btn-logout {
+  font-size: 15px;
+  width: 120px;
+  height: 25px;
+  background-color: #eb1d36;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  opacity: 0.9;
+  cursor: pointer;
+  margin-top: 15px;
+}
+.slidebar-btn-logout i {
+  margin-right: 5px;
+}
+.slidebar-btn-logout:hover {
+  opacity: 1;
+  color: #bcead5;
+}
+.slidebar-right {
+  width: 88%;
+  margin-bottom: 15px;
+  background-color: #eaeaea;
+}

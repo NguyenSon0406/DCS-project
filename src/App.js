@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dispatchLogin, fetchUser, dispatchGetUser } from './redux/actions/authActions'
 import axios from 'axios';
 import PrivateRoute from './utils/PrivateRoute';
+import Admin from './pages/Admin';
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
           <Route path="/forgot-password" exact element={<ForgotPassword />} />
           <Route path="/user/reset/:token" exact element={<ResetPassword />} />
           <Route path="/user/activate/:activation_token" exact element={<ActivationEmail />} />
+          <Route path="/admin/*" exact element={<PrivateRoute><Admin /></PrivateRoute>} />
           <Route path="*" exact element={<NotFound />} />
         </Routes>
       </div>
