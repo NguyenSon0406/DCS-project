@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const sendMail = require("./sendMail");
 const { CLIENT_URL } = process.env
 const companyInfo = require('../models/companyModel')
+const adminInfo = require('../models/adminModel');
 
 const userCtrl = {
     register: async (req, res) => {
@@ -83,12 +84,12 @@ const userCtrl = {
         try {
             const { email, password } = req.body
             const user = await Users.findOne({ email })
-            if (!user) return res.status(400).json({ msg: "This email does not exist" })
+            if (!user) return res.status(400).json({ msg: "Incorrect email or password." })
 
             if (user.isVerify === false)
                 return res.status(400).json({ msg: "This account hasn't been activated yet. If you are student, please use your DTU email to sign up." })
             const isMatch = await bcrypt.compare(password, user.password)
-            if (!isMatch) return res.status(400).json({ msg: "Password is incorrect." })
+            if (!isMatch) return res.status(400).json({ msg: "Incorrect email or password." })
 
             const access_token = createAccessToken({ id: user._id })
 
@@ -157,6 +158,9 @@ const userCtrl = {
             }
             else if (user.role === 1) {
                 info = await companyInfo.findOne({ user_id: id });
+            }
+            else if (user.role === 2) {
+                info = await adminInfo.findOne({ user_id: id });
             }
             res.status(200).json({ success: true, info });
         } catch (error) {

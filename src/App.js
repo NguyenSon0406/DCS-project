@@ -18,9 +18,8 @@ import PrivateRoute from './utils/PrivateRoute';
 
 function App() {
   const dispatch = useDispatch();
-  const token = useSelector(state => state.token);
   const auth = useSelector(state => state.auth);
-  const { isLogged, authLoading } = auth;
+  const { authLoading } = auth;
 
   useEffect(() => {
     let info = null;

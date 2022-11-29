@@ -68,7 +68,7 @@ function Navbar() {
 
   //fetch user information
   const auth = useSelector(state => state.auth);
-  const { user, isLogged } = auth;
+  const { user, role} = auth;
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
@@ -241,9 +241,10 @@ function Navbar() {
                 root: styles.popOverRoot,
               }}
             >
-              <MenuItem onClick={handleClose1}><Link to="recruitment/newest" style={{ color: "black" }}>Newest</Link></MenuItem>
-              <MenuItem onClick={handleClose1}><Link to="recruitment/myjobpost" style={{ color: "black" }}>My Recruitment Post</Link></MenuItem>
-              <MenuItem onClick={handleClose1}>Post Job</MenuItem>
+              {(role === 0) ? <MenuItem onClick={handleClose1} sx={{width:"100px"}}><Link to="recruitment/newest" style={{ color: "black" }}>Newest</Link></MenuItem>
+                : <MenuItem onClick={handleClose1}><Link to="recruitment/newest" style={{ color: "black" }}>Newest</Link></MenuItem>
+              }
+              {(role === 1) ? <MenuItem onClick={handleClose1}><Link to="recruitment/myjobpost" style={{ color: "black" }}>My Recruitment Post</Link></MenuItem> : ""}
             </Menu>
             <Button
 
