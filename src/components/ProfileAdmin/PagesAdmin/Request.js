@@ -78,7 +78,6 @@ export default function Request() {
     return (
         <>
             <div className="request-container">
-                <HomeProfileAdmin />
                 <div className="nav-page-admin-request">
                     <div className="text-title-request">Request</div>
                     <Paper sx={{ width: '100%', overflow: 'hidden' }}>

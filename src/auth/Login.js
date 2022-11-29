@@ -29,7 +29,6 @@ const Login = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const timer = useRef("");
   let navigate = useNavigate();
-  const auth = useSelector(state => state.auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

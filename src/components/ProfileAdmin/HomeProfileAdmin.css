@@ -2,18 +2,18 @@
   height: 100vh;
 }
 .slidebar-left {
-  width: 170px;
+  width: 190px;
   border: 1px solid #fff8ea;
-  padding-top: 100px;
+  
 }
 .slidebar-btn {
   text-align: center;
 }
 .slidebar-btn .slidebar-btn-logout {
   font-size: 15px;
-  width: 120px;
-  height: 25px;
-  background-color: #eb1d36;
+  width: 110px;
+  height: 40px;
+  background-color: #F33E33;
   border: none;
   border-radius: 5px;
   color: white;
@@ -27,9 +27,12 @@
 .slidebar-btn-logout:hover {
   opacity: 1;
   color: #bcead5;
+  transition: 0.3s
 }
-.slidebar-right {
-  width: 88%;
-  margin-bottom: 15px;
-  background-color: #eaeaea;
+.slidebar-logo {
+  margin-top: 0;
+  top:0;
+  width: 180px;
+  height: 200px;
+  margin-bottom: 0;
 }

@@ -70,7 +70,6 @@ export default function Students() {
     return (
         <>
             <div className="student-container">
-                <HomeProfileAdmin />
                 <div className="nav-page-admin">
                     <div className="text-title-student">Users</div>
                     <Paper sx={{ width: '100%', overflow: 'hidden' }}>

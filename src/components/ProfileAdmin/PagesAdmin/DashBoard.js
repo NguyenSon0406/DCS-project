@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts"
 import './DashBoard.css';
 import HomeProfileAdmin from "../HomeProfileAdmin";
 
@@ -85,7 +85,7 @@ class DashBoard extends Component {
         return (
             <>
                 <div className="dash-board-container">
-                    <HomeProfileAdmin />
+                    
                     <div className="nav-page-admin">
                         <div className="dashboard-quantity">
                             <div className="dashboard-quantity-content">
@@ -96,7 +96,7 @@ class DashBoard extends Component {
                                 </div>
                                 <div className="dashboard-quanlity-right">
                                     <div className="quanlity-right-up">
-                                        Quanlity: {students}
+                                        Quantity: {students}
                                     </div>
                                     <div className="quanlity-right-down color-student-right">
                                         Students
@@ -111,7 +111,7 @@ class DashBoard extends Component {
                                 </div>
                                 <div className="dashboard-quanlity-right">
                                     <div className="quanlity-right-up">
-                                        Quanlity: {companies}
+                                        Quantity: {companies}
                                     </div>
                                     <div className="quanlity-right-down color-companies-right">
                                         Companies
@@ -126,7 +126,7 @@ class DashBoard extends Component {
                                 </div>
                                 <div className="dashboard-quanlity-right">
                                     <div className="quanlity-right-up">
-                                        Quanlity: {admin}
+                                        Quantity: {admin}
                                     </div>
                                     <div className="quanlity-right-down color-admin-right">
                                         Admin
@@ -141,7 +141,7 @@ class DashBoard extends Component {
                                 </div>
                                 <div className="dashboard-quanlity-right">
                                     <div className="quanlity-right-up">
-                                        Quanlity: {lecturer}
+                                        Quantity: {lecturer}
                                     </div>
                                     <div className="quanlity-right-down color-lecturer-right">
                                         Lecturer

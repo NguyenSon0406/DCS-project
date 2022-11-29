@@ -15,7 +15,8 @@ const PrivateRoute = ({ children }) => {
     </Box>
     )
 
-    if (!isLogged) {
+    if(!isLogged)
+    {
         return <Navigate to="/login" replace />
     }
     return (children)

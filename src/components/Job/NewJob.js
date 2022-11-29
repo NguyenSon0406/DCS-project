@@ -84,6 +84,7 @@ const NewJob = (props) => {
         })
         setData({...data, err:'', success: res.data.msg})
         handleClick();
+        setOpenPopup(false);
     }catch(err){
         err.response.data.msg && 
         setData({...data, err:err.response.data.msg, success: ''})
@@ -92,7 +93,8 @@ const NewJob = (props) => {
     props.passUpdateList();
   }
   return (
-    <Dialog open={openPopup} fullWidth={true} maxWidth="lg" onBackdropClick={() => setOpenPopup(false)}>
+    <>
+      <Dialog open={openPopup} fullWidth={true} maxWidth="lg" onBackdropClick={() => setOpenPopup(false)}>
         <DialogTitle>
             <Box display="flex" justifyContent="space-between" alignItem="center">
                 Post Job
@@ -178,12 +180,14 @@ const NewJob = (props) => {
                 <Button variant='contained' sx={{fontWeight:"bold",m:2}} onClick={handlePost}>Post Job</Button>
                 </Box>
         </DialogActions>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+         
+    </Dialog>
+    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             {success && <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                 {success}
             </Alert>}
-         </Snackbar>    
-    </Dialog>
+         </Snackbar>   
+    </>
   )
 }
 

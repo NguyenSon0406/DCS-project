@@ -16,6 +16,8 @@ const Recruitment=() => {
   const [jobs, setJobs] = useState([]);
   const token = localStorage.getItem('accessToken');
   const [reducerValue,forceUpdate] = useReducer(x => x + 1, 0);
+  const auth = useSelector( state => state.auth)
+  const {role} = auth 
 
   useEffect(() =>{  
     if(token)
@@ -60,13 +62,14 @@ const Recruitment=() => {
                   <Grid item xs={12}>
                     <Box display="flex" justifyContent="space-between" sx={{marginBottom:2}}>
                     <Typography  variant='h3'>Newest Job</Typography>
-                    <Button 
+                   {(role === 1) &&  <Button 
                     variant='contained'
                     color='error'                   
                     sx={{fontWeight:"bold"}}
                     onClick={() => setOpenPopup(true)}
                     startIcon={<PostAddIcon/>}                    
                     >Post a job</Button>
+                   }
                     </Box>
                     <SearchBar term = {searchTerm}
                     searchKeyWord = {searchHandle}

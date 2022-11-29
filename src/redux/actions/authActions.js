@@ -14,7 +14,7 @@ export const fetchUser = (info) => {
             isLogged: true,
             user: info,
             role: info.role,
-            isAdmin: false
+            isAdmin: info.role === 2 ? true : false
         },
     }
     return {

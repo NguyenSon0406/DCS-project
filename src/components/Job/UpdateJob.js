@@ -5,7 +5,7 @@ import TagInput from "./TagInput";
 import TextEdittor from "./TextEdittor";
 import CompanyList from "./CompanyList";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import SnackBar from "../../utils/SnackBar";
 
 const initialState = {
     tempTitle:'',
@@ -25,6 +25,8 @@ const UpdateJob = (props) => {
     
     const [tempSkills,setTempSkills] = useState([]);
     const [tempDescription, setTempDescription] = useState('');
+
+    const [open,setOpen] = useState(false);
 
     const handleSkills = (tags) => {
         setTempSkills(tags);
@@ -50,7 +52,7 @@ const UpdateJob = (props) => {
                 headers: {Authorization: token}
             })
             setData({...data,err:'',success:res.data.msg})
-            navigate("/home/recruitment/myjobpost")
+            setOpen(true);
         }catch(err)
         {
             err.response.data.msg && 
@@ -143,9 +145,9 @@ const UpdateJob = (props) => {
                             <TextEdittor jobDescription ={description} handleDescription={handleDescription}/>
                         </Box>
                     </Grid>
-                    <Grid item xs={12} spacing={2}>
-                        <Button variant="contained" color="primary" sx={{fontWeight:"bold",fontSize:"15px",padding:1,marginRight:"30px"}} onClick={handleUpdate}>EDIT</Button>
-                        <Button variant="contained" color="error" sx={{fontWeight:"bold",fontSize:"15px", padding:1}} onClick={handleClick}>CANCEL</Button>
+                    <Grid item xs={12} spacing={2} textAlign="center">
+                        <Button variant="contained" color="primary" sx={{fontWeight:"bold",fontSize:"15px",padding:1,marginRight:"30px", width:"100px"}} onClick={handleUpdate}>EDIT</Button>
+                        <Button variant="contained" color="error" sx={{fontWeight:"bold",fontSize:"15px", padding:1,width:"100px"}} onClick={handleClick}>CANCEL</Button>
                     </Grid>
                     </Grid>           
                     </Grid>
@@ -171,6 +173,7 @@ const UpdateJob = (props) => {
                </Grid>
                 </Grid>
               </Box>
+              <SnackBar open={open} setOpen={setOpen} msg={success} />
         </>
     )
 

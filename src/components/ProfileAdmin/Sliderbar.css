@@ -11,15 +11,20 @@
   padding: 7px;
   color: black;
 }
-.nav-link.active {
-  color: red;
-  background-color: rgb(182, 182, 202);
-  border-right: 2px solid red;
+.nav-link:focus {
+  color: #d50000;
+  background-color: #ffebee;
+  border-right: 2px solid #d50000;
   opacity: 0.8;
+  transition: 0.3s;
+  box-shadow:0px 5px 25px rgba(0,0,0,0.1);
 }
 .nav-link:hover {
-  color: red;
-  background-color: rgb(182, 182, 202);
-  border-right: 2px solid red;
+  color: #d50000;
+  background-color: #ffebee;
+  border-right: 2px solid #d50000;
   opacity: 0.8;
+  box-shadow:0px 5px 25px rgba(0,0,0,0.1);
+  transition: 0.3s;
 }
+

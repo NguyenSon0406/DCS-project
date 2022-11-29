@@ -29,9 +29,6 @@ class Companies extends Component {
         return (
             <>
                 <div className="companies-container">
-
-                    <HomeProfileAdmin />
-
                     <div className="nav-page-admin">
                         <div className="text-title-companies">Companies</div>
                         {
