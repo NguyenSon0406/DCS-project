@@ -211,7 +211,7 @@ function Navbar() {
                 <MenuItem onClick={handleClose}>Newest</MenuItem>
                 <MenuItem onClick={handleClose}>My post</MenuItem>
                 <MenuItem onClick={handleClose}>
-                  <Link to="create-post">Create post</Link>
+                  <Link to="post/create">Create post</Link>
                 </MenuItem>
               </Menu>
             </Button>

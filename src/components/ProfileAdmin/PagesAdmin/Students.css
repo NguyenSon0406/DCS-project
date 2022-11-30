@@ -32,20 +32,4 @@ tr:hover {
   background-color: #d6eeee;
 }
 
-.btn-delete-student {
-  cursor: pointer;
-  margin-right: 15px;
-}
-.btn-delete-student:hover {
-  border: 2px solid red;
-  color: red;
-  border-radius: 5px;
-}
-.btn-view-student {
-  cursor: pointer;
-}
-.btn-view-student:hover {
-  border: 2px solid orange;
-  color: orange;
-  border-radius: 5px;
-}
+
