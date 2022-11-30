@@ -28,6 +28,8 @@
   width: 30%;
   border: 1px solid red;
   height: 100%;
+  text-align: center;
+  justify-content: center;
 }
 .item-companies-right {
   width: 70%;
@@ -43,8 +45,10 @@
 .item-btn-companies {
   height: 50%;
   width: 100%;
-  padding-top: 20px;
-  padding-left: 100px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  display: flex;
 }
 .btn-delete-companies {
   margin-right: 5px;

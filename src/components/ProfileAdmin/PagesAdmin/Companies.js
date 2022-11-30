@@ -1,31 +1,23 @@
-import React, { Component } from "react";
-import HomeProfileAdmin from "../HomeProfileAdmin";
+import React,{ useEffect, useState } from "react";
+import { Button } from "@mui/material";
+import axios from "axios";
 import './Companies.css';
 
-class Companies extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
-    render() {
-        let arrCompanies = [
+function Companies() {
+        const token = localStorage.getItem('accessToken');
+        const [arrCompanies, setArrCompanies] = useState([]);
+        useEffect(() =>{
+            if(token)
             {
-                img: "",
-                name: "FPT SOFWARE"
-            }, {
-                img: "",
-                name: "RIKKEISOFT"
-            }, {
-                img: "",
-                name: "ENCLAVE"
-            }, {
-                img: "",
-                name: "BRAVO"
+              const getAllCompany= async() => {
+                const response = await axios.get("/admin/list-company",{
+                  headers: {Authorization: token}
+                });
+                setArrCompanies(response.data);
             }
-        ]
+            getAllCompany();
+            }
+        })
         return (
             <>
                 <div className="companies-container">
@@ -36,17 +28,24 @@ class Companies extends Component {
                                 return (
                                     <div className="item-companies" key={index}>
                                         <div className="item-companies-left">
-
+                                            <img src={item.avatar} style={{width:"70px",height:"70px"}}/>
                                         </div>
                                         <div className="item-companies-right">
-                                            <div className="item-name-companies">{item.name}</div>
+                                            <div className="item-name-companies">{item.companyName}</div>
                                             <div className="item-btn-companies">
-                                                <button className="btn-delete-companies">
+                                                <Button
+                                                    variant="contained"
+                                                    sx={{cursor:"pointer", marginRight:"15px", padding:1.5}}
+                                                    color='error'
+                                                    >
                                                     <i className="fas fa-trash-can"></i>
-                                                </button>
-                                                <button className="btn-view-companies">
+                                                </Button>
+                                                <Button              
+                                                                                                                
+                                                    sx={{cursor:"pointer", marginRight:"15px", padding:1.5}}
+                                                    variant="contained">
                                                     <i className="fas fa-magnifying-glass"></i>
-                                                </button>
+                                                </Button>
                                             </div>
                                         </div>
                                     </div>
@@ -58,6 +57,5 @@ class Companies extends Component {
             </>
         );
     }
-}
 
 export default Companies;

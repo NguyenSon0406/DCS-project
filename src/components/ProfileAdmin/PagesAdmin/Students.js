@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './Students.css';
-import HomeProfileAdmin from "../HomeProfileAdmin";
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,20 +13,38 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import { useState, useReducer, useEffect  } from 'react';
+import axios from 'axios';
 
 const columns = [
     { id: 'id', label: 'ID', minWidth: 50 },
     { id: 'firstName', label: 'First\u00a0Name', minWidth: 100 },
     { id: 'lastName', label: 'Last\u00a0Name', minWidth: 100 },
     { id: 'email', label: 'Email', minWidth: 100 },
-    { id: 'phone', label: 'Phone', minWidth: 100 },
+    { id: 'contact', label: 'Phone', minWidth: 100 },
     { id: 'gender', label: 'Gender', minWidth: 100 },
-    { id: 'birthday', label: 'Date\u00a0of\u00a0birth', minWidth: 100 },
+    { id: 'dayofbirth', label: 'Date\u00a0of\u00a0birth', minWidth: 100 },
+    { id: 'className', label: 'Class', minWidth: 100 },
+    { id: 'falculty', label: 'Falculty', minWidth: 100 },
     { id: 'action', label: 'Action', minWidth: 100 },
 ];
 
 export default function Students() {
-
+    const token = localStorage.getItem('accessToken');
+    const [reducerValue,forceUpdate] = useReducer(x => x + 1, 0);
+    const [students, setStudents] = useState([]);
+    useEffect(() =>{  
+        if(token)
+        {
+          const getAllStudents= async() => {
+            const response = await axios.get("/admin/list-student",{
+              headers: {Authorization: token}
+            });
+            setStudents(response.data);
+        }
+        getAllStudents();
+        }
+      },[reducerValue])
     const dataStudents = [
         {
             id: '01', firstName: 'Sơn', lastName: 'Nguyễn', email: 'nguyenson5@dtu.edu.vn',
@@ -44,6 +61,15 @@ export default function Students() {
     ]
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    let count = 0;
+    const handleCountID = (countID) => {
+        if(count === 0)
+            count = 1;
+        else {
+            count = countID + 1;
+        }
+        return count;
+    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -53,8 +79,12 @@ export default function Students() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    const handleDeleteStudent = (idStudent) => {
-        console.log("check id student", idStudent)
+    const handleDeleteStudent = async (id) => {
+        await axios.delete(`/admin/delete/${id}`,
+        {
+            headers: {Authorization: token}
+        })
+        forceUpdate();
         setOpen(false);
     }
     const [open, setOpen] = React.useState(false);
@@ -67,6 +97,10 @@ export default function Students() {
     const handleClose = () => {
         setOpen(false);
     };
+    const convertBirthday= (userbirthday) => {
+        const birthday = new Date(userbirthday).toISOString().slice(0,10)
+        return birthday;
+    }
     return (
         <>
             <div className="student-container">
@@ -93,7 +127,7 @@ export default function Students() {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {dataStudents
+                                    {students
                                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         .map((row) => {
                                             return (
@@ -102,20 +136,26 @@ export default function Students() {
                                                         const value = row[column.id];
                                                         return (
                                                             <TableCell key={column.id} align={column.align}>
-                                                                {column.id === 'action'
+                                                                {(column.id === 'action'
                                                                     ?
                                                                     <>
-                                                                        <button
-                                                                            className="btn-delete-student"
-                                                                            onClick={() => handleClickOpen(row.id)}
+                                                                        <Button
+                                                                            variant="contained"   
+                                                                            color='error'                                                                         
+                                                                            sx={{cursor:"pointer", marginRight:"15px", padding:1.5}}
+                                                                            onClick={() => handleClickOpen(row.user_id)}
                                                                         >
                                                                             <i className="fas fa-trash-can"></i>
-                                                                        </button>
-                                                                        <button className="btn-view-student">
+                                                                        </Button>
+                                                                        <Button     
+                                                                            color='info'                                                                     
+                                                                            sx={{cursor:"pointer", marginRight:"15px", padding:1.5}}
+                                                                            variant="contained">
                                                                             <i className="fas fa-magnifying-glass"></i>
-                                                                        </button>
+                                                                        </Button>
                                                                     </>
-                                                                    : value}
+                                                                    : column.id === 'dayofbirth' ? convertBirthday(value) 
+                                                                    : column.id === "id" ? handleCountID(count) : value) }                                                                    
                                                             </TableCell>
                                                         );
                                                     })}
@@ -128,7 +168,7 @@ export default function Students() {
                         <TablePagination
                             rowsPerPageOptions={[10, 25, 100]}
                             component="div"
-                            count={dataStudents.length}
+                            count={students.length}
                             rowsPerPage={rowsPerPage}
                             page={page}
                             onPageChange={handleChangePage}
