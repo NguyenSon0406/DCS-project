@@ -212,7 +212,7 @@ function Navbar() {
               }}
                   >
                   <MenuItem onClick={handleClose}><Link to="post/newest" style={{color:"black"}}>Newest</Link></MenuItem>
-                  <MenuItem onClick={handleClose}>My post</MenuItem>
+                  <MenuItem onClick={handleClose}><Link to="post/mypost" style={{color:"black"}}>My post</Link></MenuItem>
                   <MenuItem onClick={handleClose}>Create post</MenuItem>
                 </Menu>
               </Button>

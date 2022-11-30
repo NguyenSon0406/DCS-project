@@ -14,6 +14,7 @@ import RecruitmentDetail from "../components/Job/JobDetail";
 import HomeProfile from "../components/ProfileStudent/HomeProfile"
 import ListStudent from "./ListStudent";
 import ArticleList from "../components/ArticleList/ArticleList"
+import ArticlePost from "../components/ArticlePost/ArticlePost"
 export default function Homepage(){
     const auth = useSelector(state => state.auth)
     const {isLogged} = auth;
@@ -25,6 +26,7 @@ export default function Homepage(){
                 <Route path= "/"  element={<Home/> }/>
                 <Route path= "/post" element={<Post/>}/>
                 <Route path = "/post/newest" element={<ArticleList/>}/>
+                <Route path = "/post/mypost" element={<ArticlePost/>}/>
                 <Route path = "/recruitment/myjobpost" element={<MyJobPost/>}/>
                 <Route path= "/recruitment/newest" element={<Recruitment/> }/>
                 <Route path = "/recruitment/detail/:id" element={<RecruitmentDetail/>}/>
