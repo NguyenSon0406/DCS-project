@@ -13,8 +13,10 @@ import UpdateJob from "../components/Job/UpdateJob"
 import RecruitmentDetail from "../components/Job/JobDetail";
 import HomeProfile from "../components/ProfileStudent/HomeProfile"
 import ListStudent from "./ListStudent";
-import ArticleList from "../components/ArticleList/ArticleList"
-import ArticlePost from "../components/ArticlePost/ArticlePost"
+import ArticleList from "../components/Article/ArticleList/ArticleList"
+import ArticlePost from "../components/Article/ArticlePost/ArticlePost"
+import {CreatePost} from "../components/Article/Createpost/CreatePost"
+import EditPost from "../components/Article/EditPost/EditPost"
 export default function Homepage(){
     const auth = useSelector(state => state.auth)
     const {isLogged} = auth;
@@ -24,13 +26,16 @@ export default function Homepage(){
             <Navbar/>
             <Routes>
                 <Route path= "/"  element={<Home/> }/>
-                <Route path= "/post" element={<Post/>}/>
+                {/* <Route path= "/post" element={<Post/>}/> */}
                 <Route path = "/post/newest" element={<ArticleList/>}/>
-                <Route path = "/post/mypost" element={<ArticlePost/>}/>
+                <Route path = "/post/readmore" element={<ArticlePost/>}/>
+                <Route path = "/post/create" element={<CreatePost/>}/>
+                <Route path = "/post/editpost" element={<EditPost/>}/>
                 <Route path = "/recruitment/myjobpost" element={<MyJobPost/>}/>
                 <Route path= "/recruitment/newest" element={<Recruitment/> }/>
                 <Route path = "/recruitment/detail/:id" element={<RecruitmentDetail/>}/>
                 <Route path = "/recruitment/edit/:id" element={<UpdateJob/>}/>
+                <Route path = "/recruitment/postjob" element={<EditPost/>}/>
                 <Route path= "/profile" exact element={<HomeProfile/>}/>
                 <Route path= "*"  element={<NotFound/> }/>
                 <Route path= "/liststudent"  element={<ListStudent/> }/>

@@ -10,6 +10,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import {Box, Grid, ThemeProvider, Typography, Button,Paper, Divider, Chip, IconButton,Menu, MenuItem,Tooltip} from "@mui/material"
 import { useLocation,Link } from 'react-router-dom';
 export default function ArticleList() {
+    const [skills, setSkills] = useState(["MongoDb","NodeJS"]);
     const rootElement = document.getElementById("root");
     const root = createRoot(rootElement);
     const getLocation = useLocation(); 
@@ -29,8 +30,8 @@ export default function ArticleList() {
             <header>
                 <h1 class="title large bold text-primary">Cẩm nang sử dụng Figma hiệu quả dành cho UI/UX Designer </h1>
             </header>
-            <Box>
-                           <Tooltip title="Setting" arrow>
+            <Box sx={{float:'right'}}>
+                           <Tooltip title="Setting" arrow >
                            <IconButton onClick={handleOpenSetting} size="small">
                               <MoreHorizIcon/>
                             </IconButton>
@@ -53,7 +54,9 @@ export default function ArticleList() {
                               >
                                 <MenuItem onClick={()=>setOpenPopup(true)}><DeleteIcon  sx={{ fontSize: 18,marginRight:"5px" }}/>Delete</MenuItem>
                                 <MenuItem>
+                                <Link to="/home/post/editpost"> 
                                   <EditIcon sx={{ fontSize: 18,marginRight:"5px" }}/>Edit
+                                </Link> 
                                   
                                 </MenuItem>
                               </Menu>
@@ -64,8 +67,19 @@ export default function ArticleList() {
                     <a>Nguyễn Sơn</a>
                 </div>
                 <div class="text-muted">
+                  
                     <p>Đã đăng 1 giờ trước</p>
+                    
                 </div>
+            </div>
+            <div class="posttag">
+                        {
+                                skills.map((skill) => (
+                                  <Chip label={skill} color="primary" size='small'
+                                    sx={{fontWeight:"bold",fontSize:"10px",marginRight:"5px"}}
+                                  />
+                                ))
+                              }
             </div>
             <section class="post-content">
                 <div class="post-format-image post-format-wrapper ">

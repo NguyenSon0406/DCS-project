@@ -212,8 +212,8 @@ function Navbar() {
               }}
                   >
                   <MenuItem onClick={handleClose}><Link to="post/newest" style={{color:"black"}}>Newest</Link></MenuItem>
-                  <MenuItem onClick={handleClose}><Link to="post/mypost" style={{color:"black"}}>My post</Link></MenuItem>
-                  <MenuItem onClick={handleClose}>Create post</MenuItem>
+                  <MenuItem onClick={handleClose}><Link to="post/readmore" style={{color:"black"}}>My post</Link></MenuItem>
+                  <MenuItem onClick={handleClose}><Link to="post/create" style={{color:"black"}}>Create post</Link></MenuItem>
                 </Menu>
               </Button>
               
@@ -245,7 +245,7 @@ function Navbar() {
                   >
                   <MenuItem onClick={handleClose1}><Link to="recruitment/newest" style={{color:"black"}}>Newest</Link></MenuItem>
                   <MenuItem onClick={handleClose1}><Link to="recruitment/myjobpost" style={{color:"black"}}>My Recruitment Post</Link></MenuItem>
-                  <MenuItem onClick={handleClose1}>Post Job</MenuItem>
+                  <MenuItem onClick={handleClose1}><Link to="recruitment/postjob" style={{color:"black"}}>Post Job</Link></MenuItem>
                 </Menu>
               <Button
                 

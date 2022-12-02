@@ -109,9 +109,69 @@ div.text {
 img{
     width:auto;
     margin: 0;
+    padding-top: 0px;
 }
 .CommentBox{
     padding: 0 20%;
     font-family: sans-serif; 
     text-align: center;
 }
+.posttag{
+    margin-top: 20px;
+}
+.Create2 {
+    padding-top: 30px;
+    margin-bottom: 20px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .Create2 .input2 {
+    width: 100%;
+    height: 50px;
+    border: 1.25px solid rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 10px;
+  }
+  
+  .Create2 .input2:hover {
+    border-color: rgba(58, 162, 251, 0.9);
+  }
+  
+  .Create2 .input:focus {
+    outline: 0;
+  
+    background: white;
+    box-shadow: 0 0 5px #1890ff;
+  }
+  .input2 {
+    transition: all 0.4s;
+  }
+  
+  .editor2 {
+    /* padding: 20px; */
+  }
+  
+  button {
+    background-color: #1890ff;
+    border: none;
+    color: white;
+    padding: 13px ;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: rgba(58, 162, 251, 0.9);
+  }
+  
+  
+  .img .img1 {
+    font-size: 150%;
+  }
+  .editimg{
+    padding:0
+  }
