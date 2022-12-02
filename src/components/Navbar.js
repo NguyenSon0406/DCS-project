@@ -224,9 +224,11 @@ function Navbar() {
               onMouseLeave={handleCloseHover1}
               sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold", zIndex: 1301 }}
             >
-              Recruitment
+             {(role!==1) ? ( <Link to="recruitment/newest" style={{ color: "white" }}>Recruitment</Link>) : "Recruitment"}
             </Button>
-            <Menu
+            {
+              (role === 1) ? (
+                <Menu
               id="simple-menu2"
               anchorEl={anchorReEl}
               open={Boolean(anchorReEl)}
@@ -241,11 +243,11 @@ function Navbar() {
                 root: styles.popOverRoot,
               }}
             >
-              {(role === 0) ? <MenuItem onClick={handleClose1} sx={{width:"100px"}}><Link to="recruitment/newest" style={{ color: "black" }}>Newest</Link></MenuItem>
-                : <MenuItem onClick={handleClose1}><Link to="recruitment/newest" style={{ color: "black" }}>Newest</Link></MenuItem>
-              }
-              {(role === 1) ? <MenuItem onClick={handleClose1}><Link to="recruitment/myjobpost" style={{ color: "black" }}>My Recruitment Post</Link></MenuItem> : ""}
+              <MenuItem onClick={handleClose1}><Link to="recruitment/newest" style={{ color: "black" }}>Newest</Link></MenuItem>
+              <MenuItem onClick={handleClose1}><Link to="recruitment/myjobpost" style={{ color: "black" }}>My Recruitment Post</Link></MenuItem>
             </Menu>
+              ) : ""
+            }
             <Button
 
               onClick={handleCloseNavMenu}

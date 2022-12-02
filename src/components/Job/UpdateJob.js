@@ -110,6 +110,7 @@ const UpdateJob = (props) => {
                         name="tempLink"
                         placeholder='Job Link *' 
                         disableUnderline
+                        onChange={handleChange}
                         fullWidth={true}
                         defaultValue={link}
                         />

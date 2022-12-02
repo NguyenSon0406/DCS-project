@@ -15,24 +15,32 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { useState, useReducer, useEffect  } from 'react';
 import axios from 'axios';
+import { Box, DialogTitle, Typography, Snackbar } from '@mui/material';
+import MuiAlert from '@mui/material/Alert';
+
 
 const columns = [
     { id: 'id', label: 'ID', minWidth: 50 },
-    { id: 'firstName', label: 'First\u00a0Name', minWidth: 100 },
+    { id: 'firstName', label: 'First\u00a0Name', minWidth: 50 },
     { id: 'lastName', label: 'Last\u00a0Name', minWidth: 100 },
     { id: 'email', label: 'Email', minWidth: 100 },
     { id: 'contact', label: 'Phone', minWidth: 100 },
-    { id: 'gender', label: 'Gender', minWidth: 100 },
-    { id: 'dayofbirth', label: 'Date\u00a0of\u00a0birth', minWidth: 100 },
+    { id: 'gender', label: 'Gender', minWidth: 50 },
+    { id: 'dayofbirth', label: 'Date\u00a0of\u00a0birth', minWidth: 70 },
     { id: 'className', label: 'Class', minWidth: 100 },
     { id: 'falculty', label: 'Falculty', minWidth: 100 },
-    { id: 'action', label: 'Action', minWidth: 100 },
+    { id: 'action', label: 'Action', minWidth: 200 },
 ];
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 export default function Students() {
     const token = localStorage.getItem('accessToken');
     const [reducerValue,forceUpdate] = useReducer(x => x + 1, 0);
     const [students, setStudents] = useState([]);
+    const [studentInfo, getStuddentInfo] = useState('');
+    const [success, setSuccess] = useState('')
     useEffect(() =>{  
         if(token)
         {
@@ -45,30 +53,12 @@ export default function Students() {
         getAllStudents();
         }
       },[reducerValue])
-    const dataStudents = [
-        {
-            id: '01', firstName: 'Sơn', lastName: 'Nguyễn', email: 'nguyenson5@dtu.edu.vn',
-            phone: '0123456789', roles: 'Student', gender: 'Male', birthday: '04/06/2001'
-        },
-        {
-            id: '02', firstName: 'Hoàng', lastName: 'Trần Đình Minh', email: 'trandinhmhoang@gdtu.edu.vn',
-            phone: '0123456789', roles: 'Student', gender: 'Female', birthday: '13/03/2001'
-        },
-        {
-            id: '03', firstName: 'Chân', lastName: 'Phạm Ngọc', email: 'phamngocchan@dtu.edu.vn',
-            phone: '0123456789', roles: 'Student', gender: 'Male', birthday: '13/01/2001'
-        }
-    ]
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    let count = 0;
-    const handleCountID = (countID) => {
-        if(count === 0)
-            count = 1;
-        else {
-            count = countID + 1;
-        }
-        return count;
+
+    const handleID = (id) => {
+        let stringId = id.slice(19,24)
+        return stringId;
     }
 
     const handleChangePage = (event, newPage) => {
@@ -80,15 +70,29 @@ export default function Students() {
         setPage(0);
     };
     const handleDeleteStudent = async (id) => {
-        await axios.delete(`/admin/delete/${id}`,
+        const res = await axios.delete(`/admin/delete/${id}`,
         {
             headers: {Authorization: token}
         })
+        setSuccess(res.data.msg)
+        handleClick();
         forceUpdate();
         setOpen(false);
     }
     const [open, setOpen] = React.useState(false);
+    const [openView, setOpenView] = React.useState(false);
     const [idStudent, setIdStudent] = React.useState('')
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const handleClick = () => {
+        setOpenSnackbar(true);
+    };
+    const handleCloseSnackbar = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpenSnackbar(false);
+   }
+
     const handleClickOpen = (idStudent) => {
         setOpen(true);
         setIdStudent(idStudent)
@@ -96,7 +100,16 @@ export default function Students() {
 
     const handleClose = () => {
         setOpen(false);
+        setOpenView(false);
     };
+    const handleClickOpenView= async (id) => {
+        const res = await axios.get(`/admin/student-info/${id}`,
+        {
+            headers: {Authorization: token}
+        })
+        getStuddentInfo(res.data);
+        setOpenView(true);
+    }
     const convertBirthday= (userbirthday) => {
         const birthday = new Date(userbirthday).toISOString().slice(0,10)
         return birthday;
@@ -150,12 +163,13 @@ export default function Students() {
                                                                         <Button     
                                                                             color='info'                                                                     
                                                                             sx={{cursor:"pointer", marginRight:"15px", padding:1.5}}
-                                                                            variant="contained">
+                                                                            variant="contained"
+                                                                            onClick={() => handleClickOpenView(row.user_id)}>
                                                                             <i className="fas fa-magnifying-glass"></i>
                                                                         </Button>
                                                                     </>
                                                                     : column.id === 'dayofbirth' ? convertBirthday(value) 
-                                                                    : column.id === "id" ? handleCountID(count) : value) }                                                                    
+                                                                    : column.id === "id" ? handleID(row._id) : value) }                                                                    
                                                             </TableCell>
                                                         );
                                                     })}
@@ -181,19 +195,63 @@ export default function Students() {
                 open={open}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
+                fullWidth={true}
+                maxWidth="sm"
+                onBackdropClick={handleClose}
             >
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Delete Student?
+                       Are you sure to delete this student?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>No</Button>
-                    <Button onClick={() => handleDeleteStudent(idStudent)} autoFocus>
+                    <Button variant='outlined' onClick={handleClose}>No</Button>
+                    <Button variant="contained" onClick={() => handleDeleteStudent(idStudent)} autoFocus>
                         Yes
                     </Button>
                 </DialogActions>
             </Dialog>
+            <Dialog
+                open={openView}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                onBackdropClick={handleClose}
+                fullWidth={true}
+                maxWidth="sm"
+            >
+                <DialogTitle>
+                    Student details
+                </DialogTitle>
+                <DialogContent dividers>
+                    <Box display="flex" textAlign='center' alignItems='center'>
+                    <img alt='avatar company'
+                        src={studentInfo.avatar}
+                        style={{
+                            verticalAlign: "middle", margin: 0, width: "70px", height: "70px", borderRadius: "50%"
+                            }}/>
+                    <Typography sx={{marginLeft:"10px", fontWeight:"bold"}}>{studentInfo.lastName} {studentInfo.firstName}</Typography>
+                    </Box>
+                    <Typography>Email: {studentInfo.email}</Typography>
+                    <Typography>Gender: {studentInfo.gender}</Typography>
+                    <Typography>Date of birth: {studentInfo.dayofbirth}</Typography>
+                    <Typography>Address: {studentInfo.address}</Typography>
+                    
+                    <Typography>Class: {studentInfo.className}</Typography>
+                    <Typography>Falculty: {studentInfo.falculty}</Typography>
+                    <Typography>Description: {studentInfo.description}</Typography>
+                </DialogContent>
+                <DialogActions>
+                    <Button variant='outlined' onClick={handleClose}>Cancel</Button>
+                    <Button variant="contained" autoFocus>
+                        Update
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+            {success && <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+                {success}
+            </Alert>}
+         </Snackbar>  
         </>
     );
 }

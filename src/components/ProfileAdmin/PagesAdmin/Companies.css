@@ -15,8 +15,8 @@
   font-weight: 600;
 }
 .nav-page-admin .item-companies {
-  width: 250px;
-  height: 100px;
+  width: 300px;
+  height: 120px;
   float: left;
   margin-top: 50px;
   margin-left: 70px;
@@ -26,7 +26,6 @@
 }
 .item-companies-left {
   width: 30%;
-  border: 1px solid red;
   height: 100%;
   text-align: center;
   justify-content: center;

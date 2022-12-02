@@ -109,15 +109,22 @@ export default function Request() {
                                                                 {column.id === 'action'
                                                                     ?
                                                                     <>
-                                                                        <button className="btn-accept-request">
-                                                                            <i className="fas fa-check"></i>
-                                                                        </button>
-                                                                        <button
-                                                                            className="btn-decline-request"
-                                                                            onClick={() => handleClickOpen(row.id)}
+                                                                    <Button
+                                                                        variant="contained"
+                                                                        sx={{cursor:"pointer", marginRight:"15px", padding:1.5}}
+                                                                        color='success'
+                                                                        onClick={() => handleClickOpen(row.id)}
                                                                         >
-                                                                            <i className="fas fa-xmark"></i>
-                                                                        </button>
+                                                                         <i className="fas fa-check"></i>
+                                                                    </Button>
+                                                                    <Button              
+                                                                        color="error"                                                           
+                                                                        sx={{cursor:"pointer", marginRight:"15px", padding:1.5}}
+                                                                        variant="contained"
+                                                                        onClick={() => handleClickOpen(row.id)}>
+
+                                                                        <i className="fas fa-xmark"></i>
+                                                                    </Button>
                                                                     </>
                                                                     :
                                                                     column.id === 'businessLiscense' ?
