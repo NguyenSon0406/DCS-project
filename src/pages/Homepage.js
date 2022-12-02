@@ -19,7 +19,6 @@ import {CreatePost} from "../components/Article/Createpost/CreatePost"
 import EditPost from "../components/Article/EditPost/EditPost"
 import HomeProfileAdmin from '../components/ProfileAdmin/HomeProfileAdmin'
 import HomeProfileCompany from "../components/ProfileCompany/HomeProfileCompany";
-import { CreatePost } from "../components/Createpost/CreatePost";
 import DashBoard from '../components/ProfileAdmin/PagesAdmin/DashBoard'
 import Students from '../components/ProfileAdmin/PagesAdmin/Students'
 import Companies from '../components/ProfileAdmin/PagesAdmin/Companies'
