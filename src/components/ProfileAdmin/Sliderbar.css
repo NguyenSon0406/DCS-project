@@ -1,0 +1,30 @@
+.slidebar-item {
+  font-size: 15px;
+  display: flex;
+  margin-bottom: 8px;
+}
+.slidebar-icon {
+  margin: 0 10px;
+}
+.nav-link {
+  width: 100%;
+  padding: 7px;
+  color: black;
+}
+.nav-link:focus {
+  color: #d50000;
+  background-color: #ffebee;
+  border-right: 2px solid #d50000;
+  opacity: 0.8;
+  transition: 0.3s;
+  box-shadow:0px 5px 25px rgba(0,0,0,0.1);
+}
+.nav-link:hover {
+  color: #d50000;
+  background-color: #ffebee;
+  border-right: 2px solid #d50000;
+  opacity: 0.8;
+  box-shadow:0px 5px 25px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+

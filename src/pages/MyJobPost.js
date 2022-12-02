@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import {makeStyles} from "@mui/styles"
 import {Box, Grid, ThemeProvider, Typography, Button, Pagination, FilledInput, InputAdornment} from "@mui/material"
 import theme from "../components/Job/theme";
 import CompanyList from '../components/Job/CompanyList';
 import MyJobList from '../components/Job/MyJobList';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
   wrapper:{
@@ -20,7 +22,22 @@ const useStyles = makeStyles({
   },
 });
 export default function MyJobPost() { 
-  const classes = useStyles();  
+  const classes = useStyles();
+  const [jobs,setJobs] = useState([])
+  const token = localStorage.getItem('accessToken');
+  
+
+  useEffect(() =>{  
+    const getAllJobs= async() => {
+        const response = await axios.get("/recruitment/mypost",{
+          headers: {Authorization: token}
+        });
+        setJobs(response.data);
+    }
+    getAllJobs();
+    
+  },[])  
+  
   return (
     <>
     <ThemeProvider theme={theme} >
@@ -32,9 +49,9 @@ export default function MyJobPost() {
                <Grid container justifyContent="center" sx={{marginLeft:"20px",border:"1px solid #e8e8e8"}}>  
                   <Grid item xs={12}>
                     <Box display="flex" justifyContent="space-between" sx={{marginBottom:2 }}>
-                    <Typography  variant='h3'>My Recruitment Post (0)</Typography>
+                    <Typography  variant='h3'>My Recruitment Post ({jobs.length})</Typography>
                     </Box>
-                    <MyJobList/>
+                    <MyJobList jobs={jobs}/>
                   </Grid>
                   <Pagination 
                     style={{marginTop:"40px"}} 
@@ -66,7 +83,8 @@ export default function MyJobPost() {
                </Grid>
                 </Grid>
               </Box>
-    </ThemeProvider> 
+    </ThemeProvider>
+  
 </>
   )
 }

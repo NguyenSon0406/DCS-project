@@ -31,6 +31,8 @@ mongoose.connect(URL, err => {
 // routes
 app.use('/user', require('./routes/userRouter'));
 app.use("/api", require('./routes/upload'));
+app.use('/recruitment',require('./routes/recruimentRouter'))
+app.use('/admin',require('./routes/adminRouter'))
 
 const port = process.env.PORT || 8080;
 app.listen(port, console.log(`Listening on port ${port}...`));

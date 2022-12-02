@@ -46,8 +46,7 @@ const useStyles = makeStyles((theme) =>({
 
 export default function JobCard(props) {
   const classes = useStyles();
-  const {id} = props.job;
-  
+  const id = props.job._id;
   const calculateTimePass = ( datePast) => {
     const dateNow = Date.now();
     const datePa = Date.parse(datePast);
@@ -95,7 +94,7 @@ export default function JobCard(props) {
       <Grid container alignItems="center">
       <Grid item>
             <img alt='avatar company'
-              src={props.image}
+              src={props.avatar}
               style={{
                 margin:"10px",
                 width: "70px",
@@ -104,8 +103,11 @@ export default function JobCard(props) {
             </Grid>
           <Grid item container direction="column" xs>
           <Grid item>
-          <Typography variant='subtitle1' sx={{fontWeight:"bold"}}>{props.title}</Typography>
-
+          <Typography variant='subtitle1' sx={{fontWeight:"bold"}}>
+            <Link to={`/home/recruitment/detail/${id}`} state = {{ job: props.job}}>
+              {props.title}
+            </Link>
+          </Typography>
           </Grid>
           <Grid item>
           <Typography className={classes.companyName} variant='subtitle1'>{props.companyName}</Typography>
@@ -123,7 +125,7 @@ export default function JobCard(props) {
         <Grid item container direction="column" alignItems="flex-end" xs>
           <Grid item>
             <Typography variant='caption'>
-              {calculateTimePass(props.postedOn)} | {props.type} | {props.location}
+              {calculateTimePass(props.createdAt)} | {props.type} | {props.location}
             </Typography>
           </Grid>
           <Grid item>

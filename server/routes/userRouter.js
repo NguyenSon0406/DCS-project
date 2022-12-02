@@ -10,5 +10,6 @@ router.post('/forgot', userCtrl.forgotPassword);
 router.post('/reset',auth, userCtrl.resetPassword);
 router.get('/infor',auth, userCtrl.getUserInfor);
 router.get('/logout', userCtrl.logout);
-router.get('/update',auth, userCtrl.updateUser);
+router.patch('/update',auth, userCtrl.updateUser);
+router.post('/change-pass',auth, userCtrl.changePassword);
 module.exports = router;

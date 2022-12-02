@@ -13,6 +13,7 @@ class HomeProfile extends Component {
     render(){
         return (
             <div>
+            <img src='/image/DTUConnection_banner.png' alt='duytan-banner' style={{marginTop:0,width:"100%",height:"200px",marginBottom:0}}/>
                 <div className="home-title">
                     My Profile
                 </div>
