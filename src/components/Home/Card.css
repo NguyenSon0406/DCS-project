@@ -31,6 +31,7 @@
 .card-top h1 {
   font-size: 0.9rem;
   margin: 20px;
+  
 }
 
 .card-top > img {
@@ -42,6 +43,8 @@
 
 .card-bottom {
   margin: 10px 20px;
+  color: black;
+  margin-top: 20px;
 }
 
 .category {

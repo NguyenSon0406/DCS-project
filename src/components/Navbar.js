@@ -192,7 +192,7 @@ function Navbar() {
               onMouseLeave={handleCloseHover}
               sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold", zIndex: 1301 }}
             >
-              <Link to="post" style={{ color: "white" }}>Post</Link>
+              
               <Menu
                 id="simple-menu"
                 anchorEl={anchorPostEl}
@@ -207,15 +207,12 @@ function Navbar() {
                 PopoverClasses={{
                   root: styles.popOverRoot,
                 }}
-              >
-                <MenuItem onClick={handleClose}>Newest</MenuItem>
-                <MenuItem onClick={handleClose}>My post</MenuItem>
-                <MenuItem onClick={handleClose}>
-                  <Link to="post/create">Create post</Link>
-                </MenuItem>
-              </Menu>
-            </Button>
-
+                  >
+                  <MenuItem onClick={handleClose}><Link to="post/newest" style={{color:"black"}}>Newest</Link></MenuItem>
+                  <MenuItem onClick={handleClose}>My post</MenuItem>
+                  <MenuItem onClick={handleClose}><Link to="post/create" style={{color:"black"}}>Create post</Link></MenuItem>
+                </Menu>
+              </Button>
             <Button
               aria-owns={anchorReEl ? "simple-menu2" : undefined}
               aria-haspopup="true"
@@ -247,7 +244,6 @@ function Navbar() {
               {(role === 1) ? <MenuItem onClick={handleClose1}><Link to="recruitment/myjobpost" style={{ color: "black" }}>My Recruitment Post</Link></MenuItem> : ""}
             </Menu>
             <Button
-
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold" }}
             >
