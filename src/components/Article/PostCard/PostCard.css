@@ -120,10 +120,10 @@ h1 {
     border-top-left-radius: calc(.25rem - 1px);
     border-top-right-radius: calc(.25rem - 1px);
 }
-img {
+/* img {
     vertical-align: middle;
     border-style: none;
-}
+} */
 .card-body {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
@@ -208,6 +208,6 @@ h5{
     padding-top: 1px;
 }
 .daytime {
-    display: inline-block;
+    display: block;
     float: right;
 }
