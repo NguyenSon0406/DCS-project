@@ -192,7 +192,8 @@ function Navbar() {
               onMouseLeave={handleCloseHover}
               sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold", zIndex: 1301 }}
             >
-              
+              Post
+             </Button> 
               <Menu
                 id="simple-menu"
                 anchorEl={anchorPostEl}
@@ -212,7 +213,6 @@ function Navbar() {
                   <MenuItem onClick={handleClose}>My post</MenuItem>
                   <MenuItem onClick={handleClose}><Link to="post/create" style={{color:"black"}}>Create post</Link></MenuItem>
                 </Menu>
-              </Button>
             <Button
               aria-owns={anchorReEl ? "simple-menu2" : undefined}
               aria-haspopup="true"

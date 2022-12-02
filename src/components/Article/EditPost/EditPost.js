@@ -32,7 +32,7 @@ export default function EditPost() {
             <section class="post-content">
                 <div class="post-format-image post-format-wrapper ">
                     
-        <div className="img" class =" editimg">
+        <div className="img-post" class =" editimg">
         <input
           className="img1"
           type="file"
