@@ -160,12 +160,7 @@ p {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     margin-top: 15px;
 }
-a {
-    color: #007bff;
-    text-decoration: none;
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
-}
+
 h5{
     margin-block-start: 1.67em;
     /* margin-block-end: 1.40em; */

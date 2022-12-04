@@ -19,7 +19,7 @@ const shortDescripstion = (props) =>{
                     <div class="post-meta--inline">
                         <div class="d-inline-flex ">
                             <img src="https://img.freepik.com/premium-vector/ukrainian-sunflower-shaped-flag-avatar-sunflower-symbol-ukraine-is-blue-yellow_549857-156.jpg" alt="avatar" style={{verticalAlign:"middle",margin:0, width:"25px", height:"25px",borderRadius:"50%"}}/>
-                            <a>Nguyễn Sơn</a>
+                            <a className="post-name">Nguyễn Sơn</a>
                         </div>
                         <div class="daytime">
                             <p>{props.postedOn}</p>

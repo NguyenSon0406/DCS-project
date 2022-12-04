@@ -1,5 +1,4 @@
 import React from "react";
-import Post from "./Post";
 import "./Home.css";
 import Footer from "../components/Home/Footer"
 import { Route, Routes, Navigate } from "react-router-dom";

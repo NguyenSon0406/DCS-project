@@ -24,7 +24,7 @@ export default function CommentBox() {
           currentUserFullName: "Nguyễn Sơn"
         }}
         advancedInput={true}
-        hrStyle={{ border: "0.5px solid #ff0072",width:"auto", margin: 0 }}
+        hrStyle={{ border: "0.5px solid #ff0072"}}
         commentData={data}
         logIn={{
           loginLink: "http://localhost:3001/",

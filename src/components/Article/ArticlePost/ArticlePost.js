@@ -25,7 +25,8 @@ export default function ArticleList() {
       // const {id,title,type,address,location,image,companyName,postedOn,skills,jobDescription,companyUrl} = getLocation.state.job;
     return (
       <>
-      <div class="left-content grid-66">
+        <div className="body">
+        <div class="left-content grid-66">
         <article class="main-article boxed ">
             <header>
                 <h1 class="title large bold text-primary">Cẩm nang sử dụng Figma hiệu quả dành cho UI/UX Designer </h1>
@@ -100,6 +101,7 @@ Dù bạn mới tìm hiểu hoặc đã biết Figma là gì bài viết này s�
             </section>
         </article>
       </div>
+        </div>
       <StrictMode>
     <CommentBox />
   </StrictMode>

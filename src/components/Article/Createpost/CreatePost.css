@@ -31,20 +31,7 @@
   padding: 20px;
 }
 
-button {
-  background-color: #1890ff;
-  border: none;
-  color: white;
-  padding: 13px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  cursor: pointer;
-}
-button:hover {
-  background: rgba(58, 162, 251, 0.9);
-}
+
 
 .create-button {
   display: flex;

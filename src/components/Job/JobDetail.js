@@ -185,7 +185,10 @@ export default function JobDetail(props) {
                         <Box>
                             {ConvertToHTML(description)}
                         </Box>
-                        <Button variant='contained' sx={{marginTop:"30px",marginBottom:"30px",fontWeight:"bold", justifyContent:"center", textAlign:"center"}}  color='error'>Apply Now</Button>
+                        {user.role !== 1 ? 
+                        ( <Button variant='contained' sx={{marginTop:"30px",marginBottom:"30px",fontWeight:"bold", justifyContent:"center", textAlign:"center"}}  color='error'>Apply Now</Button>)
+                          : ""
+                        }
                     </Paper>
                   </Grid>         
                 </Grid>

@@ -18,15 +18,15 @@ import axios from 'axios';
 
 const columns = [
     { id: 'id', label: 'ID', minWidth: 50 },
-    { id: 'firstName', label: 'First\u00a0Name', minWidth: 100 },
+    { id: 'firstName', label: 'First\u00a0Name', minWidth: 50 },
     { id: 'lastName', label: 'Last\u00a0Name', minWidth: 100 },
     { id: 'email', label: 'Email', minWidth: 100 },
     { id: 'contact', label: 'Phone', minWidth: 100 },
-    { id: 'gender', label: 'Gender', minWidth: 100 },
+    { id: 'gender', label: 'Gender', minWidth: 50 },
     { id: 'dayofbirth', label: 'Date\u00a0of\u00a0birth', minWidth: 100 },
     { id: 'className', label: 'Class', minWidth: 100 },
     { id: 'falculty', label: 'Falculty', minWidth: 100 },
-    { id: 'action', label: 'Action', minWidth: 100 },
+    { id: 'action', label: 'Action', minWidth: 200 },
 ];
 
 export default function Students() {
@@ -45,20 +45,6 @@ export default function Students() {
         getAllStudents();
         }
       },[reducerValue])
-    const dataStudents = [
-        {
-            id: '01', firstName: 'Sơn', lastName: 'Nguyễn', email: 'nguyenson5@dtu.edu.vn',
-            phone: '0123456789', roles: 'Student', gender: 'Male', birthday: '04/06/2001'
-        },
-        {
-            id: '02', firstName: 'Hoàng', lastName: 'Trần Đình Minh', email: 'trandinhmhoang@gdtu.edu.vn',
-            phone: '0123456789', roles: 'Student', gender: 'Female', birthday: '13/03/2001'
-        },
-        {
-            id: '03', firstName: 'Chân', lastName: 'Phạm Ngọc', email: 'phamngocchan@dtu.edu.vn',
-            phone: '0123456789', roles: 'Student', gender: 'Male', birthday: '13/01/2001'
-        }
-    ]
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     let count = 0;

@@ -3,6 +3,7 @@ import React from "react";
 import "./CreatePost.css";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Box, Button } from "@mui/material";
 
 export const CreatePost = (props) => {
   return (
@@ -48,8 +49,10 @@ export const CreatePost = (props) => {
         />
       </div>
       <div class="create-button">
-        <button type="button">Create</button>
-        <button type="button">Cancel</button>
+      <Box sx={{textAlign:"center", marginBottom:"20px"}}>
+            <Button variant="contained" sx={{fontWeight:"bold", marginRight:"25px"}}>Post</Button>
+            <Button variant="outlined" sx={{fontWeight:"bold"}}>Cancel</Button>
+        </Box>
       </div>
     </div>
   );

@@ -176,7 +176,7 @@ p {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     margin-top: 15px;
 }
-a {
+.post-name {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;

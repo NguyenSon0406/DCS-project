@@ -6,7 +6,7 @@ import JobData from "../components/ListStudent/dummyData2"
 import JobList from '../components/ListStudent/StudentList';
 
 const ListStudent = () => {
-  const [openPopup, setOpenPopup] = useState(false);
+  const [openPtxopup, setOpenPopup] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState("");
   const searchHandle = (searchTerm) => {

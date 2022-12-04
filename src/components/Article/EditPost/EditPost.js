@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import './EditPost.css';
 import { createRoot } from "react-dom/client";
-import {Box, Grid, ThemeProvider, Typography, Button,Paper, Divider, Chip, IconButton,Menu, MenuItem,Tooltip} from "@mui/material"
+import {Box, Grid, Button} from "@mui/material"
 import { useLocation,Link } from 'react-router-dom';
 import TextEdittor from "../../Job/TextEdittor";
 import TagInput from "../../Job/TagInput";
@@ -32,15 +32,9 @@ export default function EditPost() {
             <section class="post-content">
                 <div class="post-format-image post-format-wrapper ">
                     
-        <div className="img-post" class =" editimg">
-        <input
-          className="img1"
-          type="file"
-          id="img"
-          name="img"
-          accept="image/*"
-        />
-      </div>
+        <div className="img-post" class ="editimg">
+                <input className="input-img" type="file" />
+        </div>
                 </div>
                 <div class="text">
                 <Grid item xs={12}>
@@ -65,9 +59,13 @@ export default function EditPost() {
 
         />
       </div>
-                    </Grid>
-                </div>
-            </section>
+      </Grid>
+      </div>
+          </section>
+          <Box sx={{textAlign:"center"}}>
+            <Button variant="contained" sx={{fontWeight:"bold", marginRight:"25px"}}>Update</Button>
+            <Button variant="outlined" sx={{fontWeight:"bold"}}>Cancel</Button>
+          </Box>
         </article>
       </div>
     </>
