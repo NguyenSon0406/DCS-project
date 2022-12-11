@@ -140,7 +140,7 @@ p {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
-p {
+.card-text {
     margin-top: 0;
     margin-bottom: 1rem;
 }

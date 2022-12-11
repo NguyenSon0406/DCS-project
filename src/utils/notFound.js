@@ -1,14 +1,15 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom'
 
 function notFound() {
   return (
     <div>
-      <h2> 404 | Not Found</h2>
+      <Navigate to="/home"/>
     </div>
   )
 }
 
 
 
-export default notFound
+export default notFound;
 

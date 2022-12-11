@@ -18,10 +18,12 @@ import {CreatePost} from "../components/Article/Createpost/CreatePost"
 import EditPost from "../components/Article/EditPost/EditPost"
 import HomeProfileAdmin from '../components/ProfileAdmin/HomeProfileAdmin'
 import HomeProfileCompany from "../components/ProfileCompany/HomeProfileCompany";
-import DashBoard from '../components/ProfileAdmin/PagesAdmin/DashBoard'
-import Students from '../components/ProfileAdmin/PagesAdmin/Students'
-import Companies from '../components/ProfileAdmin/PagesAdmin/Companies'
-import Request from '../components/ProfileAdmin/PagesAdmin/Request'
+import DashBoard from '../components/ProfileAdmin/PagesAdmin/Dashboard/DashBoard'
+import Students from '../components/ProfileAdmin/PagesAdmin/Students/Students'
+import Companies from '../components/ProfileAdmin/PagesAdmin/Companies/Companies'
+import Request from '../components/ProfileAdmin/PagesAdmin/Request/Request'
+import RequestPage from "./RequestPage";
+
 export default function Homepage(){
     const auth = useSelector(state => state.auth)
     const { role, isAdmin } = auth;
@@ -30,6 +32,7 @@ export default function Homepage(){
            (
             <>
                 <Navbar />
+                <img src='/image/DTUConnection_banner.png' alt='duytan-banner' style={{marginTop:0,width:"100%",height:"200px",marginBottom:0}}/>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path = "/post/newest" element={<ArticleList/>}/>
@@ -43,6 +46,7 @@ export default function Homepage(){
                     <Route path="/profile" exact element={(role === 0) ? (<HomeProfile />) : (<HomeProfileCompany />)} />
                     <Route path="*" element={<NotFound />} />
                     <Route path="/liststudent" element={<ListStudent />} />
+                    <Route path="/request" element={<RequestPage/>} />
                 </Routes>
             <Footer />
             </> 
@@ -52,7 +56,8 @@ export default function Homepage(){
                <div style={{display:"flex", height: '100vh'}}>
                 <HomeProfileAdmin/>
                     <Routes>
-                        <Route path="/" element={<DashBoard/>}/>
+                        <Route path = "/" element={<Navigate to="/home/admin/dashboard" />}/>
+                        <Route path = "/admin/dashboard" element={<DashBoard/>}/>
                         <Route path = "/admin/students" element={<Students/>}/>
                         <Route path = "/admin/companies" element={<Companies/>}/>
                         <Route path = "/admin/request" element={<Request/>}/>

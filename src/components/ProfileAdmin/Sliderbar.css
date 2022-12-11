@@ -1,17 +1,24 @@
 .slidebar-item {
   font-size: 15px;
   display: flex;
-  margin-bottom: 8px;
 }
 .slidebar-icon {
   margin: 0 10px;
 }
 .nav-link {
   width: 100%;
-  padding: 7px;
+  padding: 12px;
   color: black;
 }
-.nav-link:focus {
+.nav-link:active {
+  color: #d50000;
+  background-color: #ffebee;
+  border-right: 2px solid #d50000;
+  opacity: 0.8;
+  transition: 0.3s;
+  box-shadow:0px 5px 25px rgba(0,0,0,0.1);
+}
+.active .nav-link{
   color: #d50000;
   background-color: #ffebee;
   border-right: 2px solid #d50000;

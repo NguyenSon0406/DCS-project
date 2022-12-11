@@ -26,7 +26,6 @@ const ListStudent = () => {
   return (
     <>
       <ThemeProvider theme={theme} >
-          
               <Box bgcolor="white" py={2} sx={{marginTop:0,width:"100%"}}>
                 <Grid container justifyContent="center">  
                   <Grid item xs={10}>

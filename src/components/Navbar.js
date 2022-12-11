@@ -221,7 +221,7 @@ function Navbar() {
               onMouseLeave={handleCloseHover1}
               sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold", zIndex: 1301 }}
             >
-              <Link to="recruitment/newest" style={{ color: "white" }}> Recruitment</Link>
+              {(role !== 1) ? <Link to="recruitment/newest" style={{ color: "white" }}> Recruitment</Link> : "Recruitment"}
             </Button>
           {(role === 1) ? (   <Menu
               id="simple-menu2"
@@ -247,6 +247,12 @@ function Navbar() {
             >
               <Link to="liststudent" style={{ color: "white" }}>Student</Link>
             </Button>
+            {(role === 1) ? <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold" }}
+            >
+              <Link to="request" style={{ color: "white" }}>Request</Link>
+            </Button> : ""}
           </Box>
           <Box sx={{ flexGrow: 0.05 }}>
             <IconButton sx={{ color: "#fff" }}>

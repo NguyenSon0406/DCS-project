@@ -5,7 +5,7 @@ import ContentList from '../components/Home/ContentList'
 import "./Home.css"
 export const Home = () => {
   return (
-    <div className='container'>
+    <div className='container' style={{marginTop:"50px"}}>
       <Slider/>
       <Card/>
       <ContentList/>

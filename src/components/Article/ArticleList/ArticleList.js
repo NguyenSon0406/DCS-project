@@ -27,7 +27,13 @@ export default function ArticleList() {
       </div>
       </div>
       </div>
-      <Stack sx={{marginLeft: 100, marginBottom: 4}} spacing={2}>
+      <Stack sx={{
+      marginBottom: 4,
+      textAlign:"center", 
+      justifyContent:"center",
+      width:"100%",
+      display:"flex",
+      alignItems:"center"}} spacing={2}>
       <Pagination count={10} color="primary" />   
     </Stack>
       </>
