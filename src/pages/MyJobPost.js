@@ -41,7 +41,6 @@ export default function MyJobPost() {
   return (
     <>
     <ThemeProvider theme={theme} >
-    <img src='/image/DTUConnection_banner.png' alt='duytan-banner' style={{marginTop:0,width:"100%",height:"200px",marginBottom:0}}/>
     <Box bgcolor="white" py={2} sx={{width:"100%"}}>
                 <Grid container display="flex" spacing={2} columnSpacing={{ xs: 2, sm: 3, md: 4 }}>
                  

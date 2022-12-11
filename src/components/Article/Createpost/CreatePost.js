@@ -1,19 +1,21 @@
-import { ClassNames } from "@emotion/react";
 import React from "react";
 import "./CreatePost.css";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Box, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export const CreatePost = (props) => {
   return (
     <div>
       <div className="img">
+        <div style={{paddingBottom:"10px", fontSize:"20px", color:"#9e9e9e"}}>Choose Image Post</div>
         <input
           className="img1"
           type="file"
           id="img"
           name="img"
-          accept="image/*"
+          accept="image/png,image/jpg"
         />
       </div>
       <div className="Create">
@@ -48,8 +50,10 @@ export const CreatePost = (props) => {
         />
       </div>
       <div class="create-button">
-        <button type="button">Create</button>
-        <button type="button">Cancel</button>
+      <Box sx={{textAlign:"center", marginBottom:"20px"}}>
+            <Button variant="contained" sx={{fontWeight:"bold", marginRight:"25px"}}>Post</Button>
+            <Button variant="outlined" sx={{fontWeight:"bold"}}><Link to="/home/post/newest">Cancel</Link></Button>
+        </Box>
       </div>
     </div>
   );

@@ -140,7 +140,7 @@ p {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
-p {
+.card-text {
     margin-top: 0;
     margin-bottom: 1rem;
 }
@@ -176,7 +176,7 @@ p {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     margin-top: 15px;
 }
-a {
+.post-name {
     color: #007bff;
     text-decoration: none;
     background-color: transparent;

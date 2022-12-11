@@ -6,7 +6,7 @@ import JobData from "../components/ListStudent/dummyData2"
 import JobList from '../components/ListStudent/StudentList';
 
 const ListStudent = () => {
-  const [openPopup, setOpenPopup] = useState(false);
+  const [openPtxopup, setOpenPopup] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState("");
   const searchHandle = (searchTerm) => {
@@ -26,7 +26,6 @@ const ListStudent = () => {
   return (
     <>
       <ThemeProvider theme={theme} >
-          
               <Box bgcolor="white" py={2} sx={{marginTop:0,width:"100%"}}>
                 <Grid container justifyContent="center">  
                   <Grid item xs={10}>

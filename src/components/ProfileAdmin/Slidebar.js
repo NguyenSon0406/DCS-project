@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import './Sliderbar.css';
-import { Link, NavLink } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 
 
 let pathData = [
     {
         title: "Dashboard",
-        path: "/",
+        path: "admin/dashboard",
         icon: <i className="fas fa-gauge-high"></i>
     },
     {
@@ -15,30 +15,25 @@ let pathData = [
         icon: <i className="fas fa-user-graduate"></i>
     },
     {
-        title: "Companies",
+        title: "Company",
         path: 'admin/companies',
         icon: <i className="fas fa-building"></i>
     },
     {
-        title: "Request",
+        title: "Post",
         path: 'admin/request',
         icon: <i className="fas fa-file-pen"></i>
     }
 ]
-class Sliderbar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
-    render() {
+function Sliderbar (){
+        const location = useLocation();
+        let url = location.pathname.slice(6);
         return (
             <div className="slidebar-container" >
                 {
                     pathData.map((item, index) => {
                         return (
-                            <div key={index} className="slidebar-item">
+                            <div key={index} className={`slidebar-item ${item.path === url ? 'active' : ''}`}>
                                 <Link to={item.path} className="nav-link">
                                     <span className="slidebar-icon">{item.icon}</span>
                                     <span className="slidebar-text">{item.title}</span>
@@ -49,7 +44,6 @@ class Sliderbar extends Component {
                 }
             </div>
         );
-    }
 }
 
 export default Sliderbar;

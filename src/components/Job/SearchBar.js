@@ -84,10 +84,15 @@ const SearchBar = (props) => {
         placeholder='Input keyword to search' 
         inputRef={inputElement}
         disableUnderline
+        margin='dense'
         value={props.term}
-        sx={{width:"75%"}}
+        sx={{width:"75%", 
+        textAlign:"center", 
+        justifyContent:"center",
+        alignContent:"center",
+        alignItems:"center"}}
         onChange= {getSearchTerm}
-        
+        autoFocus
         endAdornment= {<InputAdornment position="start">
           <SearchIcon/>
         </InputAdornment>}

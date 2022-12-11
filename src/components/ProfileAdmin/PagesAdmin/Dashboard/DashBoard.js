@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts"
 import './DashBoard.css';
-import HomeProfileAdmin from "../HomeProfileAdmin";
+import HomeProfileAdmin from "../../HomeProfileAdmin";
+import CheckCircle from "@mui/icons-material/CheckCircle";
+import { Paper } from "@mui/material";
+import PostChart from "./PostChart";
 
 
 class DashBoard extends Component {
@@ -34,11 +37,11 @@ class DashBoard extends Component {
     pieDataStudentCompany = () => {
         let pie1 = [
             {
-                name: "Students",
+                name: "Student",
                 value: this.state.students
             },
             {
-                name: "Companies",
+                name: "Company",
                 value: this.state.companies
             },
         ]
@@ -61,8 +64,8 @@ class DashBoard extends Component {
             pieData2: pie2
         })
     }
-    COLORS1 = ["#8884d8", "rgb(109, 154, 42)",];
-    COLORS2 = ["#82ca9d", "rgb(26, 125, 167)",];
+    COLORS1 = ["#ef5350", "#42a5f5",];
+    COLORS2 = ["#4caf50", "#fbc02d",];
     CustomTooltip = ({ active, payload, label }) => {
         if (active) {
             return (
@@ -84,67 +87,71 @@ class DashBoard extends Component {
         let { students, companies, admin, lecturer } = this.state;
         return (
             <>
-                <div className="dash-board-container">
-                    
-                    <div className="nav-page-admin">
+                <Paper sx={{width:"100%", height:"100vh", display:'flex', overflow:"auto"}}>
+                <div className="nav-page-admin">
                         <div className="dashboard-quantity">
-                            <div className="dashboard-quantity-content">
+                            <div className="dashboard-quantity-content" style={{backgroundColor:"#ef5350"}}>
                                 <div className="dashboard-quanlity-left">
                                     <div className="quanlity-left-icon color-student-left">
-                                        <i class="fas fa-graduation-cap"></i>
+                                        <i class="fas fa-graduation-cap" style={{color:"#ef5350"}}></i>
                                     </div>
                                 </div>
                                 <div className="dashboard-quanlity-right">
-                                    <div className="quanlity-right-up">
-                                        Quantity: {students}
+                                    <div className="quanlity-right-up" style={{color:"white"}}>  
+                                    Quantity: {students}
                                     </div>
-                                    <div className="quanlity-right-down color-student-right">
-                                        Students
+                                    <div className="quanlity-right-down color-student-right" style={{color:"#ef5350"}}>
+                                    <CheckCircle sx={{color:"#ef5350", fontSize:20}}/>
+                                        Student
                                     </div>
                                 </div>
                             </div>
-                            <div className="dashboard-quantity-content">
+                            <div className="dashboard-quantity-content" style={{backgroundColor:"#42a5f5"}}>
                                 <div className="dashboard-quanlity-left">
                                     <div className="quanlity-left-icon color-companies-left">
-                                        <i class="fas fa-city"></i>
+                                        <i class="fas fa-city" style={{color:"#42a5f5"}}></i>
                                     </div>
                                 </div>
                                 <div className="dashboard-quanlity-right">
-                                    <div className="quanlity-right-up">
+                                    <div className="quanlity-right-up" style={{color:"white", paddingLeft:"15px"}}>
                                         Quantity: {companies}
                                     </div>
-                                    <div className="quanlity-right-down color-companies-right">
-                                        Companies
+                                    <div className="quanlity-right-down color-companies-right"  style={{color:"#42a5f5"}}>
+                                    <CheckCircle sx={{color:"#42a5f5", fontSize:20}}/>
+                                        Company
                                     </div>
                                 </div>
                             </div>
-                            <div className="dashboard-quantity-content">
+                            <div className="dashboard-quantity-content" style={{backgroundColor:"#4caf50"}}>
                                 <div className="dashboard-quanlity-left">
                                     <div className="quanlity-left-icon color-admin-left">
-                                        <i class="fas fa-user-large"></i>
+                                        <i class="fas fa-book-open-reader" style={{color:"#4caf50"}}></i>
                                     </div>
                                 </div>
                                 <div className="dashboard-quanlity-right">
-                                    <div className="quanlity-right-up">
-                                        Quantity: {admin}
+                                    <div className="quanlity-right-up" style={{color:"white", paddingLeft:"15px"}}>
+                                        
+                                        Quantity: {lecturer}
                                     </div>
-                                    <div className="quanlity-right-down color-admin-right">
-                                        Admin
+                                    <div className="quanlity-right-down color-admin-right" style={{color:"#4caf50"}}>
+                                    <CheckCircle sx={{color:"#4caf50", fontSize:20}}/>
+                                    Lecturer
                                     </div>
                                 </div>
                             </div>
-                            <div className="dashboard-quantity-content">
+                            <div className="dashboard-quantity-content" style={{backgroundColor:"#fbc02d"}}>
                                 <div className="dashboard-quanlity-left">
                                     <div className="quanlity-left-icon color-lecturer-left">
-                                        <i class="fas fa-book-open-reader"></i>
+                                        <i class="fas fa-user-large" style={{color:"#fbc02d"}}></i>
                                     </div>
                                 </div>
                                 <div className="dashboard-quanlity-right">
-                                    <div className="quanlity-right-up">
-                                        Quantity: {lecturer}
+                                    <div className="quanlity-right-up" style={{color:"white", paddingLeft:"15px"}}> 
+                                        Quantity: {admin}
                                     </div>
-                                    <div className="quanlity-right-down color-lecturer-right">
-                                        Lecturer
+                                    <div className="quanlity-right-down color-lecturer-right" style={{color:"#fbc02d"}}>
+                                    <CheckCircle sx={{color:"#fbc02d", fontSize:20}}/>
+                                        Admin
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +160,7 @@ class DashBoard extends Component {
                         <div className="dashboard-group">
                             <div className="dashboard-pieChart-left">
                                 <div>
-                                    <label>Students/Companies</label>
+                                    <label>Student/Company</label>
                                 </div>
                                 <PieChart width={400} height={400} >
                                     <Legend />
@@ -206,8 +213,9 @@ class DashBoard extends Component {
                                 </PieChart>
                             </div>
                         </div>
+                        <PostChart/>
                     </div>
-                </div>
+                </Paper>
             </>
         );
     }

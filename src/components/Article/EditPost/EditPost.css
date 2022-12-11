@@ -1,4 +1,7 @@
-body {
+
+div.left-content {
+    margin: 0;
+    border: 0;
     margin: 0;
     font-family: Roboto,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
     font-size: .875rem;
@@ -7,10 +10,6 @@ body {
     color: #292b2c;
     text-align: left;
     background-color: #fff;
-}
-div.left-content {
-    margin: 0;
-    border: 0;
 }
 #single .main-article {
     position: relative;
@@ -148,22 +147,7 @@ div.text {
   .input2 {
     transition: all 0.4s;
   }
-  
-  button {
-    background-color: #1890ff;
-    border: none;
-    color: white;
-    padding: 13px ;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  button:hover {
-    background: rgba(58, 162, 251, 0.9);
-  }
-  
+    
   
   .img .img1 {
     font-size: 150%;

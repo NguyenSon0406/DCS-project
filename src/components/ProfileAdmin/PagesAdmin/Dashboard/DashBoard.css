@@ -6,7 +6,8 @@
 .nav-page-admin {
   width: 100%;
   margin-bottom: 15px;
-  background-color: #eaeaea;
+  height: 100vh;
+
 }
 
 .dashboard-quantity {
@@ -19,7 +20,8 @@
   margin-top: 20px;
   display: flex;
   background-color: white;
-  box-shadow: 0px 5px 3px gray;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
+  border-radius: 5px;
 }
 .dashboard-pieChart-left {
   margin-top: 50px;
@@ -29,6 +31,7 @@
   padding-left: 75px;
   padding-top: 20px;
   background-color: white;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
   border-radius: 5px;
 }
 .dashboard-pieChart-left label {
@@ -45,8 +48,9 @@
   padding-left: 75px;
   padding-top: 20px;
   background-color: white;
-  border-radius: 5px;
   margin-left: 150px;
+  box-shadow: 0px 1px 5px rgba(0,0,0,0.3);
+  border-radius: 5px;
 }
 .dashboard-pieChart-right label {
   font-size: 18px;
@@ -70,46 +74,50 @@
 }
 .quanlity-right-up {
   width: 100%;
-  height: 50%;
-  padding-top: 15px;
+  height:55%;
+  padding-top: 25px;
   padding-left: 10px;
-  font-weight: 600;
   font-size: 15px;
+  color:"white"
 }
 .quanlity-right-down {
   width: 70%;
   height: 25%;
-  margin-top: 15px;
-  margin-left: 5px;
-  font-weight: 600;
+  padding:10px;
   font-size: 15px;
   text-align: center;
   padding-top: 2px;
   color: white;
+  display: flex;
+  justify-content: center;
 }
 .color-student-left {
-  background-color: #8884d8;
+  background-color: white;
 }
 .color-student-right {
-  background-color: #8884d8;
+  background-color: white;
+  border-radius: 5px;
 }
 .color-companies-left {
-  background-color: rgb(109, 154, 42);
+  background-color: white;
 }
 .color-companies-right {
-  background-color: rgb(109, 154, 42);
+  background-color: white;
+  border-radius: 5px;
 }
 .color-admin-left {
-  background-color: rgb(26, 125, 167);
+  background-color: white;
   padding-left: 15px;
 }
 .color-admin-right {
-  background-color: rgb(26, 125, 167);
+  background-color: white;
+  border-radius: 5px;
 }
 .color-lecturer-left {
-  background-color: #82ca9d;
+  background-color: white;
   padding-left: 15px;
 }
 .color-lecturer-right {
-  background-color: #82ca9d;
+  background-color: white;
+  border-radius: 5px;
 }

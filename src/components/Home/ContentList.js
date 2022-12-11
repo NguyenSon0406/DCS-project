@@ -1,14 +1,11 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { Grid } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { fontSize } from '@mui/system';
-import { red } from '@mui/material/colors';
+import {Link} from "react-router-dom"
 export default function ContentList() {
   return (
     
@@ -99,7 +96,7 @@ export default function ContentList() {
     
   
     <div style={{marginTop: '20px', marginBottom: '20px', width: '70%', justifyContent: 'flex-end', display: 'flex'}}>
-      <Button variant="contained" color="success">More</Button>
+      <Button variant="contained" color="success"><Link to="/home/post/newest" style={{fontWeight:"bold", color:"white"}}>More</Link></Button>
     </div>
     </>
     
