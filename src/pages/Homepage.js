@@ -34,9 +34,9 @@ export default function Homepage(){
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path = "/post/newest" element={<ArticleList/>}/>
-                    <Route path = "/post/readmore" element={<ArticlePost/>}/>
+                    <Route path = "/post/readmore/:id" element={<ArticlePost/>}/>
                     <Route path = "/post/create" element={<CreatePost/>}/>
-                    <Route path = "/post/editpost" element={<EditPost/>}/>
+                    <Route path = "/post/edit/:id" element={<EditPost/>}/>
                     <Route path="/recruitment/myjobpost" element={<MyJobPost />} />
                     <Route path="/recruitment/newest" element={<Recruitment />} />
                     <Route path="/recruitment/detail/:id" element={<RecruitmentDetail />} />
