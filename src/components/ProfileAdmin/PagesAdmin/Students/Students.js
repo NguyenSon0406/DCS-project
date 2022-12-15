@@ -15,7 +15,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { useState, useReducer, useEffect  } from 'react';
 import axios from 'axios';
-import { Box, DialogTitle, Typography, Snackbar, TextField } from '@mui/material';
+import { Box, DialogTitle, Typography, Snackbar } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import TableHeader from './TableHeader';
 
@@ -35,6 +35,20 @@ const columns = [
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
+
+function descendingComparator(a,b, orderBy) {
+  if(b[orderBy] < a[orderBy])
+    return -1;
+  if(b[orderBy] > a[orderBy])
+    return 1;
+  return 0;
+}
+
+function getComparator(order, orderBy) {
+  return order === 'desc' 
+  ? (a,b) => descendingComparator(a,b, orderBy)
+  : (a,b) => -descendingComparator(a,b,orderBy)
+}
 export default function Students() {
     const token = localStorage.getItem('accessToken');
     const [reducerValue,forceUpdate] = useReducer(x => x + 1, 0);
@@ -79,11 +93,20 @@ export default function Students() {
     const [valueToOrderBy, setValueToOrderBy] = useState('firstName');
 
     // sorting
-    const handleSort = (property) =>
+    const handleSort = (event, property) =>
     {
         const isAscending = (valueToOrderBy === property && orderDirection === 'asc')
         setValueToOrderBy(property);
         setOrderDirection(isAscending ? 'desc' : 'asc');
+    }
+    const sortedRowInformation = (rowArr, comparator) => {
+      const stabilizedRowArray = rowArr.map((el, index) => [el,index])
+      stabilizedRowArray.sort((a,b) => {
+        const order = comparator(a[0],b[0])
+        if(order !== 0) return order;
+        return a[1] = b[1];
+      })
+      return stabilizedRowArray.map((el) => el[0])
     }
     const handleReturnList = (list) => {
         return (
@@ -103,22 +126,23 @@ export default function Students() {
                   searchHandle={searchHandle}
                   searchTerm={searchTerm}
                   columns={columns}
+                  orderDirection = {orderDirection}
+                  valueToOrderBy = {valueToOrderBy}
                 />
                 <TableBody>
-                  {list
+                  {sortedRowInformation(list, getComparator(orderDirection,valueToOrderBy))
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
+                    .map((row, index) => {
                       return (
                         <TableRow
                           hover
                           role="checkbox"
-                          tabIndex={-1}
-                          key={row.code}
+                          key={index}
                         >
-                          {columns.map((column) => {
+                          {columns.map((column, index) => {
                             const value = row[column.id];
                             return (
-                              <TableCell key={column.id} align="center">
+                              <TableCell key={index} align="center">
                                 {column.id === "action" ? (
                                   <>
                                     <Button
