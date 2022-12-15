@@ -9,19 +9,22 @@ import {
 } from "@mui/material";
 
 export default function TableHeader(props) {
-    
+    const {orderDirection, valueToOrderBy, handleSort} = props;
+
     const inputElement = useRef("");
     // search function
     const searchHandle = () => {
        props.searchHandle(inputElement.current.value)
       }
-    
+    const createSortHandle = (property) => (event) => {
+      handleSort(event,property);
+    }
   return (
     <TableHead>
       <TableRow>
-        {props.columns.map((column) => (
+        {props.columns.map((column, index) => (
           <TableCell
-            key={column.id}
+            key={index}
             align="center"
             style={{
               minWidth: column.minWidth,
@@ -45,9 +48,16 @@ export default function TableHeader(props) {
                   }}
                 />
               </>
-            ) : (
-              column.label
-            )}
+            ) : 
+            column.id === "firstName" ? 
+            <TableSortLabel
+             active = {valueToOrderBy === "firstName"}
+             direction= {valueToOrderBy === "firstName" ? orderDirection: "asc"}
+             onClick={createSortHandle('firstName')}>
+              {column.label}
+            </TableSortLabel> 
+            : column.label
+            }
           </TableCell>
         ))}
       </TableRow>

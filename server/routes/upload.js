@@ -4,5 +4,5 @@ const uploadCtrl = require('../controllers/uploadCtrl')
 const auth = require('../middleware/auth')
 
 router.post('/upload_avatar', uploadImage,auth, uploadCtrl.uploadAvatar)
-
+router.post('/upload_imgPost', uploadImage,auth, uploadCtrl.uploadPost)
 module.exports = router

@@ -18,23 +18,44 @@ export default function SnackBar(props) {
     const {open, setOpen} = props;
     const navigate = useNavigate();
     return (
-        <Modal
-            open={open}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-            onClose={open && setTimeout(() => {
-            setOpen(false)
-            navigate('/home/recruitment/myjobpost');
-        }, 3000)}
-            >
-            <Box sx={style}>
-                <CheckCircleIcon fontSize='large' sx={{color:"green"}}/>
-                <Typography>{props.msg}</Typography>
-                <Button variant="contained" sx={{marginTop:"10px"}}>
-                    <Link to="/home/recruitment/myjobpost" style={{ color: "white", fontWeight:"bold" }}>Return
-                    </Link>
-                </Button>
-            </Box>
-        </Modal>
+        <>
+        {props.type === "post" 
+        ?  <Modal
+        open={open}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        onClose={open && setTimeout(() => {
+        setOpen(false)
+        navigate('/home/post/newest');
+    }, 3000)}
+        >
+        <Box sx={style}>
+            <CheckCircleIcon fontSize='large' sx={{color:"green"}}/>
+            <Typography>{props.msg}</Typography>
+            <Button variant="contained" sx={{marginTop:"10px"}}>
+                <Link to="/home/post/newest" style={{ color: "white", fontWeight:"bold" }}>Return
+                </Link>
+            </Button>
+        </Box>
+    </Modal>
+        :  <Modal
+        open={open}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        onClose={open && setTimeout(() => {
+        setOpen(false)
+        navigate('/home/recruitment/myjobpost');
+    }, 3000)}
+        >
+        <Box sx={style}>
+            <CheckCircleIcon fontSize='large' sx={{color:"green"}}/>
+            <Typography>{props.msg}</Typography>
+            <Button variant="contained" sx={{marginTop:"10px"}}>
+                <Link to="/home/recruitment/myjobpost" style={{ color: "white", fontWeight:"bold" }}>Return
+                </Link>
+            </Button>
+        </Box>
+    </Modal>}
+     </>
     )
 }

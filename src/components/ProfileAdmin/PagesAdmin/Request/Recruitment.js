@@ -13,8 +13,6 @@ const columns = [
     { id: 'id', label: 'ID', minWidth: 50 },
     { id: 'title', label: 'Title', minWidth: 50 },
     { id: 'companyName', label: 'Company\u00a0Name', minWidth: 150 },
-    { id: 'email', label: 'Email', minWidth: 100 },
-    { id: 'contact', label: 'Phone', minWidth: 50 },
     { id: 'createdAt', label: 'Created At', minWidth: 50},
     { id: 'action',  minWidth: 190 },
 ];
@@ -78,9 +76,9 @@ export default function Recruitment() {
   const [idCompany, setIdCompany] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const handleClickOpen = (idStudent) => {
+  const handleClickOpen = (id) => {
     setOpen(true);
-    setIdCompany(idStudent);
+    setIdCompany(id);
   };
 
   const handleClickOpenView = async (id) => {
@@ -106,7 +104,7 @@ export default function Recruitment() {
     setOpenSnackbar(false);
   };
   const handleDeleteRecruitment = async (id) => {
-    const res = await axios.delete(`/admin/delete-company/${id}`, {
+    const res = await axios.delete(`/admin/delete-recruitment/${id}`, {
       headers: { Authorization: token },
     });
     setSuccess(res.data.msg);
@@ -135,9 +133,9 @@ export default function Recruitment() {
           >
             <TableHead>
               <TableRow>
-                {columns.map((column) => (
+                {columns.map((column, index) => (
                   <TableCell
-                    key={column.id}
+                    key={index}
                     align="center"
                     value={searchTerm}
                     style={{
@@ -173,18 +171,18 @@ export default function Recruitment() {
             <TableBody>
               {list
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
+                .map((row, index) => {
                   return (
                     <TableRow
+                      key={index}
                       hover
                       role="checkbox"
                       tabIndex={-1}
-                      key={row.code}
                     >
-                      {columns.map((column) => {
+                      {columns.map((column, index) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align="center">
+                          <TableCell key={index} align="center">
                             {column.id === "action" ? (
                               <>
                                 <Button
@@ -195,7 +193,7 @@ export default function Recruitment() {
                                     marginRight: "15px",
                                     padding: 1,
                                   }}
-                                  onClick={() => handleClickOpen(row.user_id)}
+                                  onClick={() => handleClickOpen(row._id)}
                                 >
                                   <i className="fas fa-trash-can"></i>
                                 </Button>
@@ -208,7 +206,7 @@ export default function Recruitment() {
                                   }}
                                   variant="contained"
                                   onClick={() =>
-                                    handleClickOpenView(row.user_id)
+                                    handleClickOpenView(row._id)
                                   }
                                 >
                                   <i className="fas fa-magnifying-glass"></i>
@@ -285,7 +283,7 @@ export default function Recruitment() {
       fullWidth={true}
       maxWidth="sm"
     >
-      <DialogTitle>Recruitment Information</DialogTitle>
+      <DialogTitle>Recruitment Post Information</DialogTitle>
       <DialogContent dividers>
         <Box display="flex" textAlign="center" alignItems="center">
           <img
@@ -303,9 +301,11 @@ export default function Recruitment() {
             {companyInfo.companyName}
           </Typography>
         </Box>
-        <Typography>Email: {companyInfo.email}</Typography>
-        <Typography>Contact: {companyInfo.contact}</Typography>
+        <Typography sx={{color:"#1976d2"}}>Job Title: {companyInfo.title}</Typography>
+        <Typography>Type: {companyInfo.type}</Typography>
+        <Typography>Location: {companyInfo.location}</Typography>
         <Typography>Address: {companyInfo.address}</Typography>
+        <Typography>Job Link: {companyInfo.link}</Typography>
         <Typography>
           Description: {ConvertHTML(companyInfo.description)}
         </Typography>
@@ -324,6 +324,7 @@ export default function Recruitment() {
       autoHideDuration={6000}
       onClose={handleCloseSnackbar}
     >
+      <>
       {success && (
         <Alert
           onClose={handleCloseSnackbar}
@@ -333,6 +334,7 @@ export default function Recruitment() {
           {success}
         </Alert>
       )}
+      </>
     </Snackbar>
   </div>
   );

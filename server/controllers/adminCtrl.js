@@ -66,7 +66,7 @@ const adminCtrl =  {
     },
     getRecruitmentByID: async(req,res) => {
         try {
-            const posts = await recruitmentPost.find({user_id: req.user.id});
+            const posts = await recruitmentPost.findById(req.params.id);
             res.json(posts)
         }catch(err){
             return res.status(500).json({msg: err.message});
