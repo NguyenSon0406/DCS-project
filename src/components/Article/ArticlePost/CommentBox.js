@@ -6,10 +6,11 @@ import { useSelector } from "react-redux";
 
 export default function CommentBox() {
   const auth = useSelector(state => state.auth)
-  const {user} = auth;
+  const {user,role} = auth;
 
   const [data] = useState([]);
 
+  const fullname = user.lastName + " " + user.firstName;
   return (
     <div className="CommentBox">
       <CommentSection
@@ -21,14 +22,14 @@ export default function CommentBox() {
           currentUserImg: user.avatar,
           currentUserProfile:
             "https://www.linkedin.com/in/riya-negi-8879631a9/",
-          currentUserFullName: "Nguyễn Sơn"
+          currentUserFullName: role === 1 ? user.companyName : fullname
         }}
         advancedInput={true}
         hrStyle={{ border: "0.5px solid #ff0072"}}
         commentData={data}
         logIn={{
-          loginLink: "http://localhost:3001/",
-          signupLink: "http://localhost:3001/"
+          loginLink: "http://localhost:3000/",
+          signupLink: "http://localhost:3000/"
         }}
         customImg={user.avatar}
         inputStyle={{ border: "1px solid rgb(208 208 208)" }}

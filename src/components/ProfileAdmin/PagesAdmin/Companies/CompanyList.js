@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import MuiAlert from '@mui/material/Alert';
 import ConvertHTML from "react-html-parser"
 import axios from 'axios';
+import "./CompanyList.css"
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -126,7 +127,7 @@ export default function CompanyList() {
   const handleReturnList=(list) => {
     return(
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ height: 440 }}>
         <Table
           stickyHeader
           aria-label="sticky table"
@@ -138,10 +139,9 @@ export default function CompanyList() {
         >
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map((column, index) => (
                 <TableCell
-                  key={column.id}
-                  align="center"
+                  key={index}
                   value={searchTerm}
                   style={{
                     minWidth: column.minWidth,
@@ -184,12 +184,12 @@ export default function CompanyList() {
                     tabIndex={-1}
                     key={row.code}
                   >
-                    {columns.map((column) => {
+                    {columns.map((column, index) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align="center">
+                        <TableCell key={index}>
                           {column.id === "action" ? (
-                            <>
+                            <Box sx={{textAlign:"center",justifyContent:"center", alignItems:"center"}}>
                               <Button
                                 variant="contained"
                                 color="error"
@@ -216,7 +216,7 @@ export default function CompanyList() {
                               >
                                 <i className="fas fa-magnifying-glass"></i>
                               </Button>
-                            </>
+                            </Box>
                           ) : column.id === "avatar" ? (
                             <img
                               src={row.avatar}
@@ -244,16 +244,12 @@ export default function CompanyList() {
         </Table>
       </TableContainer>
       <TablePagination
+        className='paginate'
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={list.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        sx={{
-          textAlign: "center",
-          alignContent: "center",
-          justifyContent: "center",
-        }}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
@@ -337,6 +333,7 @@ export default function CompanyList() {
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}
       >
+        <div>
         {success && (
           <Alert
             onClose={handleCloseSnackbar}
@@ -346,6 +343,7 @@ export default function CompanyList() {
             {success}
           </Alert>
         )}
+        </div>
       </Snackbar>
     </div>
   );

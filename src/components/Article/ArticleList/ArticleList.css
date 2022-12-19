@@ -115,7 +115,7 @@ img {
 .h5, h5 {
     font-size: 1.25rem;
 }
-p {
+.root p {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;

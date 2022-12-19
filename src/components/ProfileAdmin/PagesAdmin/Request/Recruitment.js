@@ -121,7 +121,7 @@ export default function Recruitment() {
   const handleReturnList = (list) => {
     return (
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <TableContainer sx={{ height: 440 }}>
           <Table
             stickyHeader
             aria-label="sticky table"
@@ -234,11 +234,7 @@ export default function Recruitment() {
           count={list.length}
           rowsPerPage={rowsPerPage}
           page={page}
-          sx={{
-            textAlign: "center",
-            alignContent: "center",
-            justifyContent: "center",
-          }}
+          className="paginate"
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
@@ -298,17 +294,21 @@ export default function Recruitment() {
             }}
           />
           <Typography sx={{ marginLeft: "10px", fontWeight: "bold" }}>
-            {companyInfo.companyName}
+            <div>
+              {companyInfo.companyName}
+            </div>
           </Typography>
         </Box>
-        <Typography sx={{color:"#1976d2"}}>Job Title: {companyInfo.title}</Typography>
-        <Typography>Type: {companyInfo.type}</Typography>
-        <Typography>Location: {companyInfo.location}</Typography>
-        <Typography>Address: {companyInfo.address}</Typography>
-        <Typography>Job Link: {companyInfo.link}</Typography>
-        <Typography>
-          Description: {ConvertHTML(companyInfo.description)}
-        </Typography>
+        <Box>
+          <Typography sx={{color:"#1976d2"}}>Job Title: {companyInfo.title}</Typography>
+          <Typography>Type: {companyInfo.type}</Typography>
+          <Typography>Location: {companyInfo.location}</Typography>
+          <Typography>Address: {companyInfo.address}</Typography>
+          <Typography>Job Link: {companyInfo.link}</Typography>
+          <Typography>
+            Description: {ConvertHTML(companyInfo.description)}
+          </Typography>
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button variant="outlined" sx={{fontWeight:"bold"}} onClick={handleClose}>
@@ -324,7 +324,7 @@ export default function Recruitment() {
       autoHideDuration={6000}
       onClose={handleCloseSnackbar}
     >
-      <>
+      <div>
       {success && (
         <Alert
           onClose={handleCloseSnackbar}
@@ -334,7 +334,7 @@ export default function Recruitment() {
           {success}
         </Alert>
       )}
-      </>
+      </div>
     </Snackbar>
   </div>
   );

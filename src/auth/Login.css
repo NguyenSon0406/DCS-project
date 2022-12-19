@@ -189,7 +189,6 @@ input[type=file]::placeholder{
 
 .textfield-border-radius fieldset {
     border: 2px solid rgb(201, 201, 201);
-    
   }
 .textfield-border-radius{
     width: 100%;

@@ -21,7 +21,7 @@ let pathData = [
     },
     {
         title: "Post",
-        path: 'admin/request',
+        path: 'admin/posts',
         icon: <i className="fas fa-file-pen"></i>
     }
 ]

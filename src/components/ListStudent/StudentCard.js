@@ -1,7 +1,10 @@
 import React from 'react'
-import {  Box, Grid, Typography, Button, Avatar} from "@mui/material"
+import { styled } from '@mui/material/styles';
+import {  Box, Grid, Typography, Button} from "@mui/material"
 import { makeStyles } from '@mui/styles';
+import { BorderColor,StarBorder, School } from '@mui/icons-material'
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const useStyles = makeStyles((theme) =>({
   wrapper:{
@@ -12,7 +15,6 @@ const useStyles = makeStyles((theme) =>({
       borderLeft:"6px solid #4D64E4",
     }
   },
-  
   companyName:{
     
     fontSize:"13.5px",
@@ -44,20 +46,31 @@ const useStyles = makeStyles((theme) =>({
  
 }));
 
-export default function JobCard(props) {
-  const classes = useStyles();
+const LightTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#757575",
+    color: theme.palette.common.white,
+    boxShadow: theme.shadows[2],
+    fontSize: 12,
+  },
+}));
+export default function StudentCard(props) {
+    const classes = useStyles();
     const [flag, setFlag] = React.useState(false);
-  
+    console.log(props.student)
+    const {firstName, lastName, className, avatar} = props.student.user_id;
+    const {skills} = props.student
     const handleClick = () => {
       setFlag(!flag);
     }
-    
   return (
    <Box p={1} className={classes.wrapper}>
       <Grid container alignItems="center">
       <Grid item>
-            <img alt='avatar company'
-              src="https://www.citypng.com/public/uploads/preview/black-user-member-guest-icon-31634946589seopngzc1t.png"
+            <img alt='avatar'
+              src={avatar}
               style={{
                 margin:"10px",
                 width: "70px",
@@ -65,26 +78,45 @@ export default function JobCard(props) {
                 }}/>
             </Grid>
           <Grid item container direction="column" xs>
-          <Grid item>
-          <Typography variant='subtitle1' sx={{fontWeight:"bold"}}>{props.title}</Typography>
-
-          </Grid>
-          <Grid item>
-          <Typography className={classes.companyName} variant='subtitle1'>{props.companyName}</Typography>
-          </Grid>
+            <Grid item>
+              <Typography variant='subtitle1' sx={{fontWeight:"bold"}}>{firstName}</Typography>
+            </Grid>
+            <Grid item>
+              <Typography className={classes.companyName} variant='subtitle1'>{className}</Typography>
+            </Grid>
         </Grid>
-            {/* <Grid item xs direction="column"  alignItems="flex-start">
-              <Typography variant='subtitle1' sx={{fontWeight:"bold"}}>{props.title}</Typography>
-              <Typography className={classes.companyName} variant='subtitle1'>{props.companyName}</Typography>
-            </Grid> */}
-        <Grid item container xs>
+        <Grid item container xs={3}>
                 {
-                  props.skills.map((skill) =>(
-                    <Grid key={skill} className={classes.skillChip}>
+                  skills.map((skill , index) =>(
+                    <Grid key={index} className={classes.skillChip}>
                       {skill}
                  </Grid>
                   ))
                   }  
+        </Grid>
+        <Grid item xs alignItems="center">
+          <Grid item display="flex" sx={{justifyContent:"center"}}>
+                    <LightTooltip title="Exp">
+                        <StarBorder  color='primary' sx={{fontSize:"25px"}} />
+                    </LightTooltip>
+                    <Typography variant='body1' color="#B5B5B5" sx={{fontSize:"20px"}}>10</Typography>
+          </Grid>
+        </Grid>
+        <Grid item xs>
+          <Grid item display="flex" sx={{justifyContent:"center"}} >
+                    <LightTooltip title="Posts" >
+                      <BorderColor  color='primary' sx={{fontSize:"22px"}} />
+                    </LightTooltip>
+                    <Typography variant='body1' color="#B5B5B5" sx={{fontSize:"20px"}}>0</Typography>
+          </Grid>
+        </Grid>
+        <Grid item xs >
+          <Grid item display='flex' sx={{justifyContent:"center"}}>
+                  <LightTooltip title="GPA">
+                  <School  color='primary' sx={{fontSize:"26px"}}/>
+                  </LightTooltip>
+                  <Typography variant='body1' color="#B5B5B5" sx={{fontSize:"20px"}}>1</Typography>
+          </Grid>
         </Grid>
         <Grid item container direction="column" alignItems="flex-end" xs>
           <Grid item>

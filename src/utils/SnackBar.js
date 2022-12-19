@@ -3,6 +3,7 @@ import { Modal, Box, Typography, Button } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Link, useNavigate } from 'react-router-dom';
 
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -15,8 +16,9 @@ const style = {
     textAlign:"center",
 };
 export default function SnackBar(props) {
-    const {open, setOpen} = props;
+    const {open, setOpen , type} = props;
     const navigate = useNavigate();
+
     return (
         <>
         {props.type === "post" 
@@ -24,10 +26,10 @@ export default function SnackBar(props) {
         open={open}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        onClose={open && setTimeout(() => {
-        setOpen(false)
-        navigate('/home/post/newest');
-    }, 3000)}
+        onClose={ open && setTimeout(() => {
+            setOpen(false)
+            navigate('/home/post/newest');
+        }, 3000)}
         >
         <Box sx={style}>
             <CheckCircleIcon fontSize='large' sx={{color:"green"}}/>
@@ -42,10 +44,10 @@ export default function SnackBar(props) {
         open={open}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        onClose={open && setTimeout(() => {
-        setOpen(false)
-        navigate('/home/recruitment/myjobpost');
-    }, 3000)}
+        onClose={ open && setTimeout(() => {
+            setOpen(false)
+            navigate('/home/recruitment/myjobpost');
+        }, 3000)}
         >
         <Box sx={style}>
             <CheckCircleIcon fontSize='large' sx={{color:"green"}}/>

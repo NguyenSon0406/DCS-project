@@ -23,13 +23,14 @@ export default function PopupSignUp(props) {
                         <Box display="flex" flexDirection="column" justifyContent="center"
                         boxShadow={12}
                         sx={{
-                            
+                            transition:"0.3s",
                             textAlign:"center",
                             width: 200,
                             height: 200,      
-                            borderRadius:"20px",
+                            borderRadius:"20px",  
                             '&:hover': {
                             opacity: [0.9, 0.8, 0.7],
+                            transition:"0.3s",
                             },
                         }} >
                         <Link to="/sign-up-role-student">             
@@ -44,8 +45,10 @@ export default function PopupSignUp(props) {
                             width: 200,
                             height: 200,
                             borderRadius:"20px",
+                            transition:"0.3s",
                             '&:hover': {
                             opacity: [0.9, 0.8, 0.7],
+                            transition:"0.3s",
                             },
                         }}>
                        <Link to="/sign-up-role-business">

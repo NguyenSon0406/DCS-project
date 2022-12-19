@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Box } from '@mui/material';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import './Card.css';
-import { dataDigitalBestSeller } from './data';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-import Divider from '@mui/material/Divider';
+import axios from 'axios';
 function Card() {
+  const [company, setCompany] = useState([]);
+  const token = localStorage.getItem('accessToken');
+
   const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
     < ArrowCircleLeftIcon {...props} sx = {{color: 'black', "&:hover":{color: "gray"}}} />
   );
@@ -17,7 +20,6 @@ function Card() {
     <ArrowCircleRightIcon {...props} sx = {{color: 'black', "&:hover":{color: "gray"}}} />
 
   );
-  const [defaultImage, setDefaultImage] = useState({});
   const settings = {
     dots: true,
     infinite: false,
@@ -54,7 +56,18 @@ function Card() {
       },
     ],
   };
-
+  useEffect(() =>{
+    if(token)
+    {
+    const getAllCompany= async() => {
+        const response = await axios.get("/admin/list-company",{
+        headers: {Authorization: token}
+        });
+        setCompany(response.data);
+    }
+    getAllCompany();
+    }
+  },[token])
  
 
   return (
@@ -65,23 +78,24 @@ function Card() {
     </Box>
     <div className="Card">
       <Slider {...settings}>
-        {dataDigitalBestSeller?.map((item) => (
-          <div className="card">
+        {company.map((item) => (
+          <div className="card" key={item.id}>
             <div className="card-top">
+             
               <img
                 src={
-                  defaultImage[item.title] === item.title
-                    ? defaultImage.linkDefault
-                    : item.linkImg
+                  item.avatar
                 }
                 alt={item.title}
-                
               />
-              <h1>{item.title}</h1>
+              
+              <h1><LocationOnIcon 
+                sx={{fontSize:"13px"}}
+              />{item.address}</h1>
             </div>
             <div className="card-bottom">
-              <h3>{item.price}</h3>
-              <span className="category">{item.category}</span>
+              <h3>{item.companyName}</h3>
+              <span className="category">Software Company</span>
             </div>
           </div>
         ))}

@@ -108,7 +108,7 @@ const Login = () => {
         setSuccess(true);
         setLoading(false);
         handleSubmit(e);
-      }, 2000);
+      }, 3000);
     }
 
   };
@@ -129,10 +129,12 @@ const Login = () => {
               marginTop={5}
               padding={2}
               borderRadius={5}
-              boxShadow={"5px 5px 10px #ccc"}
+              boxShadow={"rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;"}
               sx={{
+                transition:"0.3s",
                 ":hover": {
-                  boxShadow: '10px 10px 20px #ccc',
+                  transition:"0.3s",
+                  boxShadow: 'rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;',
                 }
               }}>
               <h3>Sign in with</h3>
@@ -159,7 +161,8 @@ const Login = () => {
                     {...error.email && { error: true, helperText: error.email }}
                     onChange={handleChange}
                     required
-                    size="small" />
+                    size="small"
+                      />
                 </div>
               </Box>
               <Box sx={{ display: 'flex', marginTop: 2 }}>

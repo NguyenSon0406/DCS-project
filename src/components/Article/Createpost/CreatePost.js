@@ -86,7 +86,7 @@ const handlePost = async (e) => {
   return (
     <div>
       <div className="img">
-        <Typography sx={{ fontSize:"20px", marginBottom:"5px"}}>Choose Image Post</Typography>
+        <Typography sx={{ fontSize:"20px", marginBottom:"10px"}}>Choose Image Post</Typography>
         <input
           className="img1"
           type="file"
@@ -97,6 +97,7 @@ const handlePost = async (e) => {
         />
       </div>
       <div className="Create">
+      <Typography sx={{ fontSize:"20px", marginBottom:"10px"}}>Post Title</Typography>
         <input 
         type="text" 
         name="title" 

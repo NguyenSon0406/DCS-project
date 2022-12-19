@@ -29,7 +29,7 @@ const CompanyCard = (props) => {
             }}/>
            </Grid>
            <Grid item direction="column" xs={8}>
-                <Grid item  display="flex">
+                <Grid item display="flex">
                 <Typography variant='subtitle1' sx={{fontWeight:"bold"}}>{props.companyName}</Typography>
                 </Grid>
                 <Grid item display="flex" sx={{marginTop:"5px"}}>

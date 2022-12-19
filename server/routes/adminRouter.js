@@ -11,4 +11,8 @@ router.delete('/delete-company/:id',auth, adminCtrl.deleteCompany);
 router.get('/list-recruitment',auth,adminCtrl.getPostRecruitment);
 router.delete('/delete-recruitment/:id',auth,adminCtrl.deleteRecruitment);
 router.get('/recruitment-info/:id',auth,adminCtrl.getRecruitmentByID);
+router.get('/list-post', auth, adminCtrl.getPostArticle);
+router.delete('/delete-article/:id', auth, adminCtrl.deleteArticle);
+router.get('/article-info/:id', auth, adminCtrl.getArticleByID);
+
 module.exports = router;

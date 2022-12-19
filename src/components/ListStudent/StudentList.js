@@ -1,19 +1,17 @@
 import React,{ useState, useEffect } from 'react'
-import JobCard from './StudentCard';
-import JobData from "./dummyData2"
-const JobList =(props) => {
-    // const[jobs, setJob] = useState([]);
+import StudentCard from './StudentCard';
+const StudentList =(props) => {
     
-   const renderJobList = props.jobs.map((job) => {
-        return <JobCard
-        key = {job.id} {...job}/>
+   const renderStudentList = props.students.map((student, index) => {
+        return <StudentCard student = {student}
+        key = {index} {...student}/>
     });
     
     return (
         <>
-            {renderJobList.length > 0 ? renderJobList : "No Contacts available"}
+            {renderStudentList.length > 0 ? renderStudentList : "No suitable Students"}
         </>
   )
 }
 
-export default JobList;
+export default StudentList;

@@ -20,9 +20,9 @@ const JobList =(props) => {
    const renderJobList = props.jobs.sort((a,b) => {
    return new Date(b.createdAt) - new Date (a.createdAt)
    })
-   .map((job) => {
+   .map((job, index) => {
         return <JobCard job = {job}
-        key = {job.id} {...job}/>
+        key = {index} {...job}/>
     });
     
     return (
