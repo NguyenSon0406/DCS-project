@@ -22,7 +22,7 @@ export default function CreateRequest(props)
    }}>
    <Typography sx={{
       fontWeight:"bold",
-      fontSize:"30px"
+      fontSize:"25px"
     }}>Create Request</Typography>
     <FormControl variant="filled" sx={{ m: 1, minWidth: 300 }}>
         <InputLabel id="demo-simple-select-filled-label">Title</InputLabel>
@@ -32,10 +32,8 @@ export default function CreateRequest(props)
           value={title}
           onChange={handleChange}
         >
-          
-          <MenuItem value={10}>List potential Student</MenuItem>
-          <MenuItem value={20}>Seminar</MenuItem>
-          <MenuItem value={30}>Contracting</MenuItem>
+          <MenuItem value="List potential Student">List potential Student</MenuItem>
+          <MenuItem value="Seminar">Seminar</MenuItem>
         </Select>
       </FormControl>
       <CKEditor

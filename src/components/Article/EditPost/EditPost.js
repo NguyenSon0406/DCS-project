@@ -4,8 +4,9 @@ import {
   Box,
   Grid,
   Button,
+  Typography,
 } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import TagInput from "../../Job/TagInput";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -24,6 +25,7 @@ export default function EditPost() {
   const token = localStorage.getItem("accessToken");
   const getLocation = useLocation();
   const [data, setData] = useState(initialState);
+  const [loading, setLoading] = useState(false)
   const { tempTitle, success, err } = data;
   const { _id, title, skills, description, img } = getLocation.state.edit;
   const [tempDescription, setTempDescription] = useState("");
@@ -77,13 +79,14 @@ export default function EditPost() {
 
       let formData = new FormData();
       formData.append("file", file);
-
+      setLoading(true)
       const res = await axios.post("/api/upload_imgPost", formData, {
         headers: {
           "content-type": "multipart/form-data",
           Authorization: token,
         },
       });
+      setLoading(false)
       setTempImg(res.data.url);
     } catch (err) {
       setData({ ...data, err: err.response.data.msg, success: "" });
@@ -95,22 +98,13 @@ export default function EditPost() {
   return (
     <>
       <div class="left-content grid-66">
+        <Box sx={{}}>
         <article class="main-article boxed ">
           <p style={{ fontWeight: "bold", fontSize: "30px" }}>Edit Article</p>
           <div className="Create2">
-            <input
-              type="text"
-              class="input2"
-              name="tempTitle"
-              placeholder="Post Title"
-              defaultValue={title}
-              onChange={handleChange}
-            />
-          </div>
-          <TagInput skills={skills} handleSkills={handleSkills} />
-          <section class="post-content">
-            <div class="post-format-image post-format-wrapper ">
+          <div class="post-format-image post-format-wrapper ">
               <div className="img" class=" editimg">
+              <Typography sx={{ fontSize:"20px", marginBottom:"10px"}}>Choose Image Post</Typography>
                 <input
                   className="img1"
                   type="file"
@@ -121,6 +115,20 @@ export default function EditPost() {
                 />
               </div>
             </div>
+            <Typography sx={{ fontSize:"20px", marginBottom:"10px"}}>Post Title</Typography>
+            <input
+              type="text"
+              className="input2"
+              name="tempTitle"
+              placeholder="Post Title"
+              defaultValue={title}
+              onChange={handleChange}
+            />
+          </div>
+          <Typography sx={{ fontSize:"20px", marginBottom:"10px"}}>Hashtag</Typography>
+          <TagInput skills={skills} handleSkills={handleSkills} />
+          <section class="post-content" style={{marginTop:"20px"}}>
+          <Typography sx={{ fontSize:"20px", marginBottom:"10px"}}>Description</Typography>
             <div class="text">
               <Grid item xs={12}>
                 <div className="editor2">
@@ -146,19 +154,30 @@ export default function EditPost() {
               </Grid>
             </div>
           </section>
-          <Box sx={{ textAlign: "center" }}>
+          <Box sx={{ textAlign: "center", marginTop:"10px" }}>
+          {loading 
+           ?   <Button
+              variant="contained"
+              onClick={handleUpdate}
+              disabled={true}
+              sx={{ fontWeight: "bold", marginRight: "25px" }}
+            >
+              Loading...
+            </Button>
+            :  
             <Button
               variant="contained"
               onClick={handleUpdate}
               sx={{ fontWeight: "bold", marginRight: "25px" }}
             >
               Update
-            </Button>
+            </Button>}
             <Button variant="outlined" sx={{ fontWeight: "bold" }}>
-              Cancel
+              <Link to="/home/post/newest">Cancel</Link>
             </Button>
           </Box>
         </article>
+        </Box>
       </div>
       <SnackBar open={open} setOpen={setOpen} msg={success} type={post} />
     </>

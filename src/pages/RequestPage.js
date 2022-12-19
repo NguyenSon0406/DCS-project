@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import AssignmentReturnedIcon from '@mui/icons-material/AssignmentReturned';
-import VerifiedIcon from '@mui/icons-material/Verified';
 import {styled} from '@mui/material/styles';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import CreateRequest from '../components/Request/CreateRequest';
@@ -65,9 +64,8 @@ function ColorlibStepIcon(props) {
 
   const icons = {
     1: <PostAddIcon />,
-    2: <VerifiedIcon />,
-    3: <PendingActionsIcon/>,
-    4: <AssignmentReturnedIcon />,
+    2: <PendingActionsIcon/>,
+    3: <AssignmentReturnedIcon />,
   };
 
   return (
@@ -94,7 +92,7 @@ ColorlibStepIcon.propTypes = {
    */
   icon: PropTypes.node,
 };
-const steps = ['Create request','Received' ,'Pending', 'Returned'];
+const steps = ['Create request','Pending', 'Returned'];
 
 const RequestPage=() => {
   const [openPopup, setOpenPopup] = useState(false);
@@ -239,7 +237,7 @@ const RequestPage=() => {
                       ))}
                     </Stepper>
                     <div>
-                      {activeStep === 3 && (
+                      {activeStep === 2 && (
                         <React.Fragment>
                         <Box sx={{
                           mt: 2, 

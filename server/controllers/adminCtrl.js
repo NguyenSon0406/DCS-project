@@ -2,6 +2,7 @@ const Users = require('../models/userModel')
 const companyInfo = require('../models/companyModel')
 const recruitmentPost = require('../models/recruitmentPostModel')
 const userInfo = require('../models/userInfoModel')
+const postModel = require('../models/postModel')
 
 const adminCtrl =  {
     getStudents: async (req,res) => {
@@ -78,6 +79,31 @@ const adminCtrl =  {
             res.json({msg:"Deleted Successfully!"})
         }
         catch(err) {
+            return res.status(500).json({msg: err.message});
+        }
+    },
+    getPostArticle: async(req,res) => {
+        try {
+            const posts = await postModel.find();
+            res.json(posts)
+        }catch(err){
+            return res.status(500).json({msg: err.message});
+        }
+    },
+    deleteArticle: async(req,res) =>{
+        try{
+            await postModel.findByIdAndDelete(req.params.id);
+            res.json({msg:"Deleted Successfully!"})
+        }
+        catch(err) {
+            return res.status(500).json({msg: err.message});
+        }
+    },
+    getArticleByID: async(req,res) => {
+        try {
+            const posts = await postModel.findById(req.params.id);
+            res.json(posts)
+        }catch(err){
             return res.status(500).json({msg: err.message});
         }
     },

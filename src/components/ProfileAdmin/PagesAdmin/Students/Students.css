@@ -31,5 +31,14 @@ th {
 tr:hover {
   background-color: #d6eeee;
 }
+.paginate {
+  margin: 0;
+}
 
-
+.falculty {
+  width: 110px;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre;
+}

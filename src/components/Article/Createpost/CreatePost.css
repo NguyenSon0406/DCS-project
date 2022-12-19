@@ -1,5 +1,4 @@
 .Create {
-  padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -48,5 +47,10 @@
 }
 
 .img .img1 {
-  font-size: 150%;
+  width: 100%;
+  height: 50px;
+  border: 1.25px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  font-size: 16px;
+  padding: 10px 20px;
 }

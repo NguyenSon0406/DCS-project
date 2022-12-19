@@ -60,7 +60,7 @@ export default function Homepage(){
                         <Route path = "/admin/dashboard" element={<DashBoard/>}/>
                         <Route path = "/admin/students" element={<Students/>}/>
                         <Route path = "/admin/companies" element={<Companies/>}/>
-                        <Route path = "/admin/request" element={<Request/>}/>
+                        <Route path = "/admin/posts" element={<Request/>}/>
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                </div>

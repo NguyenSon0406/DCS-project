@@ -25,7 +25,6 @@ export default function TableHeader(props) {
         {props.columns.map((column, index) => (
           <TableCell
             key={index}
-            align="center"
             style={{
               minWidth: column.minWidth,
               background: "#D8D8D8",

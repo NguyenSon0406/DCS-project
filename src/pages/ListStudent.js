@@ -1,26 +1,40 @@
-import React,{useState} from 'react'
-import {Box, Grid, ThemeProvider, Typography, Button, Pagination} from "@mui/material"
+import React,{useState, useEffect} from 'react'
+import {Box, Grid, ThemeProvider, Typography, Pagination} from "@mui/material"
 import theme from "../components/Job/theme";
 import SearchBar from '../components/ListStudent/SearchBar2';
-import JobData from "../components/ListStudent/dummyData2"
-import JobList from '../components/ListStudent/StudentList';
+import StudentList from '../components/ListStudent/StudentList';
+import axios from 'axios';
 
 const ListStudent = () => {
-  const [openPtxopup, setOpenPopup] = useState(false);
+  const [students, setStudents] = useState([])
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState("");
+  const token = localStorage.getItem('accessToken');
+  useEffect(() =>{  
+    if(token)
+    {
+      const getAllStudents= async() => {
+        const response = await axios.get("/potential-student/list-student",{
+          headers: {Authorization: token}
+        });
+        setStudents(response.data);
+    }
+    getAllStudents();
+    }
+  },[token])
+
   const searchHandle = (searchTerm) => {
     setSearchTerm(searchTerm);
     if (searchTerm !== "") {
-      const newJobList = JobData.filter((job) => {
-        return Object.values(job)
+      const newJobList = students.filter((student) => {
+        return Object.values(student)
           .join("")
           .toLowerCase()
           .includes(searchTerm.toLowerCase());
       });
       setSearchResults(newJobList);
     } else {
-      setSearchResults(JobData);
+      setSearchResults(students);
     }
   };
   return (
@@ -31,7 +45,6 @@ const ListStudent = () => {
                   <Grid item xs={10}>
                     <Box display="flex" justifyContent="space-between">
                     <Typography variant='h3'>List Potential Student</Typography>
-                    {/*  */}
                     </Box>
                   </Grid>               
                 </Grid>
@@ -41,11 +54,11 @@ const ListStudent = () => {
                   <SearchBar term = {searchTerm}
                     searchKeyWord = {searchHandle}
                   />
-                  <JobList jobs={searchTerm.length < 1 ? JobData : searchResults}/>
+                  <StudentList students={searchTerm.length < 1 ? students : searchResults}/>
                 </Grid>
+                <Pagination style={{marginTop:"40px", marginBottom:"20px"}} count={10} variant="outlined" shape="rounded" showFirstButton showLastButton  />
               </Grid>
-              <Pagination style={{marginTop:"40px"}} count={10} variant="outlined" shape="rounded" showFirstButton showLastButton  />
-              
+
           </ThemeProvider> 
     </>
   );

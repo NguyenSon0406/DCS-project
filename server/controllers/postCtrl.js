@@ -42,9 +42,9 @@ const postCtrl = {
     },
     updateArticle: async (req,res) => {
         try {
-            const {title,tempImg,skills,description} = req.body;
+            const {title,img,skills,description} = req.body;
             await postModel.findByIdAndUpdate(req.params.id,{
-                title,img:tempImg,skills,description
+                title,img,skills,description
             })
             res.json({msg:"Update Successfully"})
         }catch (err){

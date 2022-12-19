@@ -5,7 +5,6 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
@@ -22,13 +21,13 @@ import TableHeader from './TableHeader';
 const columns = [
     { id: 'id', label: 'ID', minWidth: 50 },
     { id: 'firstName', label: 'First\u00a0Name', minWidth: 50 },
-    { id: 'lastName', label: 'Last\u00a0Name', minWidth: 150 },
-    { id: 'email', label: 'Email', minWidth: 100 },
+    { id: 'lastName', label: 'Last\u00a0Name', minWidth: 130 },
+    { id: 'email', label: 'Email', minWidth: 30 },
     { id: 'contact', label: 'Phone', minWidth: 50 },
     { id: 'gender', label: 'Gender', minWidth: 50 },
     { id: 'dayofbirth', label: 'Date\u00a0of\u00a0birth', minWidth: 70 },
-    { id: 'className', label: 'Class', minWidth: 150 },
-    { id: 'falculty', label: 'Falculty', minWidth: 150 },
+    { id: 'className', label: 'Class', minWidth: 120 },
+    { id: 'falculty', label: 'Falculty', minWidth: 120 },
     { id: 'action',  minWidth: 190 },
 ];
 
@@ -110,8 +109,8 @@ export default function Students() {
     }
     const handleReturnList = (list) => {
         return (
-          <Paper sx={{ width: "100%", overflow: "hidden" }}>
-            <TableContainer sx={{ maxHeight: 440 }}>
+          <Paper className='table' sx={{ width: "99%", overflow: "hidden" }}>
+            <TableContainer sx={{ height: 440 }}>
               <Table
                 stickyHeader
                 aria-label="sticky table"
@@ -142,10 +141,10 @@ export default function Students() {
                           {columns.map((column, index) => {
                             const value = row[column.id];
                             return (
-                              <TableCell key={index} align="center">
+                              <TableCell key={index}>
                                 {column.id === "action" ? (
-                                  <>
-                                    <Button
+                                  <Box sx={{textAlign:"center",justifyContent:"center", alignItems:"center"}}>
+                                  <Button
                                       variant="contained"
                                       color="error"
                                       sx={{
@@ -173,11 +172,13 @@ export default function Students() {
                                     >
                                       <i className="fas fa-magnifying-glass"></i>
                                     </Button>
-                                  </>
+                                  </Box>
                                 ) : column.id === "dayofbirth" ? (
                                   convertBirthday(value)
                                 ) : column.id === "id" ? (
                                   handleID(row._id)
+                                ) : column.id === "falculty" ? (
+                                  <p className="falculty">{value}</p>
                                 ) : (
                                   value
                                 )}
@@ -196,11 +197,7 @@ export default function Students() {
               count={list.length}
               rowsPerPage={rowsPerPage}
               page={page}
-              sx={{
-                textAlign: "center",
-                alignContent: "center",
-                justifyContent: "center",
-              }}
+              className="paginate"
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
@@ -339,9 +336,11 @@ export default function Students() {
                 </DialogActions>
             </Dialog>
             <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-            {success && <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
-                {success}
-            </Alert>}
+              <>
+              {success && <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+                  {success}
+              </Alert>}
+              </>
          </Snackbar>  
         </>
     );

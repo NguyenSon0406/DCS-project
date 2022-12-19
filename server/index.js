@@ -34,6 +34,6 @@ app.use("/api", require('./routes/upload'));
 app.use('/recruitment',require('./routes/recruimentRouter'))
 app.use('/admin',require('./routes/adminRouter'))
 app.use('/post',require('./routes/postRouter'))
-
+app.use('/potential-student', require('./routes/potentialStudent'));
 const port = process.env.PORT || 8080;
 app.listen(port, console.log(`Listening on port ${port}...`));

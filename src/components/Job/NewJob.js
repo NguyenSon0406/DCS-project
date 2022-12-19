@@ -98,8 +98,8 @@ const NewJob = (props) => {
         <DialogTitle>
             <Box display="flex" justifyContent="space-between" alignItem="center">
                 Post Job
-                <IconButton>
-                    <CloseIcon onClick={() => setOpenPopup(false)}/>
+                <IconButton onClick={() => setOpenPopup(false)}>
+                    <CloseIcon/>
                 </IconButton>
             </Box>
         </DialogTitle>
@@ -183,10 +183,12 @@ const NewJob = (props) => {
          
     </Dialog>
     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            {success && <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                {success}
-            </Alert>}
-         </Snackbar>   
+      <div>
+      {success && <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                  {success}
+      </Alert>}
+      </div>
+    </Snackbar>   
     </>
   )
 }
