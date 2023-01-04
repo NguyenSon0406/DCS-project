@@ -143,27 +143,49 @@ useEffect(() => {
 }, [error]);
   return (
     <>
-    <div className="main-page">
-            <img src="image/duytan-banner.jpg" alt="Duy Tân Banner" />
-            <div className="login-page" style={{width:"30%"}}>
+     <div className="split right">
+        <img className="banner-login" src="/image/bannerlogin.png" alt="banner login"/>
+      </div>
+    <div className="split left">
+      <div className="centered">
+        <img className="banner-duytan" src="image/icon.png" alt="Duy Tân Banner" />
+        <div className="login-page">
                 <h2 className="mb-3"><i>DTU</i> CONNECTIONS</h2>
-                <h3>Sign up with</h3>
-                {Object.keys(error).length === 0 && isSubmit ? (
-                  <>
-                    {err && showErrMsg(err)}
-                    {isSuccess && showSuccessMsg(isSuccess)}
-                  </>
-                  ) : Object.keys(error).length !==0 && isSubmit  ? (
-                    <>
-                    {/* <div className="ui message error">Sign up failed</div> */}
-                      {err && showErrMsg(err)}
-                    </>
-                    
-                  ): (
-                    <div></div>
-                  )}
                 <Form className="login-ui" onSubmit={handleSubmit}>
-                <Box sx={{ display: 'flex'}}>
+                  <Box display="flex"
+                  flexDirection={"column"}
+                  maxWidth={600}
+                  alignItem="center"
+                  justifyContent="center"
+                  margin="auto"
+                  marginTop={1}
+                  padding={2}
+                  borderRadius={5}
+                  boxShadow={"rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;"}
+                  sx={{
+                    width:"480px",
+                    transition:"0.3s",
+                    ":hover": {
+                      transition:"0.3s",
+                      boxShadow: 'rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;',
+                    }
+                  }}>
+                   <h3>Sign up with</h3>
+                  {Object.keys(error).length === 0 && isSubmit ? (
+                    <>
+                      {err && showErrMsg(err)}
+                      {isSuccess && showSuccessMsg(isSuccess)}
+                    </>
+                    ) : Object.keys(error).length !==0 && isSubmit  ? (
+                      <>
+                      {/* <div className="ui message error">Sign up failed</div> */}
+                        {err && showErrMsg(err)}
+                      </>
+                      
+                    ): (
+                      <div></div>
+                    )}
+                  <Box sx={{ display: 'flex'}}>
                   <AccountCircle sx={{ color: 'action.active', mr: 1, my: 1 }} />
                      <div className="textfield-border-radius">
                       <TextField 
@@ -306,9 +328,11 @@ useEffect(() => {
                     <div className="login-component">
                         Already have an account? <Link to="/">Sign In</Link>
                     </div>
+                  </Box>
                 </Form>
             </div>
-        </div>
+      </div>      
+    </div>
      
     </>
   );

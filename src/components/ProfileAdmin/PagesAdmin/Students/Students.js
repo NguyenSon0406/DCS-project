@@ -27,7 +27,7 @@ const columns = [
     { id: 'gender', label: 'Gender', minWidth: 50 },
     { id: 'dayofbirth', label: 'Date\u00a0of\u00a0birth', minWidth: 70 },
     { id: 'className', label: 'Class', minWidth: 120 },
-    { id: 'falculty', label: 'Falculty', minWidth: 120 },
+    { id: 'falculty', label: 'Faculty', minWidth: 120 },
     { id: 'action',  minWidth: 190 },
 ];
 
@@ -52,7 +52,7 @@ export default function Students() {
     const token = localStorage.getItem('accessToken');
     const [reducerValue,forceUpdate] = useReducer(x => x + 1, 0);
     const [students, setStudents] = useState([]);
-    const [studentInfo, getStuddentInfo] = useState('');
+    const [studentInfo, getStudentInfo] = useState('');
     const [success, setSuccess] = useState('')
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState("");
@@ -87,7 +87,6 @@ export default function Students() {
           setSearchResults(students);
         }
       }
-    
     const [orderDirection, setOrderDirection] = useState('asc');
     const [valueToOrderBy, setValueToOrderBy] = useState('firstName');
 
@@ -259,17 +258,24 @@ export default function Students() {
         setOpen(false);
         setOpenView(false);
     };
+    function dateIsValid(date) {
+      return !Number.isNaN(new Date(date).getTime());
+    }
     const handleClickOpenView= async (id) => {
         const res = await axios.get(`/admin/student-info/${id}`,
         {
             headers: {Authorization: token}
         })
-        getStuddentInfo(res.data);
+        getStudentInfo(res.data);
         setOpenView(true);
     }
     const convertBirthday= (userbirthday) => {
-        const birthday = new Date(userbirthday).toISOString().slice(0,10)
-        return birthday;
+        if(dateIsValid(userbirthday))
+        {
+          const birthday = new Date(userbirthday).toISOString().slice(0,10)
+          return birthday;
+        }
+        else return "not valid date"
     }
     return (
         <>
@@ -319,20 +325,33 @@ export default function Students() {
                             }}/>
                     <Typography sx={{marginLeft:"10px", fontWeight:"bold"}}>{studentInfo.lastName} {studentInfo.firstName}</Typography>
                     </Box>
-                    <Typography>Email: {studentInfo.email}</Typography>
-                    <Typography>Gender: {studentInfo.gender}</Typography>
-                    <Typography>Date of birth: {studentInfo.dayofbirth}</Typography>
-                    <Typography>Address: {studentInfo.address}</Typography>
-                    
-                    <Typography>Class: {studentInfo.className}</Typography>
-                    <Typography>Falculty: {studentInfo.falculty}</Typography>
-                    <Typography>Description: {studentInfo.description}</Typography>
+                    <Box sx={{marginTop:"10px", display:"flex"}}>
+                      <Box sx={{ padding: 1}}>
+                        <Typography sx={{fontWeight:"bold"}}>Email:</Typography>
+                        <Typography sx={{fontWeight:"bold"}}>Gender:</Typography>
+                        <Typography sx={{fontWeight:"bold"}}>Date of birth:</Typography>
+                        <Typography sx={{fontWeight:"bold"}}>Address:</Typography>
+                        <Typography sx={{fontWeight:"bold"}}>Class:</Typography>
+                        <Typography sx={{fontWeight:"bold"}}>Falculty:</Typography>
+                        
+                      </Box>
+                      <Box sx={{padding: 1}}>
+                        <Typography sx={{paddingLeft:"5px"}}> {studentInfo.email}</Typography>
+                        <Typography sx={{paddingLeft:"5px"}}> {studentInfo.gender}</Typography>
+                        <Typography sx={{paddingLeft:"5px"}}> {convertBirthday(studentInfo.dayofbirth)}</Typography>
+                        <Typography sx={{paddingLeft:"5px"}}> {studentInfo.address}</Typography>
+                        <Typography sx={{paddingLeft:"5px"}}> {studentInfo.className}</Typography>
+                        <Typography sx={{paddingLeft:"5px"}}> {studentInfo.falculty}</Typography>
+
+                      </Box>
+                    </Box>
+                    <Box sx={{marginTop:"5px", padding: 1}}>
+                      <Typography sx={{fontWeight:"bold"}}>Description:</Typography>
+                      <Typography> {studentInfo.description}</Typography>
+                    </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant='outlined' onClick={handleClose}>Cancel</Button>
-                    <Button variant="contained" autoFocus>
-                        Update
-                    </Button>
+                    <Button variant='outlined' sx={{fontWeight:"bold"}} onClick={handleClose}>Return</Button>
                 </DialogActions>
             </Dialog>
             <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>

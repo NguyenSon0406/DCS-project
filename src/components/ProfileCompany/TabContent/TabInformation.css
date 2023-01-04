@@ -21,7 +21,8 @@
 
 .infor-item {
   margin-right: 20px;
-  width: 35%;
+  width: 32%;
+  display: block;
 }
 .description {
   margin-right: 20px;

@@ -120,4 +120,7 @@ div.text {
 }
 .posttag{
     margin-top: 20px;
+    display: flex;
+    text-align: center;
+    align-items: center;
 }

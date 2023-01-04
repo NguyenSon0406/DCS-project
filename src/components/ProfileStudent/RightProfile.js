@@ -23,7 +23,7 @@ function RightProfile(props) {
                             <div>Gender:</div>
                             <div>Address:</div>
                             <div>Class:</div>
-                            <div>Falculty:</div>
+                            <div>Faculty:</div>
                         </div>
                         <div className="label-right">
                             <div>{email}</div>

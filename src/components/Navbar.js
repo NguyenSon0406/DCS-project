@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import MenuIcon from "@mui/icons-material/Menu"
 import { AppBar, Box, Toolbar, Typography, IconButton, Menu, Container, Button, Tooltip, MenuItem } from "@mui/material"
 import AdbIcon from '@mui/icons-material/Adb';
+import ContactPageIcon from '@mui/icons-material/ContactPage';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@mui/styles";
@@ -154,7 +156,7 @@ function Navbar() {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Link to="post" style={{ color: "black" }}>Post</Link>
+                <Link to="post" style={{ color: "black" }}>Article</Link>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Link to="recruitment" style={{ color: "black" }}>Recruitment</Link>
@@ -192,7 +194,7 @@ function Navbar() {
               onMouseLeave={handleCloseHover}
               sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold", zIndex: 1301 }}
             >
-              Post
+              Article
              </Button> 
               <Menu
                 id="simple-menu"
@@ -209,9 +211,9 @@ function Navbar() {
                   root: styles.popOverRoot,
                 }}
                   >
-                  <MenuItem onClick={handleClose}><Link to="post/newest" style={{color:"black"}}>Newest</Link></MenuItem>
-                  <MenuItem onClick={handleClose}>My post</MenuItem>
-                  <MenuItem onClick={handleClose}><Link to="post/create" style={{color:"black"}}>Create post</Link></MenuItem>
+                  <Link to="post/newest" style={{color:"black"}}><MenuItem onClick={handleClose}>Newest</MenuItem></Link>
+                  <Link to="post/my-article" style={{color:"black"}}><MenuItem onClick={handleClose}>My Article</MenuItem></Link>
+                  <Link to="post/create" style={{color:"black"}}><MenuItem onClick={handleClose}>Create Article</MenuItem></Link>
                 </Menu>
             <Button
               aria-owns={anchorReEl ? "simple-menu2" : undefined}
@@ -238,21 +240,23 @@ function Navbar() {
                 root: styles.popOverRoot,
               }}
             >
-              <MenuItem onClick={handleClose1}><Link to="recruitment/newest" style={{ color: "black" }}>Newest</Link></MenuItem>
-              <MenuItem onClick={handleClose1}><Link to="recruitment/myjobpost" style={{ color: "black" }}>My Recruitment Post</Link></MenuItem>
+              <Link to="recruitment/newest" style={{ color: "black" }}><MenuItem onClick={handleClose1}>Newest</MenuItem></Link>
+              <Link to="recruitment/myjobpost" style={{ color: "black" }}><MenuItem onClick={handleClose1}>My Recruitment Post</MenuItem></Link>
             </Menu>) : ""}
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold" }}
             >
               <Link to="liststudent" style={{ color: "white" }}>Student</Link>
-            </Button>
-            {(role === 1) ? <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold" }}
-            >
-              <Link to="request" style={{ color: "white" }}>Request</Link>
-            </Button> : ""}
+                </Button>
+                {(role === 1 || role === 3) ? 
+                  <Link to="request" style={{ color: "white" }}>
+                  <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block', fontWeight: "bold" }}
+                >Request
+                </Button>
+              </Link> : ""}
           </Box>
           <Box sx={{ flexGrow: 0.05 }}>
             <IconButton sx={{ color: "#fff" }}>
@@ -283,13 +287,16 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem>
-                <Link to="profile" style={{ color: "black" }}>
-                  <Typography textAlign="center">Profile</Typography>
+              
+                <Link to="profile" style={{ color: "black", textAlign:"center", alignItems:"center", justifyContent:"center" }}>
+                  <MenuItem>
+                    <ContactPageIcon/>
+                    <Typography textAlign="center" sx={{marginLeft:"5px"}}>Profile</Typography>
+                  </MenuItem>
                 </Link>
-              </MenuItem>
               <MenuItem onClick={handleLogout}>
-                <Typography textAlign="center">Sign out</Typography>
+                <ExitToAppIcon/>
+                <Typography textAlign="center" sx={{marginLeft:"5px"}}>Sign out</Typography>
               </MenuItem>
             </Menu>
           </Box>

@@ -34,7 +34,7 @@ const Login = () => {
     e.preventDefault();
     setError(validate(formValues));
     setIsSubmit(true);
-
+    
     try {
       const res = await axios.post('/user/login', { email, password })
       setUser({ ...user, err: '', isSuccess: res.data.msg })
@@ -87,12 +87,6 @@ const Login = () => {
     return errors;
   };
 
-  // useEffect(() => {
-  //   console.log(error);
-  //   if (Object.keys(error).length === 0 && isSubmit) {
-  //     // console.log(formValues);
-  //   }
-  // }, [error]);
 
   useEffect(() => {
     return () => {
@@ -115,14 +109,18 @@ const Login = () => {
 
   return (
     <>
-      <div className="main-page">
-        <img src="image/duytan-banner.jpg" alt="Duy Tân Banner" />
+      <div className="split right">
+        <img className="banner-login" src="/image/bannerlogin.png" alt="banner login"/>
+      </div>
+      <div className="split left">
+        <div className="centered">
+        <img className="banner-duytan" src="image/icon.png" alt="DTU Connection Banner" />
         <div className="login-page">
           <h2 className="mb-3"><i>DTU</i> CONNECTIONS</h2>
           <Form className="login-ui" onSubmit={handleSubmit}>
             <Box display="flex"
               flexDirection={"column"}
-              maxWidth={900}
+              maxWidth={600}
               alignItem="center"
               justifyContent="center"
               margin="auto"
@@ -131,6 +129,7 @@ const Login = () => {
               borderRadius={5}
               boxShadow={"rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;"}
               sx={{
+                width:"480px",
                 transition:"0.3s",
                 ":hover": {
                   transition:"0.3s",
@@ -182,10 +181,9 @@ const Login = () => {
                     size="small" />
                 </div>
               </Box>
-              <Box sx={{ display: 'flex' }}>
+              <Box sx={{ display: 'flex' , justifyContent:'space-between'}}>
                 <FormControlLabel control={<Checkbox defaultChecked color="error" />} label="Remember me" />
                 <FormControlLabel fullWidth={true}
-                  sx={{ marginLeft: "172px" }}
                   control={<Link to="/forgot-password">Forgot password</Link>} />
               </Box>
               <div className="login-component">
@@ -223,6 +221,8 @@ const Login = () => {
             </Box>
 
           </Form>
+        </div>
+
         </div>
       </div>
       <PopUp openPopup={openPopup}

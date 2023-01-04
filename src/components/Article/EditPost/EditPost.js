@@ -97,12 +97,15 @@ export default function EditPost() {
   };
   return (
     <>
-      <div class="left-content grid-66">
-        <Box sx={{}}>
-        <article class="main-article boxed ">
+      <div className="left-content grid-66">
+        <article className="main-article boxed ">
           <p style={{ fontWeight: "bold", fontSize: "30px" }}>Edit Article</p>
+          <Box sx={{
+            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            borderRadius:"10px",
+            padding:"20px"}}>
           <div className="Create2">
-          <div class="post-format-image post-format-wrapper ">
+          <div className="post-format-image post-format-wrapper ">
               <div className="img" class=" editimg">
               <Typography sx={{ fontSize:"20px", marginBottom:"10px"}}>Choose Image Post</Typography>
                 <input
@@ -127,9 +130,9 @@ export default function EditPost() {
           </div>
           <Typography sx={{ fontSize:"20px", marginBottom:"10px"}}>Hashtag</Typography>
           <TagInput skills={skills} handleSkills={handleSkills} />
-          <section class="post-content" style={{marginTop:"20px"}}>
+          <section className="post-content" style={{marginTop:"20px"}}>
           <Typography sx={{ fontSize:"20px", marginBottom:"10px"}}>Description</Typography>
-            <div class="text">
+            <div className="text">
               <Grid item xs={12}>
                 <div className="editor2">
                   <CKEditor
@@ -168,16 +171,16 @@ export default function EditPost() {
             <Button
               variant="contained"
               onClick={handleUpdate}
-              sx={{ fontWeight: "bold", marginRight: "25px" }}
+              sx={{ fontWeight: "bold", marginRight: "25px", paddingLeft:3, paddingRight:3 }}
             >
-              Update
+              Save
             </Button>}
             <Button variant="outlined" sx={{ fontWeight: "bold" }}>
               <Link to="/home/post/newest">Cancel</Link>
             </Button>
           </Box>
+          </Box>
         </article>
-        </Box>
       </div>
       <SnackBar open={open} setOpen={setOpen} msg={success} type={post} />
     </>

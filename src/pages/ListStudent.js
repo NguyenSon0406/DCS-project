@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect, useReducer} from 'react'
 import {Box, Grid, ThemeProvider, Typography, Pagination} from "@mui/material"
 import theme from "../components/Job/theme";
 import SearchBar from '../components/ListStudent/SearchBar2';
@@ -10,6 +10,12 @@ const ListStudent = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState("");
   const token = localStorage.getItem('accessToken');
+  const [typeSort, setTypeSort] = useState('');
+  const [reducerValue,forceUpdate] = useReducer(x => x + 1, 0);
+
+  const getTypeSort = (type) => {
+    setTypeSort(type)
+  }
   useEffect(() =>{  
     if(token)
     {
@@ -21,22 +27,25 @@ const ListStudent = () => {
     }
     getAllStudents();
     }
-  },[token])
+  },[reducerValue,token])
 
   const searchHandle = (searchTerm) => {
     setSearchTerm(searchTerm);
     if (searchTerm !== "") {
-      const newJobList = students.filter((student) => {
-        return Object.values(student)
+      const newStudentList = students.filter((student) => {
+        return Object.values(Object.assign(student.user_id , student.skills))
           .join("")
           .toLowerCase()
           .includes(searchTerm.toLowerCase());
       });
-      setSearchResults(newJobList);
+      setSearchResults(newStudentList);
     } else {
       setSearchResults(students);
     }
   };
+  const passUpdateSort = () => {
+    forceUpdate();
+  }
   return (
     <>
       <ThemeProvider theme={theme} >
@@ -52,9 +61,13 @@ const ListStudent = () => {
               <Grid container justifyContent="center">
                 <Grid item xs={10}>
                   <SearchBar term = {searchTerm}
+                    handleTypeSort = {getTypeSort}
                     searchKeyWord = {searchHandle}
                   />
-                  <StudentList students={searchTerm.length < 1 ? students : searchResults}/>
+                  <StudentList students={searchTerm.length < 1 ? students : searchResults} 
+                  typeSort={typeSort}
+                  passUpdateSort = {passUpdateSort}
+                  />
                 </Grid>
                 <Pagination style={{marginTop:"40px", marginBottom:"20px"}} count={10} variant="outlined" shape="rounded" showFirstButton showLastButton  />
               </Grid>

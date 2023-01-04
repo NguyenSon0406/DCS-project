@@ -9,7 +9,7 @@ const JobList =(props) => {
 
    useEffect(() => {
     const timer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 100 ? setOpen(false) : prevProgress + 10));
+      setProgress((prevProgress) => (prevProgress >= 100 ? setOpen(false) : prevProgress + 5));
     }, 100);
 
     return () => {

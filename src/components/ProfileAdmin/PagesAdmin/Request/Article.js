@@ -303,14 +303,14 @@ export default function Article() {
             {companyInfo.name}
           </Typography>
         </Box>
-        <Box sx={{marginTop:"20px"}}>
-            <Box sx={{display:"flex"}}>
+        <Box sx={{marginTop:"10px" , display:"flex"}}>
+            <Box sx={{display:"flex", flexDirection:"column" , padding: 1}}>
               <Typography sx={{fontWeight:"bold"}}>Article Title: </Typography>
-              <Typography sx={{color:"#1976d2", marginLeft:"10px",fontWeight:"bold"}}>{companyInfo.title} </Typography>
+              <Typography sx={{fontWeight:"bold", marginTop:"5px", marginBottom:"5px"}}>Tags: </Typography>
             </Box>
-            <Box sx={{display:"flex", marginTop:"10px"}}>
-              <Typography sx={{fontWeight:"bold"}}>Tags: </Typography>
-                <Box sx={{marginLeft:"10px"}}>
+            <Box sx={{display:"flex", flexDirection:"column" , padding: 1}}>
+              <Typography sx={{color:"#1976d2", marginLeft:"10px",fontWeight:"bold"}}>{companyInfo.title} </Typography>
+                <Box sx={{marginLeft:"10px", marginTop:"5px", marginBottom:"5px"}}>
                 {skills.map((skill) => (
                   <Chip
                     label={skill}
@@ -325,13 +325,21 @@ export default function Article() {
                 ))}
                 </Box>
               </Box>
-              <Box>
-                    
-              </Box>
-        <Typography>
-          Description: {ConvertHTML(companyInfo.description)}
-        </Typography>
         </Box>
+        {companyInfo.img && <Box>
+            <Box sx={{display:"flex", flexDirection:"column" , padding: 1}}>
+              <Typography sx={{fontWeight:"bold"}}>Article Image: </Typography>
+              <img src={companyInfo.img} alt="article img" style={{width:"100%", marginBottom:"0px"}}/>            
+            </Box> 
+        </Box>}
+       <Box sx={{marginTop:0}}>
+          <Box sx={{padding: 1}}>
+            <Typography sx={{fontWeight:"bold"}}>
+              Description: 
+          </Typography>
+            <Typography>{ConvertHTML(companyInfo.description)}</Typography>
+          </Box>
+       </Box>
       </DialogContent>
       <DialogActions>
         <Button variant="outlined" sx={{fontWeight:"bold"}} onClick={handleClose}>

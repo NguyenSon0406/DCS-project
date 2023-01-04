@@ -12,6 +12,7 @@ import UpdateJob from "../components/Job/UpdateJob";
 import RecruitmentDetail from "../components/Job/JobDetail";
 import HomeProfile from "../components/ProfileStudent/HomeProfile";
 import ListStudent from "./ListStudent";
+import MyArticle from "../components/Article/MyArticle/MyArticleList";
 import ArticleList from "../components/Article/ArticleList/ArticleList"
 import ArticlePost from "../components/Article/ArticlePost/ArticlePost"
 import {CreatePost} from "../components/Article/Createpost/CreatePost"
@@ -23,6 +24,7 @@ import Students from '../components/ProfileAdmin/PagesAdmin/Students/Students'
 import Companies from '../components/ProfileAdmin/PagesAdmin/Companies/Companies'
 import Request from '../components/ProfileAdmin/PagesAdmin/Request/Request'
 import RequestPage from "./RequestPage";
+import RequestPageRoleLecturer from "./RequestPageRoleLecturer";
 
 export default function Homepage(){
     const auth = useSelector(state => state.auth)
@@ -39,6 +41,7 @@ export default function Homepage(){
                     <Route path = "/post/readmore/:id" element={<ArticlePost/>}/>
                     <Route path = "/post/create" element={<CreatePost/>}/>
                     <Route path = "/post/edit/:id" element={<EditPost/>}/>
+                    <Route path = "/post/my-article" element={<MyArticle/>}/>
                     <Route path="/recruitment/myjobpost" element={<MyJobPost />} />
                     <Route path="/recruitment/newest" element={<Recruitment />} />
                     <Route path="/recruitment/detail/:id" element={<RecruitmentDetail />} />
@@ -46,7 +49,7 @@ export default function Homepage(){
                     <Route path="/profile" exact element={(role === 0) ? (<HomeProfile />) : (<HomeProfileCompany />)} />
                     <Route path="*" element={<NotFound />} />
                     <Route path="/liststudent" element={<ListStudent />} />
-                    <Route path="/request" element={<RequestPage/>} />
+                    <Route path="/request" element={(role === 1) ? <RequestPage/> : (role === 3) ? <RequestPageRoleLecturer/> : <NotFound/>} />
                 </Routes>
             <Footer />
             </> 

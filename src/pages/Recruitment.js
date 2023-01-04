@@ -30,7 +30,7 @@ const Recruitment=() => {
     }
     getAllJobs();
     }
-  },[reducerValue])
+  },[reducerValue,token])
   const searchHandle = (searchTerm) => {
     setSearchTerm(searchTerm);
     if(searchTerm !== "")

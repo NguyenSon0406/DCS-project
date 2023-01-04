@@ -6,6 +6,7 @@ const sendMail = require("./sendMail");
 const { CLIENT_URL } = process.env
 const companyInfo = require('../models/companyModel')
 const adminInfo = require('../models/adminModel');
+const lecturerInfo = require('../models/lecturerModel')
 
 const userCtrl = {
     register: async (req, res) => {
@@ -161,6 +162,9 @@ const userCtrl = {
             }
             else if (user.role === 2) {
                 info = await adminInfo.findOne({ user_id: id });
+            }
+            else if( user.role === 3) {
+                info = await lecturerInfo.findOne({ user_id: id });
             }
             res.status(200).json({ success: true, info });
         } catch (error) {

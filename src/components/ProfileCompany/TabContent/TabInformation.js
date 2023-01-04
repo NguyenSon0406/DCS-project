@@ -151,22 +151,22 @@ function TabInformation(props) {
                         </div>
                         <div className="infor-group">
                             <div className="infor-item">
-                                <label>Phone</label>
-                                <input
-                                    className="input-infor-item"
-                                    type="text"
-                                    name="contact"
-                                    defaultValue={user.contact}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="infor-item">
                                 <label>Address</label>
                                 <input
                                     className="input-infor-item"
                                     type="text"
                                     name="address"
                                     defaultValue={user.address}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="infor-item">
+                             <label>Phone</label>
+                                <input
+                                    className="input-infor-item"
+                                    type="text"
+                                    name="contact"
+                                    defaultValue={user.contact}
                                     onChange={handleChange}
                                 />
                             </div>

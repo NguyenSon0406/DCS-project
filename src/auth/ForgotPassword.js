@@ -6,6 +6,7 @@ import {useState} from "react";
 import axios from 'axios';
 import "./Login.css";
 import {showErrMsg,showSuccessMsg} from "../utils/notification";
+import { Link } from 'react-router-dom';
 
 function ForgotPassword() {
     const initialValues = {
@@ -45,36 +46,51 @@ function ForgotPassword() {
         }
     }
   return (
-    <div className="main-page">
-        <img src="image/duytan-banner.jpg" alt="Duy Tân Banner" />
-        <div className='login-page'>
-        <h2 className="mb-3"><i>DTU</i> CONNECTIONS</h2>
-        <h3>Forgot Your Password ?</h3>
-        {err && showErrMsg(err)}
-        {success && showSuccessMsg(success)}
-        <Box className="login-ui" spacing={2} sx={{marginTop:"20px"}} >
-        <div className='textfield-border-radius'>
-            <TextField 
-                    variant='outlined' 
-                    id='input-email'
-                    label="Email"
-                    name='email' 
-                    fullWidth={true}
-                    value={email}
-                    size="small"
-                    {...error.email && {error:true,helperText:error.email}}
-                    onChange={handleChangeInput}
-                    required
-                    />
-        </div>     
-            <Button 
-                variant='contained' 
-                sx={{fontWeight:"bold" ,p:"15px", marginTop:"20px"}}
-                onClick={handleForgotPass}>Verify your email</Button>
-        </Box>
+    <>  
+        <div className="split right">
+            <img className="banner-login" src="/image/bannerlogin.png" alt="banner login"/>
         </div>
+        <div className="split left">
+            <div className='centered'>
+            <img className="banner-duytan" src="image/icon.png" alt="DTU Connection Banner" />
+            <div className='login-page'>
+            <h2 className="mb-3"><i>DTU</i> CONNECTIONS</h2>
+            <h3>Forgot Your Password ?</h3>
+            {err && showErrMsg(err)}
+            {success && showSuccessMsg(success)}
+            <Box className="login-ui" spacing={2} sx={{marginTop:"20px", display:"flex" , flexDirection:"column"}} >
+            <div className='textfield-border-radius'>
+                <TextField 
+                        variant='outlined' 
+                        id='input-email'
+                        label="Email"
+                        name='email' 
+                        fullWidth={true}
+                        value={email}
+                        size="small"
+                        {...error.email && {error:true,helperText:error.email}}
+                        onChange={handleChangeInput}
+                        required
+                        />
+            </div>     
+                <Button 
+                    variant='contained' 
+                    sx={{fontWeight:"bold" ,p:"15px", marginTop:"20px"}}
+                    onClick={handleForgotPass}>Verify your email</Button>
+                <Link to="/login">
+                    <Button 
+                        variant='outlined'
+                        sx={{fontWeight:"bold" ,p:"10px", marginTop:"20px"}}
+                        >
+                        Return
+                    </Button>
+                </Link>
+            </Box>
+            </div>
       
-    </div>
+            </div>
+        </div>
+    </>
   )
 }
 

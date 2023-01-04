@@ -19,8 +19,8 @@ export default function PopupSignUp(props) {
                 </Box>
             </DialogTitle>
             <DialogContent >
-              <Box sx={{ display: 'flex', marginTop:"15px"}} justifyContent="space-between" alignItems="center" >         
-                        <Box display="flex" flexDirection="column" justifyContent="center"
+              <Box sx={{ display: 'flex', alightItems:"center"}} justifyContent="space-between" >         
+                        <Box  display="flex" flexDirection="column" justifyContent="center"
                         boxShadow={12}
                         sx={{
                             transition:"0.3s",
@@ -34,11 +34,11 @@ export default function PopupSignUp(props) {
                             },
                         }} >
                         <Link to="/sign-up-role-student">             
-                            <img src="image/student.png" alt="Student icon" style={{width:"50%", height:"50%",padding:0}}/>
-                            <Typography variant="body1" fontFamily="sans-serif" color="#000000" fontWeight="550">Student</Typography>
+                            <img src="image/student.png" alt="Student icon" style={{width:"60%", height:"85%",padding:0}}/>
+                            <Typography variant="body1" fontFamily="sans-serif" color="#000000" fontWeight="550" sx={{marginTop:"5px"}}>Student</Typography>
                         </Link>         
                         </Box>    
-                       <Box display="flex" flexDirection="column" justifyContent="center"
+                       <Box  display="flex" flexDirection="column" justifyContent="center"
                         boxShadow={12}
                         sx={{
                             textAlign:"center",
@@ -53,8 +53,8 @@ export default function PopupSignUp(props) {
                         }}>
                        <Link to="/sign-up-role-business">
                             
-                            <img src="image/business.png" alt="Business icon" style={{width:"50%", height:"50%",padding:0}}/>
-                            <Typography variant="body1" fontFamily="sans-serif" color="#000000" fontWeight="550">Business</Typography>
+                            <img src="image/business.png" alt="Business icon" style={{width:"60%", height:"85%",padding:0}}/>
+                            <Typography variant="body1" fontFamily="sans-serif" color="#000000" fontWeight="550" sx={{marginTop:"5px"}}>Business</Typography>
                         </Link>
                        </Box>
               </Box>
