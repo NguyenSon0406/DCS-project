@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { styled } from '@mui/material/styles';
 import {  Box, Grid, Typography, Button} from "@mui/material"
 import { makeStyles } from '@mui/styles';
@@ -6,6 +6,8 @@ import { BorderColor,StarBorder, School } from '@mui/icons-material'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import axios from 'axios';
+import { useEffect } from 'react';
 const useStyles = makeStyles((theme) =>({
   wrapper:{
     border:"1px solid #e8e8e8",
@@ -58,13 +60,36 @@ const LightTooltip = styled(({ className, ...props }) => (
 }));
 export default function StudentCard(props) {
     const classes = useStyles();
-    const [flag, setFlag] = React.useState(false);
-    console.log(props.student)
-    const {firstName, lastName, className, avatar} = props.student.user_id;
-    const {skills} = props.student
+    const token = localStorage.getItem('accessToken');
+    const [flag, setFlag] = useState(false);
+    const {firstName, lastName, className, avatar,user_id} = props.student.user_id;
+    const {skills, GPA,_id} = props.student
+    const [numPost, setNumPost] = useState('')
+    const [highlight, setHighlight] = useState('');
     const handleClick = () => {
       setFlag(!flag);
     }
+    const returnFullname = (lastName, firstName) => {
+      const name = lastName + " " + firstName;
+      return name;
+    }
+    
+   useEffect(() => {
+    if(token)
+    {
+      const countPosts = async () => {
+        const res = await axios.patch(`/potential-student/count-post/${user_id}`,{
+          _id: _id
+        },{
+          headers: {Authorization: token}
+        });
+        setNumPost(res.data);
+        setHighlight(res.data*10);
+      }
+      countPosts();
+    }
+   },[token,user_id,_id]);
+
   return (
    <Box p={1} className={classes.wrapper}>
       <Grid container alignItems="center">
@@ -75,11 +100,12 @@ export default function StudentCard(props) {
                 margin:"10px",
                 width: "70px",
                 height: "70px",
+                borderRadius:"50%"
                 }}/>
             </Grid>
           <Grid item container direction="column" xs>
             <Grid item>
-              <Typography variant='subtitle1' sx={{fontWeight:"bold"}}>{firstName}</Typography>
+              <Typography variant='subtitle1' sx={{fontWeight:"bold"}}>{returnFullname(lastName,firstName)}</Typography>
             </Grid>
             <Grid item>
               <Typography className={classes.companyName} variant='subtitle1'>{className}</Typography>
@@ -99,7 +125,7 @@ export default function StudentCard(props) {
                     <LightTooltip title="Exp">
                         <StarBorder  color='primary' sx={{fontSize:"25px"}} />
                     </LightTooltip>
-                    <Typography variant='body1' color="#B5B5B5" sx={{fontSize:"20px"}}>10</Typography>
+                    <Typography variant='body1' color="#B5B5B5" sx={{fontSize:"20px"}}>{highlight}</Typography>
           </Grid>
         </Grid>
         <Grid item xs>
@@ -107,7 +133,7 @@ export default function StudentCard(props) {
                     <LightTooltip title="Posts" >
                       <BorderColor  color='primary' sx={{fontSize:"22px"}} />
                     </LightTooltip>
-                    <Typography variant='body1' color="#B5B5B5" sx={{fontSize:"20px"}}>0</Typography>
+                    <Typography variant='body1' color="#B5B5B5" sx={{fontSize:"20px", marginLeft:0.5}}>{numPost}</Typography>
           </Grid>
         </Grid>
         <Grid item xs >
@@ -115,7 +141,7 @@ export default function StudentCard(props) {
                   <LightTooltip title="GPA">
                   <School  color='primary' sx={{fontSize:"26px"}}/>
                   </LightTooltip>
-                  <Typography variant='body1' color="#B5B5B5" sx={{fontSize:"20px"}}>1</Typography>
+                  <Typography variant='body1' color="#B5B5B5" sx={{fontSize:"20px", marginLeft:0.5}}>{GPA}</Typography>
           </Grid>
         </Grid>
         <Grid item container direction="column" alignItems="flex-end" xs>

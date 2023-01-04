@@ -84,59 +84,69 @@ const handlePost = async (e) => {
   }
 }
   return (
-    <div>
-      <div className="img">
-        <Typography sx={{ fontSize:"20px", marginBottom:"10px"}}>Choose Image Post</Typography>
-        <input
-          className="img1"
-          type="file"
-          id="img"
-          name="img"
-          onChange={handleImage}
-          accept="image/png,image/jpeg"
-        />
-      </div>
-      <div className="Create">
-      <Typography sx={{ fontSize:"20px", marginBottom:"10px"}}>Post Title</Typography>
-        <input 
-        type="text" 
-        name="title" 
-        class="input"
-        placeholder="Post Title"
-        onChange={handleChange} />
-      </div>
-      <div className="Create">
-        <Typography sx={{ fontSize:"20px", marginBottom:"5px"}}>Hashtag</Typography>
-        <TagInput handleSkills = {handleSkills}/>
-      </div>
-      <div className="editor">
-      <Typography sx={{ fontSize:"20px", marginBottom:"5px"}}>Description</Typography>
-      <CKEditor
-        id="editor"
-        editor={ClassicEditor}
-        onChange={(event, editor) =>{
-           const data = editor.getData()
-           setDescription(data)
-        }}        
-        onReady={(editor) => {
-       editor.editing.view.change((writer) => {
-       writer.setStyle(
-           "height",   
-           "400px",
-           editor.editing.view.document.getRoot()
-           );
-           });
-           }}
+    <>
+      <div className="left-content grid-66">
+        <article className="main-article boxed ">
+        <p style={{ fontWeight: "bold", fontSize: "30px" }}>Create Article</p>
+        <Box sx={{
+            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            borderRadius:"10px",
+            padding:"15px"}}>
+            <div className="img">
+            <Typography sx={{ fontSize:"20px", marginBottom:"5px"}}>Choose Image Post</Typography>
+            <input
+              className="img1"
+              type="file"
+              id="img"
+              name="img"
+              onChange={handleImage}
+              accept="image/png,image/jpeg"
+            />
+          </div>
+          <div className="Create">
+          <Typography sx={{ fontSize:"20px", marginBottom:"5px"}}>Post Title</Typography>
+            <input 
+            type="text" 
+            name="title" 
+            class="input"
+            placeholder="Post Title"
+            onChange={handleChange} />
+          </div>
+          <div className="Create">
+            <Typography sx={{ fontSize:"20px", marginBottom:"5px"}}>Hashtag</Typography>
+            <TagInput handleSkills = {handleSkills}/>
+          </div>
+          <div className="editor">
+          <Typography sx={{ fontSize:"20px", marginBottom:"5px"}}>Description</Typography>
+          <CKEditor
+            id="editor"
+            editor={ClassicEditor}
+            onChange={(event, editor) =>{
+              const data = editor.getData()
+              setDescription(data)
+            }}        
+            onReady={(editor) => {
+          editor.editing.view.change((writer) => {
+          writer.setStyle(
+              "height",   
+              "400px",
+              editor.editing.view.document.getRoot()
+              );
+              });
+              }}
 
-        />
-      </div>
-      <div class="create-button">
-      <Box sx={{textAlign:"center", marginBottom:"20px"}}>
-            <Button variant="contained" sx={{fontWeight:"bold", marginRight:"25px"}} onClick={handlePost}>Post</Button>
-            <Button variant="outlined" sx={{fontWeight:"bold"}}><Link to="/home/post/newest">Cancel</Link></Button>
+            />
+          </div>
+          <div class="create-button">
+          <Box sx={{textAlign:"center", marginBottom:"10px", marginTop:"10px"}}>
+                <Button variant="contained" sx={{fontWeight:"bold", marginRight:"25px"}} onClick={handlePost}>Post</Button>
+                <Button variant="outlined" sx={{fontWeight:"bold"}}><Link to="/home/post/newest">Cancel</Link></Button>
+            </Box>
+          </div>
         </Box>
+        </article>    
       </div>
-      <SnackBar open={open} setOpen={setOpen} msg={success} type={post}/>
-    </div>
+    <SnackBar open={open} setOpen={setOpen} msg={success} type={post}/>
+    </>
   );
 };

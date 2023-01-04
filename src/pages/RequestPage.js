@@ -2,9 +2,7 @@ import React,{useState,useEffect, useReducer} from 'react'
 import PropTypes from 'prop-types';
 import {Box, Grid, ThemeProvider, Typography, Button, StepLabel, Step,Stepper} from "@mui/material"
 import theme from "../components/Job/theme";
-import NewJob from '../components/Job/NewJob';
 import CompanyList from '../components/Job/CompanyList';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
@@ -149,25 +147,6 @@ const RequestPage=() => {
     setActiveStep(0);
     setCompleted({});
   };
-  // const columns = React.useMemo(()=>[
-  //   { field: 'companyName', headerName:"Company Name", width:200, hideable: false },
-  //   { field: 'title', headerName:"Request Title",width: 150,hideable: false },
-  //   { field: 'status',headerName:"Status",hideable: false },
-  //   { field: 'createdAt',headerName:"Created At",hideable: false },
-  //   { field: 'action',headerName:"Action",hideable: false },
-  // ])
-  // const rows= [
-  //   {   
-  //       id:"1",
-  //       companyName:"Rikkeisoft",
-  //       title:"List potential student",
-  //   },
-  //   {
-  //     id:"2",
-  //     companyName:"Rikkeisoft",
-  //     title:"Set a seminar",
-  //   }
-  // ]
   const passUpdateList = () => {
     forceUpdate();
   }
@@ -208,21 +187,6 @@ const RequestPage=() => {
                     paddingTop: "30px",
                     boxShadow:"0px 1px 5px rgba(0,0,0,0.3)",
                     borderRadius:'5px' }}>
-                    {/* <DataGrid
-                        disableColumnFilter
-                        disableColumnSelector
-                        disableDensitySelector
-                        rows={rows}
-                        columns={columns}
-                        getRowId={row => row.id}
-                        components={{ Toolbar: GridToolbar }}
-                        componentsProps={{
-                        toolbar: {
-                            showQuickFilter: true,
-                            quickFilterProps: { debounceMs: 500 },
-                        },
-                        }}
-                    /> */}
                     <Stepper
                       alternativeLabel
                       activeStep={activeStep}
@@ -266,12 +230,7 @@ const RequestPage=() => {
                       )}
                     </div>
                   </Box>
-                  {activeStep <= 1 ? (
-                    <Button onClick={handleComplete}>Click me</Button>
-                  ) : (
-                    ""
-                  )}
-                  <CreateRequest handleComplete={handleComplete}/>
+                  <CreateRequest handleComplete={handleComplete} activeStep={activeStep} handleBack={handleBack}/>
                 </Grid>
               </Grid>
             </Grid>
@@ -302,12 +261,6 @@ const RequestPage=() => {
             </Grid>
           </Grid>
         </Box>
-
-        <NewJob
-          openPopup={openPopup}
-          passUpdateList={passUpdateList}
-          setOpenPopup={setOpenPopup}
-        />
       </ThemeProvider>
     </>
   );

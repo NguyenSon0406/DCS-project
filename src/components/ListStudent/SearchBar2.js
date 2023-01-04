@@ -1,5 +1,5 @@
 import React,{useState,useRef} from 'react'
-import {Box, Button, Select, MenuItem,Menu, FilledInput} from "@mui/material";
+import {Box, Button, MenuItem,Menu, FilledInput} from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -78,6 +78,11 @@ const SearchBar = (props) => {
   const getSearchTerm = () => {
     props.searchKeyWord(inputElement.current.value);
 }
+  const getTypeSort = (type) => {
+    props.handleTypeSort(type);
+    console.log(type);
+    handleClose();
+  }
   return (
     <Box p={2} className={classes.wrapper}>
         <FilledInput 
@@ -113,18 +118,23 @@ const SearchBar = (props) => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
-          
+        <MenuItem onClick={()=>getTypeSort(1)} disableRipple>    
           A - Z
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={()=>getTypeSort(2)} disableRipple>
           Highlight point
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={()=>getTypeSort(3)} disableRipple>
           Grade
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={()=>getTypeSort(4)} disableRipple>
           Skills
+        </MenuItem>
+        <MenuItem onClick={()=>getTypeSort(5)} disableRipple>
+          International School
+        </MenuItem>
+        <MenuItem onClick={()=>getTypeSort(6)} disableRipple>
+          School of Computer Science
         </MenuItem>
       </StyledMenu>
     </Box>

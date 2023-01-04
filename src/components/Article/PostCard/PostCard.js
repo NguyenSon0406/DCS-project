@@ -27,7 +27,7 @@ const PostCard =(props) => {
                                 <p>{convertDay(createdAt)}</p>
                             </div>
                         </div>
-                    <div className="card-text"><p>{ConvertToHTML(description)}</p></div>
+                    <div className="card-text"><p >{ConvertToHTML(description)}</p></div>
                     <div>
                         {
                                 skills.map((skill) => (

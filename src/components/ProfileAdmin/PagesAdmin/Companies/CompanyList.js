@@ -258,7 +258,9 @@ export default function CompanyList() {
   }
   return (
     <div>
-    {searchTerm.length < 1 ? handleReturnList(companies) : handleReturnList(searchResults)}
+      {searchTerm.length < 1
+        ? handleReturnList(companies)
+        : handleReturnList(searchResults)}
       <Dialog
         open={open}
         aria-labelledby="alert-dialog-title"
@@ -273,12 +275,16 @@ export default function CompanyList() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" sx={{fontWeight:"bold"}} onClick={handleClose}>
+          <Button
+            variant="outlined"
+            sx={{ fontWeight: "bold" }}
+            onClick={handleClose}
+          >
             No
           </Button>
           <Button
             variant="contained"
-            sx={{fontWeight:"bold"}}
+            sx={{ fontWeight: "bold" }}
             onClick={() => handleDeleteStudent(idCompany)}
             autoFocus
           >
@@ -312,18 +318,38 @@ export default function CompanyList() {
               {companyInfo.companyName}
             </Typography>
           </Box>
-          <Typography>Email: {companyInfo.email}</Typography>
-          <Typography>Contact: {companyInfo.contact}</Typography>
-          <Typography>Address: {companyInfo.address}</Typography>
-          <Typography>
-            Description: {ConvertHTML(companyInfo.description)}
-          </Typography>
+          <Box sx={{ marginTop: "10px", display: "flex" }}>
+            <Box sx={{ padding: 1 }}>
+              <Typography sx={{ fontWeight: "bold" }}>Email:</Typography>
+              <Typography sx={{ fontWeight: "bold" }}>Contact:</Typography>
+              <Typography sx={{ fontWeight: "bold" }}>Address:</Typography>
+            </Box>
+            <Box sx={{ padding: 1 }}>
+              <Typography sx={{ paddingLeft: "5px" }}>
+                {companyInfo.email}
+              </Typography>
+              <Typography sx={{ paddingLeft: "5px" }}>
+                {companyInfo.contact}
+              </Typography>
+              <Typography sx={{ paddingLeft: "5px" }}>
+                {companyInfo.address}
+              </Typography>
+            </Box>
+          </Box>
+          <Box sx={{ marginTop: "5px", padding: 1 }}>
+            <Typography sx={{ fontWeight: "bold" }}>Description:</Typography>
+            <Typography> {ConvertHTML(companyInfo.description)}</Typography>
+          </Box>
         </DialogContent>
         <DialogActions>
-          <Button variant="outlined" sx={{fontWeight:"bold"}} onClick={handleClose}>
+          <Button
+            variant="outlined"
+            sx={{ fontWeight: "bold" }}
+            onClick={handleClose}
+          >
             Cancel
           </Button>
-          <Button variant="contained" sx={{fontWeight:"bold"}} autoFocus>
+          <Button variant="contained" sx={{ fontWeight: "bold" }} autoFocus>
             Update
           </Button>
         </DialogActions>
@@ -334,15 +360,15 @@ export default function CompanyList() {
         onClose={handleCloseSnackbar}
       >
         <div>
-        {success && (
-          <Alert
-            onClose={handleCloseSnackbar}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            {success}
-          </Alert>
-        )}
+          {success && (
+            <Alert
+              onClose={handleCloseSnackbar}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              {success}
+            </Alert>
+          )}
         </div>
       </Snackbar>
     </div>

@@ -3,9 +3,6 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 
 const userSchema = new mongoose.Schema({
-    id:{
-      type: String  
-    },
     user_id: {
         type: Schema.Types.ObjectId, ref: 'Users'
     },
@@ -14,7 +11,7 @@ const userSchema = new mongoose.Schema({
     },
     role:{
         type: Number,
-        default: 2 // 0 = student, 1 = IT Company, 2 = admin, 3 = Lecturer
+        default: 3 // 0 = student, 1 = IT Company, 2 = admin, 3 = Lecturer
     },
     avatar: {
         type: String,
@@ -24,4 +21,4 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model("Admin", userSchema );
+module.exports = mongoose.model("Lecturer", userSchema );

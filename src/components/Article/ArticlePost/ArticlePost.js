@@ -16,6 +16,7 @@ import {
   Menu,
   MenuItem,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import { useLocation, Link } from "react-router-dom";
 import ConvertToHTML from "react-html-parser";
@@ -104,8 +105,8 @@ export default function ArticleList() {
                 onClose={handleCloseSetting}
               >
                 <MenuItem onClick={() => setOpenPopup(true)}>
-                  <DeleteIcon sx={{ fontSize: 18, marginRight: "5px" }} />
-                  Delete
+                  <DeleteIcon sx={{ fontSize: 18, marginRight: "5px" , color:"#f44336"}} />
+                  <Typography sx={{color:"#f44336"}}>Delete</Typography>
                 </MenuItem>
                 <MenuItem>
                   <Link
@@ -124,13 +125,14 @@ export default function ArticleList() {
                 <h1 className="title large bold">{title}</h1>
             </div>
             <div className="posttag">
+                <Typography sx={{color: "#757575", fontSize:"17px"}}>Tags:</Typography>
               {skills.map((skill) => (
                 <Chip
                   label={skill}
                   color="primary"
                   sx={{
-                    fontWeight: "bold",
-                    fontSize: "20px",
+                    fontWeight:'bold',
+                    fontSize: "12px",
                     marginRight: "5px",
                   }}
                 />
@@ -139,7 +141,7 @@ export default function ArticleList() {
             <section className="post-content">
               <div className="post-format-image post-format-wrapper ">
                 <div className="fullimage">
-                  <img className="cover" src={img} alt="img"></img>
+                  <img className="cover" src={img} alt="img"/>
                 </div>
               </div>
               <div className="text">

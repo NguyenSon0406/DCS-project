@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import MuiAlert from '@mui/material/Alert';
 import ConvertHTML from "react-html-parser"
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -243,99 +244,130 @@ export default function Recruitment() {
   };
   return (
     <div>
-    {searchTerm.length < 1 ? handleReturnList(recruitment) : handleReturnList(searchResults)}
-    <Dialog
-      open={open}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-      fullWidth={true}
-      maxWidth="sm"
-      onBackdropClick={handleClose}
-    >
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          Are you sure to delete this post?
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button variant="outlined" sx={{fontWeight:"bold"}} onClick={handleClose}>
-          No
-        </Button>
-        <Button
-          variant="contained"
-          sx={{fontWeight:"bold"}}
-          onClick={() => handleDeleteRecruitment(idCompany)}
-          autoFocus
-        >
-          Yes
-        </Button>
-      </DialogActions>
-    </Dialog>
-    <Dialog
-      open={openView}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-      onBackdropClick={handleClose}
-      fullWidth={true}
-      maxWidth="sm"
-    >
-      <DialogTitle>Recruitment Post Information</DialogTitle>
-      <DialogContent dividers>
-        <Box display="flex" textAlign="center" alignItems="center">
-          <img
-            alt="avatar company"
-            src={companyInfo.avatar}
-            style={{
-              verticalAlign: "middle",
-              margin: 0,
-              width: "70px",
-              height: "70px",
-              borderRadius: "50%",
-            }}
-          />
-          <Typography sx={{ marginLeft: "10px", fontWeight: "bold" }}>
-            <div>
-              {companyInfo.companyName}
-            </div>
-          </Typography>
-        </Box>
-        <Box>
-          <Typography sx={{color:"#1976d2"}}>Job Title: {companyInfo.title}</Typography>
-          <Typography>Type: {companyInfo.type}</Typography>
-          <Typography>Location: {companyInfo.location}</Typography>
-          <Typography>Address: {companyInfo.address}</Typography>
-          <Typography>Job Link: {companyInfo.link}</Typography>
-          <Typography>
-            Description: {ConvertHTML(companyInfo.description)}
-          </Typography>
-        </Box>
-      </DialogContent>
-      <DialogActions>
-        <Button variant="outlined" sx={{fontWeight:"bold"}} onClick={handleClose}>
-          Cancel
-        </Button>
-        <Button variant="contained" sx={{fontWeight:"bold"}} autoFocus>
-          Update
-        </Button>
-      </DialogActions>
-    </Dialog>
-    <Snackbar
-      open={openSnackbar}
-      autoHideDuration={6000}
-      onClose={handleCloseSnackbar}
-    >
-      <div>
-      {success && (
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          {success}
-        </Alert>
-      )}
-      </div>
-    </Snackbar>
-  </div>
+      {searchTerm.length < 1
+        ? handleReturnList(recruitment)
+        : handleReturnList(searchResults)}
+      <Dialog
+        open={open}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        fullWidth={true}
+        maxWidth="sm"
+        onBackdropClick={handleClose}
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure to delete this post?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            variant="outlined"
+            sx={{ fontWeight: "bold" }}
+            onClick={handleClose}
+          >
+            No
+          </Button>
+          <Button
+            variant="contained"
+            sx={{ fontWeight: "bold" }}
+            onClick={() => handleDeleteRecruitment(idCompany)}
+            autoFocus
+          >
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openView}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        onBackdropClick={handleClose}
+        fullWidth={true}
+        maxWidth="sm"
+      >
+        <DialogTitle>Recruitment Post Information</DialogTitle>
+        <DialogContent dividers>
+          <Box display="flex" textAlign="center" alignItems="center">
+            <img
+              alt="avatar company"
+              src={companyInfo.avatar}
+              style={{
+                verticalAlign: "middle",
+                margin: 0,
+                width: "70px",
+                height: "70px",
+                borderRadius: "50%",
+              }}
+            />
+            <Typography sx={{ marginLeft: "10px", fontWeight: "bold" }}>
+              <div>{companyInfo.companyName}</div>
+            </Typography>
+          </Box>
+          <Box sx={{ marginTop: "10px", display: "flex" }}>
+            <Box sx={{ padding: 1 }}>
+              <Typography sx={{ fontWeight: "bold" }}>Job Title:</Typography>
+              <Typography sx={{ fontWeight: "bold" }}>Type:</Typography>
+              <Typography sx={{ fontWeight: "bold" }}>Location:</Typography>
+              <Typography sx={{ fontWeight: "bold" }}>Address:</Typography>
+              <Typography sx={{ fontWeight: "bold" }}>Job Link:</Typography>
+            </Box>
+            <Box sx={{ padding: 1 }}>
+              <Typography sx={{ paddingLeft: "5px", color: "#1976d2" }}>
+                {companyInfo.title}
+              </Typography>
+              <Typography sx={{ paddingLeft: "5px" }}>
+
+                {companyInfo.type}
+              </Typography>
+              <Typography sx={{ paddingLeft: "5px" }}>
+                {companyInfo.location}
+              </Typography>
+              <Typography sx={{ paddingLeft: "5px" }}>
+                {companyInfo.address}
+              </Typography>
+              <Typography sx={{ paddingLeft: "5px" }}>
+                <Link to={companyInfo.link}>{companyInfo.link}</Link>
+              </Typography>
+            </Box>
+          </Box>
+          <Box>
+            <Box sx={{ marginTop: "5px", padding: 1 }}>
+              <Typography sx={{ fontWeight: "bold" }}>Description:</Typography>
+              <Typography> {ConvertHTML(companyInfo.description)}</Typography>
+            </Box>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            variant="outlined"
+            sx={{ fontWeight: "bold" }}
+            onClick={handleClose}
+          >
+            Cancel
+          </Button>
+          <Button variant="contained" sx={{ fontWeight: "bold" }} autoFocus>
+            Update
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <div>
+          {success && (
+            <Alert
+              onClose={handleCloseSnackbar}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              {success}
+            </Alert>
+          )}
+        </div>
+      </Snackbar>
+    </div>
   );
 }
