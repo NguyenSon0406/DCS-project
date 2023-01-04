@@ -347,11 +347,9 @@ export default function CompanyList() {
             sx={{ fontWeight: "bold" }}
             onClick={handleClose}
           >
-            Cancel
+            Return
           </Button>
-          <Button variant="contained" sx={{ fontWeight: "bold" }} autoFocus>
-            Update
-          </Button>
+          
         </DialogActions>
       </Dialog>
       <Snackbar

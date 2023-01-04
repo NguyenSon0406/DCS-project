@@ -345,8 +345,8 @@ export default function Article() {
         <Button variant="outlined" sx={{fontWeight:"bold"}} onClick={handleClose}>
           Cancel
         </Button>
-        <Button variant="contained" sx={{fontWeight:"bold"}} autoFocus>
-          Update
+        <Button variant="contained" sx={{fontWeight:"bold"}} autoFocus color="error">
+          Alert
         </Button>
       </DialogActions>
     </Dialog>

@@ -4,9 +4,23 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel"
 import EventIcon from '@mui/icons-material/Event';
-import { FormControl,InputLabel, Select, MenuItem, Button, Typography, Box, FilledInput } from '@mui/material'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { FormControl,InputLabel, Select, MenuItem,Modal, Button, Typography, Box, FilledInput } from '@mui/material'
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+  textAlign:"center",
+};
 export default function CreateRequest(props) 
 {
+  const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(new Date());
   const [title, setTitle] = React.useState('');
   const [type, setType] =  React.useState('');
@@ -17,11 +31,15 @@ export default function CreateRequest(props)
   const handleText = (e) => {
     setText(e)
   }
+  const handleOpen = () => {
+    setOpen(true)
+  }
   const handleChange = (event) => {
     setType(event.target.value);
   };
    const handleChangeStage= () => {
     props.handleComplete();
+    handleOpen();
    }
    const handleReturn = (e) => {
     e.preventDefault();
@@ -121,6 +139,22 @@ export default function CreateRequest(props)
         </Box>}
        
    </Box>
+   <Modal
+        open={open}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        onClose={ open && setTimeout(() => {
+            setOpen(false)
+        }, 3000)}
+        >
+        <Box sx={style}>
+            <CheckCircleIcon fontSize='large' sx={{color:"green"}}/>
+            <Typography>Request Successfully</Typography>
+            <Button variant="contained" onClick={(e)=>setOpen(false)} sx={{marginTop:"10px",color: "white", fontWeight:"bold"}}>
+                Return
+            </Button>
+        </Box>
+    </Modal>
     </>
   )
 }

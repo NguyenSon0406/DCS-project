@@ -38,18 +38,11 @@ export default function RequestPageRoleLecturer() {
                       />
                         <RequestList/>
                       </Paper>
-                      <Paper className='part-right' sx={{width:"70%"}}>
-
+                      <Paper className='part-right' sx={{width:"70%", textAlign:"center", alignItems:"center"}}>
+                          <Typography sx={{fontSize:"40px"}}>Update Soon!</Typography>
                       </Paper>
                     </Box>
-                  </Grid>
-                  <Pagination 
-                  style={{marginTop:"40px"}} 
-                  count={10}
-                   
-                  variant="outlined" 
-                  shape="rounded" 
-                  showFirstButton showLastButton  />               
+                  </Grid>          
                 </Grid>
                </Grid>
                <Grid item xs={2}>

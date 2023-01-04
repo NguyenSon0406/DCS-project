@@ -97,7 +97,7 @@ export default function JobDetail(props) {
                <Grid item xs={10}>
                <Grid container justifyContent="center" sx={{marginLeft:"20px"}}>  
                   <Grid item xs={12}>
-                    <Paper display="flex" flex-dicorection="column" sx={{textAlign: "left",maxHeight: 1000, overflow: 'auto'}}>
+                    <Paper display="flex" flex-dicorection="column" sx={{textAlign: "left",maxHeight: 800, overflow: 'auto'}}>
                         <Box display="flex" justifyContent="space-between">
                           <Box display="flex" alignItems="center">
                             <img src={avatar} alt="avatar" style={{verticalAlign:"middle",margin:0, width:"60px", height:"60px",borderRadius:"50%"}}/>
@@ -175,15 +175,18 @@ export default function JobDetail(props) {
                             </Box>
                         </Box>
                         <Divider variant="middle" sx={{width:"auto"}} />
-                        <Box>
-                          <Typography sx={{fontWeight:"bold", fontSize:"40px",color:"primary.main"}}>{title}</Typography>
-                        </Box>
-                        <Box>
-                          <Typography sx={{fontWeight:"bold", fontSize:"30px"}}>Job Descriptions</Typography>
-                        </Box>
-                        <Box>
-                            {ConvertToHTML(description)}
-                        </Box>
+                        
+                        <Paper sx={{padding:2,maxHeight: 500, overflow: 'auto'}}>
+                          <Box>
+                            <Typography sx={{fontWeight:"bold", fontSize:"40px",color:"primary.main"}}>{title}</Typography>
+                          </Box>
+                          <Box>
+                            <Typography sx={{fontWeight:"bold", fontSize:"30px"}}>Job Descriptions</Typography>
+                          </Box>
+                          <Box>
+                              {ConvertToHTML(description)}
+                          </Box>
+                        </Paper>
                         {user.role !== 1 ? 
                         ( <Button variant='contained' sx={{marginTop:"30px",marginBottom:"30px",fontWeight:"bold", justifyContent:"center", textAlign:"center"}}  color='error'>Apply Now</Button>)
                           : ""

@@ -346,8 +346,8 @@ export default function Recruitment() {
           >
             Cancel
           </Button>
-          <Button variant="contained" sx={{ fontWeight: "bold" }} autoFocus>
-            Update
+          <Button variant="contained" sx={{ fontWeight: "bold" }} autoFocus color="error">
+            Alert
           </Button>
         </DialogActions>
       </Dialog>
